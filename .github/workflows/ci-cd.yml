@@ -132,6 +132,9 @@ jobs:
     needs: [lint-and-test, e2e-tests]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment: production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -167,7 +170,7 @@ jobs:
           working-directory: ./
 
       - name: Invalidate Cloudflare Cache
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: env.CLOUDFLARE_API_TOKEN != ''
         run: |
           curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
@@ -175,9 +178,9 @@ jobs:
             -d '{"purge_everything":true}'
 
       - name: Notify deployment
-        if: always()
+        if: always() && env.DEPLOY_WEBHOOK_URL != ''
         run: |
           STATUS="${{ job.status }}"
-          curl -X POST ${{ secrets.DEPLOY_WEBHOOK_URL }} \
+          curl -X POST "${{ env.DEPLOY_WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
             -d "{\"text\":\"Deploy ${STATUS} for JPV AI & Automation\",\"repo\":\"${{ github.repository }}\",\"commit\":\"${{ github.sha }}\"}"
