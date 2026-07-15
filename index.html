@@ -53,6 +53,8 @@
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,.3); }
     .btn-outline { border: 1px solid rgba(0,212,255,.4); color: #00d4ff; background: transparent; }
     .btn-outline:hover { background: rgba(0,212,255,.08); }
+    .btn-accent { background: linear-gradient(135deg, #ff006e, #b0004e); color: #fff; }
+    .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,110,.3); }
     section { padding: 100px 0; }
     .section-label {
       display: inline-block; padding: 4px 14px; border-radius: 12px;
@@ -76,6 +78,23 @@
       padding: 4px 12px; border-radius: 12px; font-size: .75rem;
       background: rgba(0,212,255,.08); color: #00d4ff;
     }
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+    .pain-card {
+      background: linear-gradient(145deg, #12121a, #0e0e15);
+      border: 1px solid rgba(255,0,110,.12); border-radius: 16px; padding: 28px;
+      text-align: center; transition: all .3s;
+    }
+    .pain-card:hover { border-color: rgba(255,0,110,.3); transform: translateY(-4px); }
+    .pain-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .pain-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .pain-card p { color: #a0a0b0; font-size: .85rem; }
+    .pain-result {
+      margin-top: 40px; text-align: center; padding: 32px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0,212,255,.06), rgba(255,0,110,.06));
+      border: 1px solid rgba(0,212,255,.15);
+    }
+    .pain-result h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .pain-result p { color: #a0a0b0; font-size: .95rem; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
     .about-text p { color: #a0a0b0; margin-bottom: 16px; }
     .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
@@ -89,6 +108,40 @@
       color: #c0c0d0; transition: all .2s;
     }
     .stack-item:hover { border-color: #00d4ff; color: #00d4ff; }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .booking-info p { color: #a0a0b0; margin-bottom: 16px; font-size: .95rem; }
+    .booking-types { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .booking-type {
+      display: flex; align-items: center; gap: 14px; padding: 16px 20px;
+      background: #12121a; border: 1px solid rgba(0,212,255,.1); border-radius: 12px;
+      transition: all .2s;
+    }
+    .booking-type:hover { border-color: rgba(0,212,255,.3); }
+    .booking-type .bt-icon { font-size: 1.4rem; }
+    .booking-type .bt-info h4 { font-size: .95rem; }
+    .booking-type .bt-info span { font-size: .8rem; color: #a0a0b0; }
+    .calendly-placeholder {
+      background: #12121a; border: 1px solid rgba(0,212,255,.1); border-radius: 16px;
+      padding: 48px 32px; text-align: center; min-height: 400px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .calendly-placeholder .cp-icon { font-size: 3rem; margin-bottom: 16px; }
+    .calendly-placeholder h3 { margin-bottom: 8px; }
+    .calendly-placeholder p { color: #a0a0b0; font-size: .85rem; max-width: 360px; margin-bottom: 20px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .contact-form { background: #12121a; border-radius: 16px; padding: 32px; border: 1px solid rgba(0,212,255,.1); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: .85rem; color: #a0a0b0; margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(0,212,255,.15);
+      background: #0e0e15; color: #e0e0e0; font-size: .9rem; font-family: inherit;
+      transition: border .2s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #00d4ff; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #12121a; color: #e0e0e0; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .contact-section { text-align: center; }
     .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
     .contact-card {
@@ -105,8 +158,9 @@
             background: rgba(10,10,15,.98); padding: 16px 24px; border-bottom: 1px solid rgba(0,212,255,.15); }
       nav.open { display: flex; }
       nav a { margin: 8px 0; }
-      .about-grid { grid-template-columns: 1fr; }
+      .about-grid, .booking-grid, .contact-grid { grid-template-columns: 1fr; }
       .about-stats { grid-template-columns: repeat(3, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -116,9 +170,11 @@
   <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
   <nav>
     <a href="#inicio">Inicio</a>
+    <a href="#porque">¿Por qué?</a>
     <a href="#servicios">Servicios</a>
     <a href="#about">Sobre mí</a>
     <a href="#stack">Stack</a>
+    <a href="#agendar">Agendar</a>
     <a href="#contacto">Contacto</a>
   </nav>
 </header>
@@ -129,12 +185,57 @@
     <h1>Transformo procesos en<br><span class="highlight">soluciones inteligentes</span></h1>
     <p>
       Ingeniero Industrial especializado en analítica de datos, automatización Low-Code/NoCode
-      e inteligencia artificial. Ayudo a empresas a digitalizar procesos, liberar capacidad operativa
-      y tomar decisiones basadas en datos.
+      e inteligencia artificial. Ayudo a <strong>empresas</strong> a digitalizar procesos y liberar capacidad operativa,
+      y a <strong>personas</strong> a optimizar su trabajo diario, crecer profesionalmente y tomar control
+      de su tiempo con tecnología.
     </p>
     <div class="hero-actions">
       <a href="#contacto" class="btn btn-primary">📩 Contáctame</a>
-      <a href="#servicios" class="btn btn-outline">Ver servicios →</a>
+      <a href="#agendar" class="btn btn-accent">📅 Agendar cita</a>
+    </div>
+  </div>
+</section>
+
+<section id="porque" style="background: radial-gradient(ellipse at 50% 50%, rgba(255,0,110,.04) 0%, transparent 50%);">
+  <div class="container">
+    <div class="section-label">¿Por qué automatizar?</div>
+    <h2 class="section-title">¿Te suena familiar?</h2>
+    <p class="section-desc">Tareas que consumen horas, datos dispersos, reportes a última hora. No tiene que ser así.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">🔁</div>
+        <h3>Tareas repetitivas</h3>
+        <p>Descargas manuales, cruces en Excel, copiar y pegar entre sistemas. Horas que podrías recuperar.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <h3>Reportes diarios</h3>
+        <p>Generar el mismo informe una y otra vez. Que se autogenere y llegue a tu bandeja cada mañana.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔗</div>
+        <h3>Cruces de datos</h3>
+        <p>Conciliar bases, validar información entre sistemas, detectar inconsistencias en segundos.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⏰</div>
+        <h3>Seguimientos & Alertas</h3>
+        <p>Vencer fechas, aprobaciones pendientes, cambios críticos. Alertas automáticas antes de que sea tarde.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📉</div>
+        <h3>Datos sin orden</h3>
+        <p>Información en correos, carpetas compartidas, chats. Un tablero que unifique todo.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📄</div>
+        <h3>Documentación dispersa</h3>
+        <p>Versiones de archivos por todos lados, procesos no documentados, pérdida de conocimiento.</p>
+      </div>
+    </div>
+    <div class="pain-result">
+      <h3>⚡ Imagina que todo eso simplemente... funcione solo</h3>
+      <p>Automatizaciones que ejecutan tareas, agentes de IA que monitorean y alertan, tableros que se actualizan solos, y procesos que fluyen sin intervención manual. Eso es lo que construyo.</p>
     </div>
   </div>
 </section>
@@ -143,7 +244,7 @@
   <div class="container">
     <div class="section-label">Servicios</div>
     <h2 class="section-title">Lo que hago</h2>
-    <p class="section-desc">Consultoría integral en transformación digital, desde el diagnóstico hasta la implementación.</p>
+    <p class="section-desc">Consultoría integral en transformación digital, desde el diagnóstico hasta la implementación, para empresas y profesionales.</p>
     <div class="services-grid">
       <div class="service-card">
         <div class="service-icon">🤖</div>
@@ -202,8 +303,9 @@
           y estructuré repositorios documentales en SharePoint.
         </p>
         <p>
-          Hoy ofrezco esa misma capacidad a empresas que quieren digitalizarse
-          sin perder el foco en el negocio.
+          Hoy ofrezco esa misma capacidad a <strong>empresas</strong> que quieren digitalizarse
+          sin perder el foco en el negocio, y a <strong>profesionales</strong> que buscan optimizar
+          su día a día, destacar en su carrera y aprovechar la IA para crecer.
         </p>
         <div class="about-stats">
           <div class="stat"><div class="stat-num">+2</div><div class="stat-label">Años experiencia</div></div>
@@ -259,24 +361,119 @@
   </div>
 </section>
 
+<section id="agendar" style="background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,.04) 0%, transparent 50%);">
+  <div class="container">
+    <div class="section-label">Agenda una cita</div>
+    <h2 class="section-title">Conversemos sin compromiso</h2>
+    <p class="section-desc">Elige el tipo de reunión y el horario que mejor se ajuste a ti. Por videollamada o presencial en Bogotá.</p>
+    <div class="booking-grid">
+      <div>
+        <div class="booking-info">
+          <p>
+            Una llamada de 15-30 minutos basta para entender tu situación, identificar
+            oportunidades y definir si puedo ayudarte. Sin presiones, sin contratos.
+          </p>
+          <div class="booking-types">
+            <div class="booking-type">
+              <div class="bt-icon">🔍</div>
+              <div class="bt-info">
+                <h4>Diagnóstico rápido</h4>
+                <span>15 min · Conozco tu caso y te doy una visión inicial</span>
+              </div>
+            </div>
+            <div class="booking-type">
+              <div class="bt-icon">📋</div>
+              <div class="bt-info">
+                <h4>Consulta completa</h4>
+                <span>30 min · Revisión a detalle y hoja de ruta</span>
+              </div>
+            </div>
+            <div class="booking-type">
+              <div class="bt-icon">🚀</div>
+              <div class="bt-info">
+                <h4>Proyecto nuevo</h4>
+                <span>45 min · Alcance, presupuesto y plan de trabajo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="calendly-inline">
+        <div class="calendly-placeholder">
+          <div class="cp-icon">📅</div>
+          <h3>Conecta tu Calendly</h3>
+          <p>
+            Crea tu cuenta gratis en <a href="https://calendly.com" target="_blank" style="color:#00d4ff;">Calendly.com</a>,
+            conéctalo con tu Gmail y reemplaza el enlace de abajo en el código.
+          </p>
+          <a href="https://calendly.com/tu-usuario" target="_blank" class="btn btn-primary">Abrir Calendly →</a>
+          <p style="margin-top:12px; font-size:.75rem; color:#606070;">
+            Una vez configures tu Calendly, el calendario se mostrará aquí mismo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contacto">
-  <div class="container contact-section">
-    <div class="section-label" style="margin: 0 auto 12px;">Contacto</div>
-    <h2 class="section-title">Trabajemos juntos</h2>
-    <p class="section-desc" style="margin: 0 auto 32px;">
+  <div class="container">
+    <div class="section-label" style="margin: 0 auto 12px; text-align:center;">Contacto</div>
+    <h2 class="section-title" style="text-align:center;">Trabajemos juntos</h2>
+    <p class="section-desc" style="margin: 0 auto 16px; text-align:center;">
       ¿Tienes un proceso que automatizar, un tablero que construir o una idea
-      que necesita tecnología para despegar? Hablemos.
+      que necesita tecnología para despegar? Cuéntame.
     </p>
-    <div class="contact-links">
-      <a href="https://www.linkedin.com/in/juan-pablo-valero-buitrago-7b474316b" target="_blank" class="contact-card">
-        <span class="icon">🔗</span><span>LinkedIn</span>
-      </a>
-      <a href="mailto:juanchopvb16@gmail.com" class="contact-card">
-        <span class="icon">📧</span><span>juanchopvb16@gmail.com</span>
-      </a>
-      <a href="https://github.com/Juanpavbo" target="_blank" class="contact-card">
-        <span class="icon">💻</span><span>GitHub</span>
-      </a>
+    <div class="contact-grid" style="margin-top:32px;">
+      <form class="contact-form" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contacto">
+        <p style="display:none;"><input name="bot-field"></p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required placeholder="tu@correo.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="interes">¿Qué necesitas?</label>
+          <select id="interes" name="interes">
+            <option value="">Selecciona una opción</option>
+            <option value="automatizacion">Automatización de procesos</option>
+            <option value="bi">Analítica / Power BI / Tableros</option>
+            <option value="ia">Agentes de IA / LLMs</option>
+            <option value="lowcode">Low-Code / No-Code</option>
+            <option value="consultoria">Consultoría general</option>
+            <option value="personal">Optimización personal / laboral</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Cuéntame más</label>
+          <textarea id="mensaje" name="mensaje" required placeholder="Describe tu situación, lo que necesitas o la idea que tienes..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Enviar mensaje ✉️</button>
+      </form>
+      <div>
+        <div style="background: #12121a; border: 1px solid rgba(0,212,255,.1); border-radius: 16px; padding: 32px; height:100%;">
+          <h3 style="margin-bottom: 16px;">📬 También puedes</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <a href="https://www.linkedin.com/in/juan-pablo-valero-buitrago-7b474316b" target="_blank" class="contact-card">
+              <span class="icon">🔗</span><span>Escribirme por LinkedIn</span>
+            </a>
+            <a href="mailto:juanchopvb16@gmail.com" class="contact-card">
+              <span class="icon">📧</span><span>juanchopvb16@gmail.com</span>
+            </a>
+            <a href="https://github.com/Juanpavbo" target="_blank" class="contact-card">
+              <span class="icon">💻</span><span>GitHub</span>
+            </a>
+            <a href="#agendar" class="btn btn-accent" style="justify-content:center; margin-top:8px;">📅 Agendar videollamada</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
