@@ -1,0 +1,54 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
+}
+const { title = 'Transformo procesos en soluciones inteligentes', subtitle, ctaText = 'Contactar', ctaHref = '#contacto', secondaryCtaText = 'Agendar cita', secondaryCtaHref = '#agendar' } = Astro.props;
+---
+
+<section class="hero min-h-[90vh] flex items-center relative" id="inicio">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(0,212,255,.08)_0%,transparent_50%),radial-gradient(ellipse_at_80%_50%,rgba(255,0,110,.06)_0%,transparent_50%)]" aria-hidden="true" />
+  <div class="container hero-content relative z-10 max-w-3xl">
+    <div class="hero-badge mb-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/25 text-brand-cyan text-sm font-medium">
+      <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" aria-hidden="true" />
+      Consultoría TI · Automatización · IA
+    </div>
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-5">
+      Transformo procesos en<br />
+      <span class="highlight bg-gradient-to-r from-brand-cyan to-brand-pink bg-clip-text text-transparent">
+        soluciones inteligentes
+      </span>
+    </h1>
+    <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl leading-relaxed">
+      Ingeniero Industrial especializado en analítica de datos, automatización Low-Code/NoCode e inteligencia artificial.
+      Ayudo a <strong>empresas</strong> a digitalizar procesos y liberar capacidad operativa, y a <strong>personas</strong> a optimizar su trabajo diario, crecer profesionalmente y tomar control de su tiempo con tecnología.
+    </p>
+    <div class="hero-actions flex flex-wrap gap-4">
+      <a href={ctaHref} class="btn btn-primary group">
+        <Mail class="w-5 h-5 mr-2" aria-hidden="true" />
+        {ctaText}
+      </a>
+      <a href={secondaryCtaHref} class="btn btn-accent group">
+        <Calendar class="w-5 h-5 mr-2" aria-hidden="true" />
+        {secondaryCtaText}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .hero { background: #0a0a0f; }
+  .highlight { background: linear-gradient(135deg, #00d4ff, #ff006e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; font-size: 0.95rem; transition: all 0.25s; cursor: pointer; border: 0; }
+  .btn-primary { background: linear-gradient(135deg, #00d4ff, #0090b0); color: #0a0a0f; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.3); }
+  .btn-accent { background: linear-gradient(135deg, #ff006e, #b0004e); color: #fff; }
+  .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,110,0.3); }
+  .btn-outline { border: 1px solid rgba(0,212,255,0.4); color: #00d4ff; background: transparent; }
+  .btn-outline:hover { background: rgba(0,212,255,0.08); }
+  @media (max-width: 768px) { .btn { width: 100%; justify-content: center; } }
+</style>

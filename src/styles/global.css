@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    line-height: 1.6;
+  }
+  ::selection { background: #00d4ff; color: #0a0a0f; }
+}
+
+@layer components {
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
+    border-radius: 8px; font-weight: 600; text-decoration: none; font-size: .95rem;
+    transition: all .25s; cursor: pointer; border: 0;
+  }
+  .btn-primary { background: linear-gradient(135deg, #00d4ff, #0090b0); color: #0a0a0f; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,.3); }
+  .btn-outline { border: 1px solid rgba(0,212,255,.4); color: #00d4ff; background: transparent; }
+  .btn-outline:hover { background: rgba(0,212,255,.08); }
+  .btn-accent { background: linear-gradient(135deg, #ff006e, #b0004e); color: #fff; }
+  .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,110,.3); }
+  .card {
+    background: linear-gradient(145deg, #12121a, #0e0e15);
+    border: 1px solid rgba(0,212,255,.1);
+    border-radius: 16px; padding: 32px;
+    transition: all .3s;
+  }
+  .card:hover { border-color: rgba(0,212,255,.3); transform: translateY(-4px); }
+  .section-label {
+    display: inline-block; padding: 4px 14px; border-radius: 12px;
+    background: rgba(0,212,255,.1); color: #00d4ff; font-size: .8rem;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+  }
+  .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px; }
+  .section-desc { color: #a0a0b0; max-width: 600px; margin-bottom: 48px; }
+}
+
+@layer utilities {
+  .text-gradient { background: linear-gradient(135deg, #00d4ff, #ff006e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .glass { background: rgba(10,10,15,.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,212,255,.15); }
+}

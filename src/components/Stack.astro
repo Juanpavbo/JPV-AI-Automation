@@ -1,0 +1,25 @@
+---
+const stack = [
+  'Python', 'SQL Server', 'MongoDB', 'MySQL', 'Power BI', 'Databricks', 'Apache Spark',
+  'n8n', 'Power Automate', 'Power Apps', 'Copilot Studio', 'Claude', 'ChatGPT',
+  'DeepSeek', 'Ollama', 'MCP', 'Azure', 'Docker', 'SAP Ariba', 'SAP ERP', 'Oracle',
+  'HTML/CSS', 'React', 'PHP', 'Git', 'Looker Studio', 'RPA', 'OCR', 'OpenCode', 'OpenClaw', 'Hermes'
+] as const;
+---
+
+<section id="stack" class="py-20 md:py-28">
+  <div class="container">
+    <div class="section-label mb-3 inline-block">Tech Stack</div>
+    <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">Tecnologías que domino</h2>
+    <p class="section-desc text-gray-400 max-w-2xl mb-10">Un ecosistema completo para llevar ideas a producción.</p>
+    <div class="stack-grid flex flex-wrap gap-3">
+      {stack.map((tech) => (
+        <span class="stack-item px-4 py-2 rounded-lg text-sm transition-all duration-200" style="background: rgba(0,212,255,.06); border: 1px solid rgba(0,212,255,.12); color: #c0c0d0;">{tech}</span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .stack-item:hover { border-color: #00d4ff; color: #00d4ff; }
+</style>

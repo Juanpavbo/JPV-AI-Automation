@@ -1,0 +1,59 @@
+import type { APIRoute } from 'astro';
+import { insertContact, sendContactEmail } from '../../lib/supabase';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+  nombre: z.string().min(2).max(100),
+  email: z.string().email(),
+  interes: z.string().min(1),
+  mensaje: z.string().min(10).max(5000)
+});
+
+export const POST: APIRoute = async ({ request }) => {
+  try {
+    const formData = await request.formData();
+    const data = {
+      nombre: formData.get('nombre')?.toString() || '',
+      email: formData.get('email')?.toString() || '',
+      interes: formData.get('interes')?.toString() || '',
+      mensaje: formData.get('mensaje')?.toString() || ''
+    };
+
+    const parsed = contactSchema.safeParse(data);
+    if (!parsed.success) {
+      return new Response(JSON.stringify({ error: 'Datos inválidos', details: parsed.error.flatten() }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const contact = await insertContact({
+      name: parsed.data.nombre,
+      email: parsed.data.email,
+      interest: parsed.data.interes,
+      message: parsed.data.mensaje
+    });
+
+    try {
+      await sendContactEmail({
+        name: parsed.data.nombre,
+        email: parsed.data.email,
+        interest: parsed.data.interes,
+        message: parsed.data.mensaje
+      });
+    } catch (emailError) {
+      console.error('Error enviando email:', emailError);
+    }
+
+    return new Response(JSON.stringify({ success: true, contact }), {
+      status: 201,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch (error) {
+    console.error('Contact API error:', error);
+    return new Response(JSON.stringify({ error: 'Error interno del servidor' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+};

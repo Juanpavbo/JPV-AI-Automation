@@ -1,0 +1,217 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # POSTHOG - Analytics + Feature Flags
+  # ==========================================
+  posthog:
+    image: posthog/posthog:latest
+    container_name: jpv-posthog
+    restart: unless-stopped
+    environment:
+      - DEBUG=False
+      - SECRET_KEY=${POSTHOG_SECRET_KEY}
+      - POSTHOG_HOST=${POSTHOG_HOST}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=posthog
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=posthog
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_PORT=8123
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=9092
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+      - clickhouse
+      - kafka
+    volumes:
+      - posthog-data:/data
+    networks:
+      - jpv-network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: jpv-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=posthog
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=posthog
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - jpv-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: jpv-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    networks:
+      - jpv-network
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:23.8-alpine
+    container_name: jpv-clickhouse
+    restart: unless-stopped
+    environment:
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+    ulimits:
+      nofile: 262144
+    networks:
+      - jpv-network
+
+  kafka:
+    image: bitnami/kafka:3.6
+    container_name: jpv-kafka
+    restart: unless-stopped
+    environment:
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_NUM_PARTITIONS=3
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=1
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    volumes:
+      - kafka-data:/bitnami/kafka
+    networks:
+      - jpv-network
+
+  # ==========================================
+  # SENTRY - Error Tracking
+  # ==========================================
+  sentry:
+    image: getsentry/sentry:24.6.0
+    container_name: jpv-sentry
+    restart: unless-stopped
+    environment:
+      - SENTRY_SECRET_KEY=${SENTRY_SECRET_KEY}
+      - SENTRY_POSTGRES_HOST=postgres
+      - SENTRY_POSTGRES_PORT=5432
+      - SENTRY_POSTGRES_USER=sentry
+      - SENTRY_POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - SENTRY_POSTGRES_DB=sentry
+      - SENTRY_REDIS_HOST=redis
+      - SENTRY_REDIS_PORT=6379
+      - SENTRY_WEB_PORT=9000
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - sentry-data:/var/lib/sentry/files
+    networks:
+      - jpv-network
+
+  # ==========================================
+  # UPTIME KUMA - Monitoring
+  # ==========================================
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: jpv-uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - uptime-kuma-data:/app/data
+    networks:
+      - jpv-network
+
+  # ==========================================
+  # POSTAL - Email Server (Self-hosted)
+  # ==========================================
+  postal:
+    image: postalserver/postal:latest
+    container_name: jpv-postal
+    restart: unless-stopped
+    environment:
+      - POSTAL_DATABASE_HOST=postgres
+      - POSTAL_DATABASE_PORT=5432
+      - POSTAL_DATABASE_NAME=postal
+      - POSTAL_DATABASE_USERNAME=postal
+      - POSTAL_DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTAL_RABBITMQ_HOST=rabbitmq
+      - POSTAL_RABBITMQ_PORT=5672
+      - POSTAL_RABBITMQ_USERNAME=postal
+      - POSTAL_RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
+      - POSTAL_DNS_SMTP_SERVER_HOSTNAME=${POSTAL_SMTP_HOST}
+      - POSTAL_DNS_SMTP_SERVER_PORT=25
+      - POSTAL_DNS_SMTP_SERVER_TLS=false
+      - POSTAL_WEB_HOST=${POSTAL_WEB_HOST}
+      - POSTAL_WEB_PORT=5000
+      - POSTAL_SMTP_SERVER_HOSTNAME=${POSTAL_SMTP_HOST}
+      - POSTAL_SMTP_SERVER_PORT=25
+      - POSTAL_SMTP_SERVER_TLS=false
+    ports:
+      - "5000:5000"
+      - "25:25"
+      - "587:587"
+    depends_on:
+      - postgres
+      - rabbitmq
+    volumes:
+      - postal-data:/postal/data
+    networks:
+      - jpv-network
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: jpv-rabbitmq
+    restart: unless-stopped
+    environment:
+      - RABBITMQ_DEFAULT_USER=postal
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - jpv-network
+
+  # ==========================================
+  # NGINX PROXY MANAGER - Reverse Proxy + SSL
+  # ==========================================
+  nginx-proxy:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: jpv-nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes:
+      - nginx-data:/data
+      - nginx-letsencrypt:/etc/letsencrypt
+    networks:
+      - jpv-network
+
+volumes:
+  posthog-data:
+  postgres-data:
+  redis-data:
+  clickhouse-data:
+  kafka-data:
+  sentry-data:
+  uptime-kuma-data:
+  postal-data:
+  rabbitmq-data:
+  nginx-data:
+  nginx-letsencrypt:
+
+networks:
+  jpv-network:
+    driver: bridge
