@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juan Pablo Valero B. | Consultoría TI & IA</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    ::selection { background: #00d4ff; color: #0a0a0f; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px; background: rgba(10,10,15,.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,255,.15); position: sticky; top: 0; z-index: 50;
+    }
+    header .logo { font-size: 1.25rem; font-weight: 700; color: #00d4ff; }
+    header .logo span { color: #ff006e; }
+    nav a {
+      color: #a0a0b0; text-decoration: none; margin-left: 24px; font-size: .9rem;
+      transition: color .2s;
+    }
+    nav a:hover { color: #00d4ff; }
+    .menu-toggle { display: none; background: none; border: 0; color: #00d4ff; font-size: 1.5rem; cursor: pointer; }
+    .hero {
+      min-height: 90vh; display: flex; align-items: center; position: relative;
+      background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 50%, rgba(255,0,110,.06) 0%, transparent 50%);
+    }
+    .hero-content { max-width: 720px; }
+    .hero-badge {
+      display: inline-block; padding: 6px 16px; border-radius: 20px;
+      background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.25);
+      color: #00d4ff; font-size: .85rem; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+    .hero h1 .highlight { background: linear-gradient(135deg, #00d4ff, #ff006e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.1rem; color: #a0a0b0; margin-bottom: 32px; max-width: 580px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
+      border-radius: 8px; font-weight: 600; text-decoration: none; font-size: .95rem;
+      transition: all .25s; cursor: pointer; border: 0;
+    }
+    .btn-primary { background: linear-gradient(135deg, #00d4ff, #0090b0); color: #0a0a0f; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,.3); }
+    .btn-outline { border: 1px solid rgba(0,212,255,.4); color: #00d4ff; background: transparent; }
+    .btn-outline:hover { background: rgba(0,212,255,.08); }
+    section { padding: 100px 0; }
+    .section-label {
+      display: inline-block; padding: 4px 14px; border-radius: 12px;
+      background: rgba(0,212,255,.1); color: #00d4ff; font-size: .8rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+    }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px; }
+    .section-desc { color: #a0a0b0; max-width: 600px; margin-bottom: 48px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .service-card {
+      background: linear-gradient(145deg, #12121a, #0e0e15);
+      border: 1px solid rgba(0,212,255,.1); border-radius: 16px; padding: 32px;
+      transition: all .3s;
+    }
+    .service-card:hover { border-color: rgba(0,212,255,.3); transform: translateY(-4px); }
+    .service-icon { font-size: 2rem; margin-bottom: 16px; }
+    .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .service-card p { color: #a0a0b0; font-size: .9rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .service-tags span {
+      padding: 4px 12px; border-radius: 12px; font-size: .75rem;
+      background: rgba(0,212,255,.08); color: #00d4ff;
+    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .about-text p { color: #a0a0b0; margin-bottom: 16px; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .stat { text-align: center; padding: 20px; background: rgba(0,212,255,.04); border-radius: 12px; }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: #00d4ff; }
+    .stat-label { font-size: .8rem; color: #a0a0b0; margin-top: 4px; }
+    .stack-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+    .stack-item {
+      padding: 10px 20px; border-radius: 8px; font-size: .85rem;
+      background: rgba(0,212,255,.06); border: 1px solid rgba(0,212,255,.12);
+      color: #c0c0d0; transition: all .2s;
+    }
+    .stack-item:hover { border-color: #00d4ff; color: #00d4ff; }
+    .contact-section { text-align: center; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+    .contact-card {
+      display: flex; align-items: center; gap: 12px; padding: 16px 24px;
+      background: #12121a; border: 1px solid rgba(0,212,255,.12); border-radius: 12px;
+      text-decoration: none; color: #e0e0e0; transition: all .25s;
+    }
+    .contact-card:hover { border-color: #00d4ff; transform: translateY(-2px); }
+    .contact-card .icon { font-size: 1.4rem; }
+    footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(0,212,255,.08); color: #606070; font-size: .85rem; }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+            background: rgba(10,10,15,.98); padding: 16px 24px; border-bottom: 1px solid rgba(0,212,255,.15); }
+      nav.open { display: flex; }
+      nav a { margin: 8px 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">JP<span>VB</span></div>
+  <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#about">Sobre mí</a>
+    <a href="#stack">Stack</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="container hero-content">
+    <div class="hero-badge">⚡ Consultoría TI · Automatización · IA</div>
+    <h1>Transformo procesos en<br><span class="highlight">soluciones inteligentes</span></h1>
+    <p>
+      Ingeniero Industrial especializado en analítica de datos, automatización Low-Code/NoCode
+      e inteligencia artificial. Ayudo a empresas a digitalizar procesos, liberar capacidad operativa
+      y tomar decisiones basadas en datos.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn btn-primary">📩 Contáctame</a>
+      <a href="#servicios" class="btn btn-outline">Ver servicios →</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="container">
+    <div class="section-label">Servicios</div>
+    <h2 class="section-title">Lo que hago</h2>
+    <p class="section-desc">Consultoría integral en transformación digital, desde el diagnóstico hasta la implementación.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>Automatización Inteligente</h3>
+        <p>n8n, Power Automate, RPA, OCR y MCP para eliminar tareas repetitivas y conectar sistemas.</p>
+        <div class="service-tags"><span>n8n</span><span>Power Automate</span><span>RPA</span><span>OCR</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Analítica & BI</h3>
+        <p>Power BI, Databricks, Python, Spark y SQL. Datos dispersos convertidos en decisiones.</p>
+        <div class="service-tags"><span>Power BI</span><span>Databricks</span><span>Python</span><span>SQL</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <h3>Agentes de IA & LLMs</h3>
+        <p>Agentes con Claude, OpenAI, DeepSeek, Ollama y MCP integrados en procesos empresariales.</p>
+        <div class="service-tags"><span>Claude</span><span>ChatGPT</span><span>DeepSeek</span><span>Ollama</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Low-Code / No-Code</h3>
+        <p>Power Apps, Copilot Studio, Power Automate, n8n. Automatización sin programar.</p>
+        <div class="service-tags"><span>Power Apps</span><span>Copilot Studio</span><span>Power Automate</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">☁️</div>
+        <h3>Cloud & DevOps</h3>
+        <p>Azure, Docker, SQL Server, MongoDB. Infraestructura escalable y segura.</p>
+        <div class="service-tags"><span>Azure</span><span>Docker</span><span>SQL Server</span><span>MongoDB</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔄</div>
+        <h3>ERP & Optimización</h3>
+        <p>Automatización SAP Ariba, SAP ERP, integración con Oracle, Power BI y SharePoint.</p>
+        <div class="service-tags"><span>SAP Ariba</span><span>SAP ERP</span><span>Oracle</span><span>SharePoint</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background: radial-gradient(ellipse at 70% 50%, rgba(255,0,110,.04) 0%, transparent 50%);">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">Sobre mí</div>
+        <h2 class="section-title">Juan Pablo Valero Buitrago</h2>
+        <p>
+          Ingeniero Industrial de la Universidad ECCI y Técnico en Sistemas del SENA.
+          Mi experiencia en Ecopetrol (Coordinación de Gestión de Proveedores) me enseñó
+          que la tecnología correcta, bien aplicada, transforma procesos enteros.
+        </p>
+        <p>
+          Construí automatizaciones con Python y Power Automate, desarrollé agentes de IA,
+          implementé pipelines ETL en Oracle, diseñé tableros Power BI
+          y estructuré repositorios documentales en SharePoint.
+        </p>
+        <p>
+          Hoy ofrezco esa misma capacidad a empresas que quieren digitalizarse
+          sin perder el foco en el negocio.
+        </p>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-num">+2</div><div class="stat-label">Años experiencia</div></div>
+          <div class="stat"><div class="stat-num">+8</div><div class="stat-label">Automatizaciones</div></div>
+          <div class="stat"><div class="stat-num">+6</div><div class="stat-label">Tecnologías</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="background: linear-gradient(145deg, #12121a, #0e0e15); border: 1px solid rgba(0,212,255,.1); border-radius: 16px; padding: 32px;">
+          <h3 style="margin-bottom: 16px;">🎓 Formación</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">🏛️</span>
+              <div><strong>Ingeniería Industrial</strong><br><span style="color: #a0a0b0; font-size: .85rem;">Universidad ECCI</span></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">🔧</span>
+              <div><strong>Gestión de Procesos Industriales</strong><br><span style="color: #a0a0b0; font-size: .85rem;">Universidad ECCI</span></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">💻</span>
+              <div><strong>Técnico en Sistemas</strong><br><span style="color: #a0a0b0; font-size: .85rem;">SENA</span></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">🚚</span>
+              <div><strong>Logística Cadena de Suministro</strong><br><span style="color: #a0a0b0; font-size: .85rem;">Politécnico Superior de Colombia</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="container">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title">Tecnologías que domino</h2>
+    <p class="section-desc">Un ecosistema completo para llevar ideas a producción.</p>
+    <div class="stack-grid">
+      <span class="stack-item">Python</span><span class="stack-item">SQL Server</span><span class="stack-item">MongoDB</span>
+      <span class="stack-item">MySQL</span><span class="stack-item">Power BI</span><span class="stack-item">Databricks</span>
+      <span class="stack-item">Apache Spark</span><span class="stack-item">n8n</span><span class="stack-item">Power Automate</span>
+      <span class="stack-item">Power Apps</span><span class="stack-item">Copilot Studio</span><span class="stack-item">Claude</span>
+      <span class="stack-item">ChatGPT</span><span class="stack-item">DeepSeek</span><span class="stack-item">Ollama</span>
+      <span class="stack-item">MCP</span><span class="stack-item">Azure</span><span class="stack-item">Docker</span>
+      <span class="stack-item">SAP Ariba</span><span class="stack-item">SAP ERP</span><span class="stack-item">Oracle</span>
+      <span class="stack-item">HTML/CSS</span><span class="stack-item">React</span><span class="stack-item">PHP</span>
+      <span class="stack-item">Git</span><span class="stack-item">Looker Studio</span><span class="stack-item">RPA</span>
+      <span class="stack-item">OCR</span><span class="stack-item">OpenCode</span><span class="stack-item">OpenClaw</span>
+      <span class="stack-item">Hermes</span>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container contact-section">
+    <div class="section-label" style="margin: 0 auto 12px;">Contacto</div>
+    <h2 class="section-title">Trabajemos juntos</h2>
+    <p class="section-desc" style="margin: 0 auto 32px;">
+      ¿Tienes un proceso que automatizar, un tablero que construir o una idea
+      que necesita tecnología para despegar? Hablemos.
+    </p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/juan-pablo-valero-buitrago-7b474316b" target="_blank" class="contact-card">
+        <span class="icon">🔗</span><span>LinkedIn</span>
+      </a>
+      <a href="mailto:juanchopvb16@gmail.com" class="contact-card">
+        <span class="icon">📧</span><span>juanchopvb16@gmail.com</span>
+      </a>
+      <a href="https://github.com/Juanpavbo" target="_blank" class="contact-card">
+        <span class="icon">💻</span><span>GitHub</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Juan Pablo Valero Buitrago · Hecho con ⚡ en Bogotá, Colombia</p>
+  </div>
+</footer>
+</body>
+</html>
