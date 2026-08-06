@@ -124,7 +124,7 @@ async function getTeamsToken(): Promise<string | null> {
     grant_type: 'client_credentials',
     client_id: clientId,
     client_secret: clientSecret,
-    scope: 'https://service.flow.microsoft.com/.default'
+    scope: 'https://service.flow.microsoft.com//.default'
   });
 
   const res = await fetch(`https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`, {
