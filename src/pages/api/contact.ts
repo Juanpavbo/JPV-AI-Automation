@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import { insertContact, sendContactEmail } from '../../lib/supabase';
 import { z } from 'zod';
 
+export const prerender = false;
+
 const contactSchema = z.object({
   nombre: z.string().min(2).max(100),
   email: z.string().email(),
