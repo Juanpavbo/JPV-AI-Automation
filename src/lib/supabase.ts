@@ -1,13 +1,20 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.SUPABASE_ANON_KEY;
+let supabaseClient: SupabaseClient | null = null;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+function getSupabase(): SupabaseClient {
+  if (supabaseClient) return supabaseClient;
+
+  const supabaseUrl = import.meta.env.SUPABASE_URL;
+  const supabaseAnonKey = import.meta.env.SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Missing Supabase environment variables');
+  }
+
+  supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+  return supabaseClient;
 }
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export type Database = {
   public: {
@@ -22,7 +29,7 @@ export type Database = {
 };
 
 export async function insertContact(data: { name: string; email: string; interest: string | null; message: string }) {
-  const { data: result, error } = await supabase
+  const { data: result, error } = await getSupabase()
     .from('contacts')
     .insert({
       name: data.name,
@@ -41,6 +48,7 @@ export async function insertContact(data: { name: string; email: string; interes
 
 export async function sendContactEmail(data: { name: string; email: string; interest: string | null; message: string }) {
   const resendApiKey = import.meta.env.RESEND_API_KEY;
+  const contactEmail = import.meta.env.CONTACT_EMAIL || 'aiyautomation@zohomail.com';
   if (!resendApiKey) return;
 
   await fetch('https://api.resend.com/emails', {
@@ -48,7 +56,7 @@ export async function sendContactEmail(data: { name: string; email: string; inte
     headers: { 'Authorization': `Bearer ${resendApiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from: 'JPV AI <contacto@jpvai.com>',
-      to: ['juanchopvb16@gmail.com'],
+      to: [contactEmail],
       subject: `Nuevo contacto: ${data.name} - ${data.interest || 'Sin categoría'}`,
       html: `
         <div style="font-family: system-ui; max-width: 600px; margin: 0 auto; background: #0a0a0f; color: #e0e0e0; padding: 24px; border-radius: 12px; border: 1px solid rgba(0,212,255,0.1);">

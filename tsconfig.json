@@ -10,6 +10,6 @@
       "@lib/*": ["src/lib/*"],
       "@styles/*": ["src/styles/*"]
     },
-    "types": ["astro/client", "@astrojs/db", "vite/client"]
+    "types": ["astro/client", "vite/client"]
   }
 }

@@ -12,6 +12,15 @@ const contactSchema = z.object({
 export const POST: APIRoute = async ({ request }) => {
   try {
     const formData = await request.formData();
+
+    const botField = formData.get('bot-field')?.toString() || '';
+    if (botField) {
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     const data = {
       nombre: formData.get('nombre')?.toString() || '',
       email: formData.get('email')?.toString() || '',

@@ -1,9 +1,8 @@
 ---
 import '../styles/global.css';
-import type { Props } from 'astro';
-import { Calendar, Mail, Github, Linkedin, Menu, X } from 'lucide-preact';
+import { Calendar, Mail, Linkedin, Menu, X } from 'lucide-preact';
 
-interface LayoutProps extends Props {
+interface Props {
   title: string;
   description?: string;
 }
@@ -65,8 +64,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <p>© 2026 Juan Pablo Valero Buitrago · Hecho con ⚡ en Bogotá, Colombia</p>
       <div class="flex justify-center gap-6 mt-4">
         <a href="https://www.linkedin.com/in/juan-pablo-valero-buitrago-7b474316b" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="LinkedIn"><Linkedin class="w-5 h-5" /></a>
-        <a href="mailto:juanchopvb16@gmail.com" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="Email"><Mail class="w-5 h-5" /></a>
-        <a href="https://github.com/Juanpavbo" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="GitHub"><Github class="w-5 h-5" /></a>
+        <a href="mailto:aiyautomation@zohomail.com" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="Email"><Mail class="w-5 h-5" /></a>
         <a href="#agendar" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="Calendario"><Calendar class="w-5 h-5" /></a>
       </div>
     </div>

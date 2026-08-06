@@ -1,13 +1,13 @@
 ---
+import { Calendar, Mail } from 'lucide-preact';
+
 interface Props {
-  title?: string;
-  subtitle?: string;
   ctaText?: string;
   ctaHref?: string;
   secondaryCtaText?: string;
   secondaryCtaHref?: string;
 }
-const { title = 'Transformo procesos en soluciones inteligentes', subtitle, ctaText = 'Contactar', ctaHref = '#contacto', secondaryCtaText = 'Agendar cita', secondaryCtaHref = '#agendar' } = Astro.props;
+const { ctaText = 'Contactar', ctaHref = '#contacto', secondaryCtaText = 'Agendar cita', secondaryCtaHref = '#agendar' } = Astro.props;
 ---
 
 <section class="hero min-h-[90vh] flex items-center relative" id="inicio">

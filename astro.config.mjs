@@ -1,12 +1,13 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-import db from '@astrojs/db';
+import preact from '@astrojs/preact';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
   site: 'https://jpv-ai-automation.vercel.app',
-  integrations: [tailwind(), mdx(), db()],
-  adapter: import('@astrojs/vercel/edge')(),
+  integrations: [tailwind(), mdx(), preact()],
+  adapter: vercel({ maxDuration: 30 }),
   output: 'hybrid',
   prefetch: { prefetchAll: true },
   compressHTML: true,

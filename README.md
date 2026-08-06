@@ -1,6 +1,6 @@
 # JPV AI & Automation - Sitio Web con Booking, DB, Notificaciones y PWA
 
-**Stack**: Astro 5 + Preact + Tailwind + Supabase + Vercel + Cloudflare
+**Stack**: Astro 4 + Preact + Tailwind + Supabase + Vercel + Cloudflare
 **Costo**: $0/mes (solo dominio ~$12/año opcional)
 
 ---
@@ -10,7 +10,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        VERCEL (Frontend)                        │
-│  Astro + Preact + PWA + Edge Functions (100GB-hrs gratis)      │
+│  Astro + Preact + PWA + Serverless Functions (100GB-hrs gratis) │
 └──────────────────────────┬──────────────────────────────────────┘
                            │ HTTPS
          ┌─────────────────┼─────────────────┐
@@ -101,7 +101,10 @@ JPV-AI-Automation/
 │   ├── pages/
 │   │   ├── index.astro
 │   │   └── api/
-│   │       └── contact.ts   # Endpoint formulario
+│   │       ├── contact.ts          # Endpoint formulario
+│   │       └── cron/
+│   │           ├── cleanup.ts      # Limpieza notificaciones leídas
+│   │           └── reminders.ts    # Recordatorios de bookings
 │   └── styles/
 │       └── global.css
 ├── supabase/
@@ -116,8 +119,11 @@ JPV-AI-Automation/
 │       └── ci-cd.yml        # CI/CD: lint, test, build, deploy
 ├── public/
 │   ├── sw.js                # Service Worker (PWA)
-│   └── manifest.webmanifest
+│   ├── manifest.webmanifest
+│   └── icons/               # Iconos PWA
 ├── vercel.json              # Config Vercel (headers, crons, rewrites)
+├── eslint.config.js         # ESLint flat config
+├── pnpm-workspace.yaml      # pnpm: onlyBuiltDependencies
 ├── astro.config.mjs
 ├── tailwind.config.mjs
 ├── tsconfig.json
@@ -240,7 +246,11 @@ Ver `.env.example` para lista completa. Mínimo para producción:
 ```env
 SUPABASE_URL=https://xxx.supabase.co
 SUPABASE_ANON_KEY=eyJ...
+SUPABASE_SERVICE_ROLE_KEY=...
 RESEND_API_KEY=re_...
+CONTACT_EMAIL=aiyautomation@zohomail.com
+CRON_SECRET=...
+PUBLIC_BOOKING_URL=https://calendly.com/tu-usuario
 VERCEL_TOKEN=...
 VERCEL_ORG_ID=...
 VERCEL_PROJECT_ID=...
@@ -273,4 +283,4 @@ MIT - Libre para uso comercial, modificación y distribución.
 
 ---
 
-**¿Preguntas?** [Agenda una llamada](https://cal.tu-dominio.com) o [escríbeme](mailto:juanchopvb16@gmail.com)
+**¿Preguntas?** [Agenda una llamada](https://calendly.com/tu-usuario) o [escríbeme](mailto:aiyautomation@zohomail.com)
