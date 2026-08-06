@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const functionsDir = join(root, '.vercel', 'output', 'functions')
-const targetRuntime = 'nodejs20.x'
+const targetRuntime = 'nodejs22.x'
 
 let patched = 0
 
