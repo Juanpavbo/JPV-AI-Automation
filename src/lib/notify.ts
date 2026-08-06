@@ -103,6 +103,48 @@ async function sendTelegram(data: ContactData): Promise<boolean> {
   return res.ok;
 }
 
+interface CachedToken {
+  value: string;
+  expiresAt: number;
+}
+
+let teamsToken: CachedToken | null = null;
+
+async function getTeamsToken(): Promise<string | null> {
+  const tenantId = env('TEAMS_TENANT_ID');
+  const clientId = env('TEAMS_CLIENT_ID');
+  const clientSecret = env('TEAMS_CLIENT_SECRET');
+  if (!tenantId || !clientId || !clientSecret) return null;
+
+  if (teamsToken && teamsToken.expiresAt > Date.now() + 60_000) {
+    return teamsToken.value;
+  }
+
+  const body = new URLSearchParams({
+    grant_type: 'client_credentials',
+    client_id: clientId,
+    client_secret: clientSecret,
+    scope: 'https://service.flow.microsoft.com/.default'
+  });
+
+  const res = await fetch(`https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString()
+  });
+
+  if (!res.ok) return null;
+
+  const json = (await res.json()) as { access_token?: string; expires_in?: number };
+  if (!json.access_token) return null;
+
+  teamsToken = {
+    value: json.access_token,
+    expiresAt: Date.now() + (json.expires_in ?? 3600) * 1000
+  };
+  return teamsToken.value;
+}
+
 async function sendTeams(data: ContactData): Promise<boolean> {
   const url = env('TEAMS_WEBHOOK_URL');
   if (!url) return false;
@@ -133,9 +175,15 @@ async function sendTeams(data: ContactData): Promise<boolean> {
         message: data.message
       };
 
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (!isDirectWebhook) {
+    const token = await getTeamsToken();
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+  }
+
   const res = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify(payload)
   });
   return res.ok;
