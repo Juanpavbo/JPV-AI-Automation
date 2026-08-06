@@ -121,7 +121,7 @@ JPV-AI-Automation/
 │   ├── sw.js                # Service Worker (PWA)
 │   ├── manifest.webmanifest
 │   └── icons/               # Iconos PWA
-├── vercel.json              # Config Vercel (headers, crons, rewrites)
+├── vercel.json              # Config Vercel (headers, rewrites; crons corren en Supabase pg_cron)
 ├── eslint.config.js         # ESLint flat config
 ├── pnpm-workspace.yaml      # pnpm: onlyBuiltDependencies
 ├── astro.config.mjs

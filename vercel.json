@@ -40,9 +40,5 @@
   "rewrites": [
     { "source": "/booking/(.*)", "destination": "/booking/$1" },
     { "source": "/api/(.*)", "destination": "/api/$1" }
-  ],
-  "crons": [
-    { "path": "/api/cron/cleanup", "schedule": "0 3 * * *" },
-    { "path": "/api/cron/reminders", "schedule": "*/15 * * * *" }
   ]
 }
