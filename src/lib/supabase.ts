@@ -29,7 +29,7 @@ export type Database = {
 };
 
 export async function insertContact(data: { name: string; email: string; interest: string | null; message: string }) {
-  const { data: result, error } = await getSupabase()
+  const { error } = await getSupabase()
     .from('contacts')
     .insert({
       name: data.name,
@@ -38,12 +38,10 @@ export async function insertContact(data: { name: string; email: string; interes
       message: data.message,
       source: 'web',
       status: 'new'
-    })
-    .select()
-    .single();
+    });
 
   if (error) throw error;
-  return result;
+  return { ...data, email: data.email.toLowerCase(), source: 'web', status: 'new' };
 }
 
 export async function sendContactEmail(data: { name: string; email: string; interest: string | null; message: string }) {

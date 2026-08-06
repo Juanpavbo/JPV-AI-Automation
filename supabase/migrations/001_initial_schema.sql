@@ -105,9 +105,13 @@ create policy "client_own_bookings" on public.bookings
     and client_email = current_setting('request.jwt.claims', true)::json->>'email'
   );
 
--- contacts: solo admins
+-- contacts: solo admins (restringido a authenticated para no bloquear el insert anon del formulario)
 create policy "admin_contacts" on public.contacts
-  for all using (
+  for all to authenticated
+  using (
+    exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
+  )
+  with check (
     exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
   );
 
@@ -128,13 +132,13 @@ begin
   return new;
 end $$;
 
-create trigger trg_profiles_updated at update on public.profiles
+create trigger trg_profiles_updated after update on public.profiles
   for each row execute function public.handle_updated_at();
-create trigger trg_availability_updated at update on public.availability_rules
+create trigger trg_availability_updated after update on public.availability_rules
   for each row execute function public.handle_updated_at();
-create trigger trg_bookings_updated at update on public.bookings
+create trigger trg_bookings_updated after update on public.bookings
   for each row execute function public.handle_updated_at();
-create trigger trg_contacts_updated at update on public.contacts
+create trigger trg_contacts_updated after update on public.contacts
   for each row execute function public.handle_updated_at();
 
 -- Cron: limpieza diaria de notificaciones leídas > 30 días
