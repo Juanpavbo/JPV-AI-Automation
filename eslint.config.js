@@ -19,5 +19,11 @@ export default [
       'astro/no-set-html-directive': 'off',
       'jsx-a11y/label-has-associated-control': 'off'
     }
+  },
+  {
+    files: ['**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/triple-slash-reference': 'off'
+    }
   }
 ];
