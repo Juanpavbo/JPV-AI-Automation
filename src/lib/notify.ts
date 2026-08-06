@@ -107,22 +107,31 @@ async function sendTeams(data: ContactData): Promise<boolean> {
   const url = env('TEAMS_WEBHOOK_URL');
   if (!url) return false;
 
-  const payload = {
-    '@type': 'MessageCard',
-    '@context': 'http://schema.org/extensions',
-    summary: `Nuevo contacto: ${data.name}`,
-    title: '📥 Nuevo contacto recibido',
-    sections: [
-      {
-        facts: [
-          { name: 'Nombre', value: data.name },
-          { name: 'Email', value: data.email },
-          { name: 'Interés', value: data.interest || 'Sin categoría' },
-          { name: 'Mensaje', value: data.message }
+  const isDirectWebhook = url.includes('webhook.office.com');
+
+  const payload = isDirectWebhook
+    ? {
+        '@type': 'MessageCard',
+        '@context': 'http://schema.org/extensions',
+        summary: `Nuevo contacto: ${data.name}`,
+        title: '📥 Nuevo contacto recibido',
+        sections: [
+          {
+            facts: [
+              { name: 'Nombre', value: data.name },
+              { name: 'Email', value: data.email },
+              { name: 'Interés', value: data.interest || 'Sin categoría' },
+              { name: 'Mensaje', value: data.message }
+            ]
+          }
         ]
       }
-    ]
-  };
+    : {
+        name: data.name,
+        email: data.email,
+        interest: data.interest || 'Sin categoría',
+        message: data.message
+      };
 
   const res = await fetch(url, {
     method: 'POST',
