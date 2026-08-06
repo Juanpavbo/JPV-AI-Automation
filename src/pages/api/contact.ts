@@ -54,6 +54,10 @@ export const POST: APIRoute = async ({ request }) => {
         message: parsed.data.mensaje
       });
       console.log('Notificación enviada:', JSON.stringify(notify));
+      return new Response(JSON.stringify({ success: true, contact, notify }), {
+        status: 201,
+        headers: { 'Content-Type': 'application/json' }
+      });
     } catch (emailError) {
       console.error('Error enviando notificación:', emailError);
     }
