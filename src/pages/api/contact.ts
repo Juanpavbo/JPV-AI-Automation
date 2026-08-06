@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { insertContact, sendContactEmail } from '../../lib/supabase';
+import { insertContact } from '../../lib/supabase';
+import { notifyContact } from '../../lib/notify';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -46,14 +47,15 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     try {
-      await sendContactEmail({
+      const notify = await notifyContact({
         name: parsed.data.nombre,
         email: parsed.data.email,
         interest: parsed.data.interes,
         message: parsed.data.mensaje
       });
+      console.log('Notificación enviada:', JSON.stringify(notify));
     } catch (emailError) {
-      console.error('Error enviando email:', emailError);
+      console.error('Error enviando notificación:', emailError);
     }
 
     return new Response(JSON.stringify({ success: true, contact }), {

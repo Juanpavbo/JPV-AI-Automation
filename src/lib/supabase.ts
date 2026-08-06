@@ -43,34 +43,3 @@ export async function insertContact(data: { name: string; email: string; interes
   if (error) throw error;
   return { ...data, email: data.email.toLowerCase(), source: 'web', status: 'new' };
 }
-
-export async function sendContactEmail(data: { name: string; email: string; interest: string | null; message: string }) {
-  const resendApiKey = import.meta.env.RESEND_API_KEY;
-  const contactEmail = import.meta.env.CONTACT_EMAIL || 'aiyautomation@zohomail.com';
-  const resendFrom = import.meta.env.RESEND_FROM || 'onboarding@resend.dev';
-  if (!resendApiKey) return;
-
-  await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${resendApiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: resendFrom,
-      to: [contactEmail],
-      subject: `Nuevo contacto: ${data.name} - ${data.interest || 'Sin categoría'}`,
-      html: `
-        <div style="font-family: system-ui; max-width: 600px; margin: 0 auto; background: #0a0a0f; color: #e0e0e0; padding: 24px; border-radius: 12px; border: 1px solid rgba(0,212,255,0.1);">
-          <h2 style="color: #00d4ff; margin-bottom: 16px;">Nuevo mensaje de contacto</h2>
-          <p><strong>Nombre:</strong> ${data.name}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          <p><strong>Interés:</strong> ${data.interest || 'No especificado'}</p>
-          <div style="margin-top: 16px; padding: 16px; background: rgba(0,212,255,0.05); border-radius: 8px; border: 1px solid rgba(0,212,255,0.1);">
-            <strong>Mensaje:</strong>
-            <p style="margin-top: 8px; white-space: pre-wrap;">${data.message}</p>
-          </div>
-          <hr style="border-color: rgba(0,212,255,0.1); margin: 24px 0;" />
-          <p style="font-size: 12px; color: #606070;">Enviado desde jpv-ai-automation.vercel.app</p>
-        </div>
-      `
-    })
-  });
-}
