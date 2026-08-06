@@ -49,13 +49,14 @@ export async function insertContact(data: { name: string; email: string; interes
 export async function sendContactEmail(data: { name: string; email: string; interest: string | null; message: string }) {
   const resendApiKey = import.meta.env.RESEND_API_KEY;
   const contactEmail = import.meta.env.CONTACT_EMAIL || 'aiyautomation@zohomail.com';
+  const resendFrom = import.meta.env.RESEND_FROM || 'onboarding@resend.dev';
   if (!resendApiKey) return;
 
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${resendApiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: 'JPV AI <contacto@jpvai.com>',
+      from: resendFrom,
       to: [contactEmail],
       subject: `Nuevo contacto: ${data.name} - ${data.interest || 'Sin categoría'}`,
       html: `

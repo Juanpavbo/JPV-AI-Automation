@@ -115,6 +115,11 @@ create policy "admin_contacts" on public.contacts
 create policy "own_notifications" on public.notifications
   for all using (auth.uid() = user_id);
 
+-- Contactos: permitir insert anónimo desde el formulario web (API con anon key)
+create policy "public_insert_web_contacts" on public.contacts
+  for insert to anon
+  with check (source = 'web');
+
 -- Trigger updated_at
 create or replace function public.handle_updated_at()
 returns trigger language plpgsql as $$
