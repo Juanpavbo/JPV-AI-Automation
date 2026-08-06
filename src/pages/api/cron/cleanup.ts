@@ -1,11 +1,11 @@
 import type { APIRoute } from 'astro';
 import { createClient } from '@supabase/supabase-js';
+import { checkCronSecret } from '../../../lib/auth';
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ request }) => {
-  const secret = import.meta.env.CRON_SECRET;
-  if (secret && request.headers.get('authorization') !== `Bearer ${secret}`) {
+  if (!checkCronSecret(request)) {
     return new Response('Unauthorized', { status: 401 });
   }
 

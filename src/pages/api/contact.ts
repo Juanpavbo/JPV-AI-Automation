@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { insertContact } from '../../lib/supabase';
 import { notifyContact } from '../../lib/notify';
+import { rateLimit, clientIp } from '../../lib/rateLimit';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -14,6 +15,15 @@ const contactSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const ip = clientIp(request);
+    const ipLimit = rateLimit(`contact:${ip}`, 5, 60_000);
+    if (!ipLimit.allowed) {
+      return new Response(JSON.stringify({ error: 'Demasiadas solicitudes' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json', 'Retry-After': String(ipLimit.retryAfter) }
+      });
+    }
+
     const formData = await request.formData();
 
     const botField = formData.get('bot-field')?.toString() || '';
@@ -36,6 +46,14 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Datos inválidos', details: parsed.error.flatten() }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const emailLimit = rateLimit(`contact-email:${parsed.data.email}`, 3, 60_000);
+    if (!emailLimit.allowed) {
+      return new Response(JSON.stringify({ error: 'Demasiadas solicitudes' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json', 'Retry-After': String(emailLimit.retryAfter) }
       });
     }
 
