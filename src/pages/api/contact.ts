@@ -62,7 +62,8 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error('Contact API error:', error);
-    return new Response(JSON.stringify({ error: 'Error interno del servidor' }), {
+    const detail = error instanceof Error ? error.message : String(error);
+    return new Response(JSON.stringify({ error: 'Error interno del servidor', detail }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
