@@ -45,8 +45,45 @@ const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL || `https://cal.com/${calU
 
       {calUsername ? (
         <div class="cal-embed rounded-2xl overflow-hidden" style="background: #12121a; border: 1px solid rgba(0,212,255,.1);">
-          <div id="cal-inline" data-cal-link={calUsername} data-cal-config={'{"layout":"month_view","theme":"dark"}'}></div>
-          <script is:inline src="https://app.cal.com/embed/embed.js" type="text/javascript"></script>
+          <div id="cal-inline" data-username={calUsername}></div>
+          <script is:inline>
+            (function (C, A, L) {
+              let p = function (a, ar) { a.q.push(ar); };
+              let d = C.document;
+              C.Cal = C.Cal || function () {
+                let cal = C.Cal;
+                let ar = arguments;
+                if (!cal.loaded) {
+                  cal.ns = {};
+                  cal.q = cal.q || [];
+                  d.head.appendChild(d.createElement('script')).src = A;
+                  cal.loaded = true;
+                }
+                if (ar[0] === L) {
+                  const api = function () { p(api, arguments); };
+                  const namespace = ar[1];
+                  api.q = api.q || [];
+                  if (typeof namespace === 'string') {
+                    cal.ns[namespace] = cal.ns[namespace] || api;
+                    p(cal.ns[namespace], ar);
+                    p(cal, ['initNamespace', namespace]);
+                  } else p(cal, ar);
+                  return;
+                }
+                p(cal, ar);
+              };
+            })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+            Cal('init', { origin: 'https://cal.com' });
+            const calEl = document.getElementById('cal-inline');
+            if (calEl) {
+              Cal('inline', {
+                elementOrSelector: '#cal-inline',
+                calLink: calEl.dataset.username,
+                config: { layout: 'month_view', theme: 'dark' }
+              });
+            }
+          </script>
         </div>
       ) : (
         <div class="calendly-placeholder rounded-2xl p-8 md:p-12 text-center min-h-[400px] flex flex-col items-center justify-center" style="background: #12121a; border: 1px solid rgba(0,212,255,.1);">
