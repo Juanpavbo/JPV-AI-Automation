@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { Calendar, Mail, Linkedin, Menu, X } from 'lucide-preact';
+import Chat from '../components/Chat.astro';
 
 interface Props {
   title: string;
@@ -69,6 +70,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
     </div>
   </footer>
+  <Chat />
   <script is:inline>
     const btn = document.querySelector('header button');
     const menu = document.getElementById('mobile-menu');

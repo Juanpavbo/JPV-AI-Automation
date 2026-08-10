@@ -1,4 +1,6 @@
 ---
+import Chat from './Chat.astro';
+
 const interests = [
   { value: 'automatizacion', label: 'Automatización de procesos' },
   { value: 'bi', label: 'Analítica / Power BI / Tableros' },
@@ -71,6 +73,9 @@ const interests = [
             </a>
             <a href="#agendar" class="btn btn-accent justify-center mt-2">Agendar videollamada →</a>
           </div>
+        </div>
+        <div class="mt-6">
+          <Chat variant="inline" />
         </div>
       </div>
     </div>

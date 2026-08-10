@@ -1,0 +1,244 @@
+---
+interface Props {
+  variant?: 'floating' | 'inline';
+}
+const { variant = 'floating' } = Astro.props;
+---
+
+{variant === 'floating' ? (
+  <div id="jpv-chat-root" data-variant="floating">
+    <button id="jpv-chat-toggle" type="button" aria-label="Abrir chat con JPV AI" aria-expanded="false">
+      <svg id="jpv-chat-open-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+      <svg id="jpv-chat-close-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <div id="jpv-chat-panel" class="jpv-chat-panel" hidden>
+      <div id="jpv-chat-messages" class="jpv-chat-messages" aria-live="polite"></div>
+      <form id="jpv-chat-form" class="jpv-chat-form">
+        <input id="jpv-chat-input" type="text" autocomplete="off" placeholder="Escribe tu mensaje..." aria-label="Mensaje" />
+        <button type="submit" aria-label="Enviar">➤</button>
+      </form>
+    </div>
+  </div>
+) : (
+  <div id="jpv-chat-inline-root" class="jpv-chat-inline" data-variant="inline">
+    <div id="jpv-chat-inline-messages" class="jpv-chat-messages" aria-live="polite"></div>
+    <form id="jpv-chat-inline-form" class="jpv-chat-form">
+      <input id="jpv-chat-inline-input" type="text" autocomplete="off" placeholder="Escribe tu mensaje..." aria-label="Mensaje" />
+      <button type="submit" aria-label="Enviar">➤</button>
+    </form>
+  </div>
+)}
+
+<script>
+  function initChat() {
+    const isInline = document.getElementById('jpv-chat-inline-root') !== null;
+    const prefix = isInline ? 'jpv-chat-inline' : 'jpv-chat';
+    const messagesEl = document.getElementById(`${prefix}-messages`) as HTMLElement | null;
+    const form = document.getElementById(`${prefix}-form`) as HTMLFormElement | null;
+    const input = document.getElementById(`${prefix}-input`) as HTMLInputElement | null;
+    if (!messagesEl || !form || !input) return;
+
+    const history: { role: 'user' | 'assistant'; content: string }[] = [];
+    let busy = false;
+
+    function appendMessage(role: 'user' | 'assistant', content: string) {
+      const el = document.createElement('div');
+      el.className = `jpv-chat-msg jpv-chat-${role}`;
+      el.textContent = content;
+      const box = messagesEl as HTMLElement;
+      box.appendChild(el);
+      box.scrollTop = box.scrollHeight;
+      return el;
+    }
+
+    if (!isInline) {
+      const toggle = document.getElementById('jpv-chat-toggle');
+      const panel = document.getElementById('jpv-chat-panel');
+      const openIcon = document.getElementById('jpv-chat-open-icon');
+      const closeIcon = document.getElementById('jpv-chat-close-icon');
+      if (toggle && panel) {
+        toggle.addEventListener('click', () => {
+          const open = panel.hidden;
+          panel.hidden = !open;
+          toggle.setAttribute('aria-expanded', String(open));
+          if (openIcon) openIcon.style.display = open ? 'none' : '';
+          if (closeIcon) closeIcon.style.display = open ? '' : 'none';
+          if (open && messagesEl.children.length === 0) {
+            appendMessage('assistant', 'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios de automatización, analítica e IA, o si quieres agendar una cita.');
+            input.focus();
+          }
+        });
+      }
+    } else {
+      appendMessage('assistant', 'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios o si quieres agendar una cita.');
+    }
+
+    form.addEventListener('submit', async (ev: Event) => {
+      ev.preventDefault();
+      const text = input.value.trim();
+      if (!text || busy) return;
+      input.value = '';
+      busy = true;
+      appendMessage('user', text);
+      history.push({ role: 'user', content: text });
+      if (history.length > 20) history.shift();
+
+      const thinking = appendMessage('assistant', '…');
+      thinking.classList.add('jpv-chat-thinking');
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history.slice(-10) })
+        });
+        thinking.remove();
+        const data = await res.json();
+        if (!res.ok) {
+          appendMessage('assistant', data.error || 'Algo salió mal. Inténtalo en un momento.');
+          return;
+        }
+        appendMessage('assistant', data.reply);
+        history.push({ role: 'assistant', content: data.reply });
+      } catch {
+        thinking.remove();
+        appendMessage('assistant', 'No pude conectar con el servicio. Revisa tu conexión e inténtalo de nuevo.');
+      } finally {
+        busy = false;
+        input.focus();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initChat());
+  } else {
+    initChat();
+  }
+</script>
+
+<style>
+  .jpv-chat-inline {
+    display: flex;
+    flex-direction: column;
+    background: #12121a;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    height: 100%;
+    min-height: 480px;
+  }
+  #jpv-chat-root[data-variant='floating'] {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 60;
+  }
+  #jpv-chat-toggle {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0f;
+    background: linear-gradient(135deg, #00d4ff, #0090b0);
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.35);
+    transition: transform 0.2s;
+  }
+  #jpv-chat-toggle:hover {
+    transform: translateY(-2px);
+  }
+  .jpv-chat-panel {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 0.75rem);
+    width: 22rem;
+    max-width: calc(100vw - 2.5rem);
+    height: 28rem;
+    display: flex;
+    flex-direction: column;
+    background: #12121a;
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  }
+  .jpv-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .jpv-chat-msg {
+    max-width: 85%;
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .jpv-chat-user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #00d4ff, #0090b0);
+    color: #0a0a0f;
+    border-bottom-right-radius: 0.25rem;
+  }
+  .jpv-chat-assistant {
+    align-self: flex-start;
+    background: #0e0e15;
+    color: #e0e0e0;
+    border: 1px solid rgba(0, 212, 255, 0.12);
+    border-bottom-left-radius: 0.25rem;
+  }
+  .jpv-chat-thinking {
+    color: #00d4ff;
+    opacity: 0.8;
+  }
+  .jpv-chat-form {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-top: 1px solid rgba(0, 212, 255, 0.1);
+    background: #0e0e15;
+  }
+  .jpv-chat-form input {
+    flex: 1;
+    background: #12121a;
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.85rem;
+    color: #e0e0e0;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .jpv-chat-form input:focus {
+    border-color: #00d4ff;
+  }
+  .jpv-chat-form button {
+    width: 2.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #0a0a0f;
+    background: linear-gradient(135deg, #00d4ff, #0090b0);
+  }
+  @media (max-width: 640px) {
+    .jpv-chat-panel {
+      width: calc(100vw - 2.5rem);
+      height: 26rem;
+    }
+  }
+</style>
