@@ -5,7 +5,7 @@ import preact from '@astrojs/preact';
 import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
-  site: 'https://jpv-ai-automation.vercel.app',
+  site: 'https://vexania.co',
   integrations: [tailwind(), mdx(), preact()],
   adapter: vercel({ maxDuration: 30 }),
   output: 'hybrid',
