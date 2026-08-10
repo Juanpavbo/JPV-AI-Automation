@@ -35,7 +35,7 @@ function buildHtml(data: ContactData): string {
         <p style="margin-top: 8px; white-space: pre-wrap;">${data.message}</p>
       </div>
       <hr style="border-color: rgba(0,212,255,0.1); margin: 24px 0;" />
-      <p style="font-size: 12px; color: #606070;">Enviado desde jpv-ai-automation.vercel.app</p>
+      <p style="font-size: 12px; color: #606070;">Enviado desde vexania.vercel.app</p>
     </div>
   `;
 }
