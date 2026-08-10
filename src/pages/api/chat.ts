@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
 import { SYSTEM_PROMPT, CHAT_MODEL, type ChatMessage } from '../../lib/chat';
+import { queryRuesByNit, queryRuesByName, ruesContext } from '../../lib/rues';
 import { rateLimit, clientIp } from '../../lib/rateLimit';
 
 export const prerender = false;
@@ -20,6 +21,30 @@ const requestSchema = z.object({
 });
 
 const NVIDIA_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
+
+const COMPANY_HINTS =
+  /empresa|compañia|compa\u00f1\u00eda|sociedad|nit|raz\u00f3n social|razon social|rues|c\u00e1mara de comercio|camara de comercio|representante legal|registro mercantil|actividad econ\u00f3mica|matr\u00edcula|registrada|inscrita|qu\u00e9 es|quien es|qui\u00e9n es/i;
+
+function extractNit(text: string): string | null {
+  const digits = text.replace(/[^0-9]/g, '');
+  const m = digits.match(/\d{6,10}/);
+  return m ? m[0] : null;
+}
+
+function looksLikeCompanyQuery(text: string): boolean {
+  return COMPANY_HINTS.test(text);
+}
+
+function extractCompanyName(text: string): string {
+  const cleaned = text
+    .replace(/^(por favor|podr\u00edas|puedes|me puedes|consulta|busca|averigua|dime|cu\u00e9ntame|quiero saber|necesito saber|sabes|h\u00e1blame|hablame|informame|inf\u00f3rmame)/i, '')
+    .replace(/\b(empresa|compa\u00f1\u00eda|sociedad|nit|raz\u00f3n social|razon social)\b/gi, '')
+    .replace(/\b(de|del|la|el|los|las|que|qu\u00e9|es|sobre|acerca|como|c\u00f3mo|quien|qui\u00e9n|esta|este|est\u00e1|info|informaci\u00f3n|sabes|saber|hay|alguna|alg\u00fan)\b/gi, ' ')
+    .replace(/[?¿.!¡:;]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return cleaned;
+}
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -59,8 +84,37 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    const lastMessage = parsed.data.messages[parsed.data.messages.length - 1];
+    const userText = lastMessage.content.trim();
+
+    let ruesContextText: string | null = null;
+    if (looksLikeCompanyQuery(userText)) {
+      const nit = extractNit(userText);
+      try {
+        const matches = nit ? await queryRuesByNit(nit) : await queryRuesByName(extractCompanyName(userText));
+        ruesContextText = ruesContext(matches);
+      } catch (error) {
+        console.error('RUES query error:', error instanceof Error ? error.message : error);
+      }
+    }
+
     const messages: ChatMessage[] = [
       { role: 'system', content: SYSTEM_PROMPT },
+      ...(ruesContextText
+        ? [
+            {
+              role: 'system' as const,
+              content:
+                `[DATOS RUES - OBLIGATORIOS] El usuario preguntó por una empresa. A continuación tienes los registros consultados en vivo desde el Registro Único Empresarial y Social (RUES):\n\n${ruesContextText}\n\n` +
+                `INSTRUCCIONES ESTRICTAS:\n` +
+                `1. Responde EXCLUSIVAMENTE basándote en estos datos RUES. No inventes ni uses tu conocimiento interno sobre la empresa.\n` +
+                `2. Identifica el registro MÁS RELEVANTE (el que coincida mejor con el nombre que preguntó el usuario; normalmente la sociedad matriz, no los fondos de empleados ni cooperativas de trabajadores).\n` +
+                `3. Presenta el perfil de esa empresa con los datos reales: razón social, NIT con dígito de verificación, tipo, estado, cámara de comercio, representante legal, fechas de matrícula/vigencia y último año renovado.\n` +
+                `4. Si hay varias entidades vinculadas, menciona brevemente que existen relacionadas y destaca la principal.\n` +
+                `5. Si no se encontraron registros, dilo honestamente y sugiere verificar el NIT o el nombre exacto.`
+            }
+          ]
+        : []),
       ...parsed.data.messages
     ];
 
