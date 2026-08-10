@@ -1,4 +1,4 @@
-# JPV AI & Automation - Sitio Web con Booking, DB, Notificaciones y PWA
+# Vexania - Sitio Web con Booking, DB, Notificaciones y PWA
 
 **Stack**: Astro 4 + Preact + Tailwind + Supabase + Vercel + Cloudflare
 **Costo**: $0/mes (solo dominio ~$12/año opcional)

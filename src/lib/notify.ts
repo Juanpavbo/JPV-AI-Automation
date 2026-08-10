@@ -55,7 +55,7 @@ async function sendEmail(data: ContactData): Promise<string[]> {
       auth: { user: smtpUser, pass: smtpPass }
     });
     await transporter.sendMail({
-      from: `"JPV AI & Automation" <${smtpUser}>`,
+      from: `"Vexania" <${smtpUser}>`,
       to: to.join(', '),
       subject: `Nuevo contacto: ${data.name} - ${data.interest || 'Sin categoría'}`,
       html: buildHtml(data)
