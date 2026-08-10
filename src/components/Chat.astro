@@ -35,15 +35,18 @@ const { variant = 'floating' } = Astro.props;
 )}
 
 <script>
-  function initChat() {
-    const isInline = document.getElementById('jpv-chat-inline-root') !== null;
-    const prefix = isInline ? 'jpv-chat-inline' : 'jpv-chat';
+  interface HistoryMsg {
+    role: 'user' | 'assistant';
+    content: string;
+  }
+
+  function makeChat(prefix: string, welcome: string) {
     const messagesEl = document.getElementById(`${prefix}-messages`) as HTMLElement | null;
     const form = document.getElementById(`${prefix}-form`) as HTMLFormElement | null;
     const input = document.getElementById(`${prefix}-input`) as HTMLInputElement | null;
     if (!messagesEl || !form || !input) return;
 
-    const history: { role: 'user' | 'assistant'; content: string }[] = [];
+    const history: HistoryMsg[] = [];
     let busy = false;
 
     function appendMessage(role: 'user' | 'assistant', content: string) {
@@ -56,29 +59,7 @@ const { variant = 'floating' } = Astro.props;
       return el;
     }
 
-    if (!isInline) {
-      const toggle = document.getElementById('jpv-chat-toggle');
-      const panel = document.getElementById('jpv-chat-panel');
-      const openIcon = document.getElementById('jpv-chat-open-icon');
-      const closeIcon = document.getElementById('jpv-chat-close-icon');
-      if (toggle && panel) {
-        toggle.addEventListener('click', () => {
-          const open = panel.hidden;
-          panel.hidden = !open;
-          toggle.setAttribute('aria-expanded', String(open));
-          if (openIcon) openIcon.style.display = open ? 'none' : '';
-          if (closeIcon) closeIcon.style.display = open ? '' : 'none';
-          if (open && messagesEl.children.length === 0) {
-            appendMessage('assistant', 'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios de automatización, analítica e IA, o si quieres agendar una cita.');
-            input.focus();
-          }
-        });
-      }
-    } else {
-      appendMessage('assistant', 'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios o si quieres agendar una cita.');
-    }
-
-    form.addEventListener('submit', async (ev: Event) => {
+    form.addEventListener('submit', (ev: Event) => {
       ev.preventDefault();
       const text = input.value.trim();
       if (!text || busy) return;
@@ -91,28 +72,62 @@ const { variant = 'floating' } = Astro.props;
       const thinking = appendMessage('assistant', '…');
       thinking.classList.add('jpv-chat-thinking');
 
-      try {
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: history.slice(-10) })
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history.slice(-10) })
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          thinking.remove();
+          if (!data.reply) {
+            appendMessage('assistant', data.error || 'Algo salió mal. Inténtalo en un momento.');
+            return;
+          }
+          appendMessage('assistant', data.reply);
+          history.push({ role: 'assistant', content: data.reply });
+        })
+        .catch(() => {
+          thinking.remove();
+          appendMessage('assistant', 'No pude conectar con el servicio. Revisa tu conexión e inténtalo de nuevo.');
+        })
+        .finally(() => {
+          busy = false;
+          input.focus();
         });
-        thinking.remove();
-        const data = await res.json();
-        if (!res.ok) {
-          appendMessage('assistant', data.error || 'Algo salió mal. Inténtalo en un momento.');
-          return;
-        }
-        appendMessage('assistant', data.reply);
-        history.push({ role: 'assistant', content: data.reply });
-      } catch {
-        thinking.remove();
-        appendMessage('assistant', 'No pude conectar con el servicio. Revisa tu conexión e inténtalo de nuevo.');
-      } finally {
-        busy = false;
-        input.focus();
-      }
     });
+
+    return { appendMessage, hasWelcome: () => messagesEl.children.length > 0 };
+  }
+
+  function initChat() {
+    const inline = makeChat(
+      'jpv-chat-inline',
+      'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios o si quieres agendar una cita.'
+    );
+    if (inline) inline.appendMessage('assistant', 'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios o si quieres agendar una cita.');
+
+    const floating = makeChat(
+      'jpv-chat',
+      'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios de automatización, analítica e IA, o si quieres agendar una cita.'
+    );
+
+    const toggle = document.getElementById('jpv-chat-toggle');
+    const panel = document.getElementById('jpv-chat-panel');
+    const openIcon = document.getElementById('jpv-chat-open-icon');
+    const closeIcon = document.getElementById('jpv-chat-close-icon');
+    if (toggle && panel) {
+      toggle.addEventListener('click', () => {
+        const open = panel.hidden;
+        panel.hidden = !open;
+        toggle.setAttribute('aria-expanded', String(open));
+        if (openIcon) openIcon.style.display = open ? 'none' : '';
+        if (closeIcon) closeIcon.style.display = open ? '' : 'none';
+        if (open && floating && !floating.hasWelcome()) {
+          floating.appendMessage('assistant', 'Hola 👋 Soy el asistente de JPV AI & Automation. Pregúntame por nuestros servicios de automatización, analítica e IA, o si quieres agendar una cita.');
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
@@ -136,7 +151,7 @@ const { variant = 'floating' } = Astro.props;
   #jpv-chat-root[data-variant='floating'] {
     position: fixed;
     right: 1.25rem;
-    bottom: 1.25rem;
+    bottom: 5.5rem;
     z-index: 60;
   }
   #jpv-chat-toggle {
@@ -170,6 +185,9 @@ const { variant = 'floating' } = Astro.props;
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  }
+  .jpv-chat-panel[hidden] {
+    display: none;
   }
   .jpv-chat-messages {
     flex: 1;

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jpv-ai-v1';
+const CACHE_NAME = 'jpv-ai-v2';
 const STATIC_ASSETS = [
   '/',
   '/manifest.webmanifest',
