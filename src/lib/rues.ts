@@ -1,3 +1,5 @@
+import { ciiuCode } from './ciiu';
+
 export interface RuesRecord {
   razon_social?: string;
   numero_identificacion?: string;
@@ -12,6 +14,9 @@ export interface RuesRecord {
   clase_identificacion_rl?: string;
   num_identificacion_representante_legal?: string;
   cod_ciiu_act_econ_pri?: string;
+  cod_ciiu_act_econ_sec?: string;
+  ciiu3?: string;
+  ciiu4?: string;
   ultimo_ano_renovado?: string;
   fecha_matricula?: string;
   fecha_vigencia?: string;
@@ -69,7 +74,7 @@ export async function queryRuesByName(name: string, limit = 10): Promise<RuesRec
     `${RUES_ENDPOINT}?` +
     `$q=${encodeURIComponent(clean)}` +
     `&$where=estado_matricula%20like%20%22ACTIVA%22` +
-    `&$select=razon_social,numero_identificacion,nit,digito_verificacion,clase_identificacion,organizacion_juridica,tipo_sociedad,estado_matricula,camara_comercio,representante_legal,num_identificacion_representante_legal,cod_ciiu_act_econ_pri,ultimo_ano_renovado,fecha_matricula,fecha_vigencia` +
+    `&$select=razon_social,numero_identificacion,nit,digito_verificacion,clase_identificacion,organizacion_juridica,tipo_sociedad,estado_matricula,camara_comercio,representante_legal,num_identificacion_representante_legal,cod_ciiu_act_econ_pri,cod_ciiu_act_econ_sec,ciiu3,ciiu4,ultimo_ano_renovado,fecha_matricula,fecha_vigencia` +
     `&$order=ultimo_ano_renovado%20DESC` +
     `&$limit=${limit}`;
   const res = await fetch(url, { signal: AbortSignal.timeout(20_000) });
@@ -85,6 +90,9 @@ export async function queryRuesByName(name: string, limit = 10): Promise<RuesRec
 export function formatRuesRecord(r: RuesRecord): string {
   const id = r.nit || r.numero_identificacion || 'No disponible';
   const dv = r.digito_verificacion ? `-${r.digito_verificacion}` : '';
+  const actPri = r.cod_ciiu_act_econ_pri ? ciiuCode(r.cod_ciiu_act_econ_pri) : null;
+  const actSec = r.cod_ciiu_act_econ_sec ? ciiuCode(r.cod_ciiu_act_econ_sec) : null;
+  const actOtras = [r.ciiu3, r.ciiu4].filter((c): c is string => Boolean(c)).map(ciiuCode);
   const lines = [
     `Razón social: ${r.razon_social || 'No disponible'}`,
     `Identificación: ${r.clase_identificacion || ''} ${id}${dv}`,
@@ -92,6 +100,9 @@ export function formatRuesRecord(r: RuesRecord): string {
     `Estado: ${r.estado_matricula || 'No disponible'}`,
     `Cámara de comercio: ${r.camara_comercio || 'No disponible'}`,
     `Representante legal: ${r.representante_legal || 'No disponible'}`,
+    `Actividad económica principal: ${actPri || 'No disponible'}`,
+    ...(actSec ? [`Actividad económica secundaria: ${actSec}`] : []),
+    ...(actOtras.length ? [`Otras actividades (CIIU): ${actOtras.join(' | ')}`] : []),
     `Matrícula desde: ${parseSocrataDate(r.fecha_matricula)}`,
     `Vigencia: ${parseSocrataDate(r.fecha_vigencia)}`,
     `Último año renovado: ${r.ultimo_ano_renovado || 'No disponible'}`

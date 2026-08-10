@@ -98,25 +98,23 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    const messages: ChatMessage[] = [
-      { role: 'system', content: SYSTEM_PROMPT },
-      ...(ruesContextText
-        ? [
-            {
-              role: 'system' as const,
-              content:
-                `[DATOS RUES - OBLIGATORIOS] El usuario preguntó por una empresa. A continuación tienes los registros consultados en vivo desde el Registro Único Empresarial y Social (RUES):\n\n${ruesContextText}\n\n` +
-                `INSTRUCCIONES ESTRICTAS:\n` +
-                `1. Responde EXCLUSIVAMENTE basándote en estos datos RUES. No inventes ni uses tu conocimiento interno sobre la empresa.\n` +
-                `2. Identifica el registro MÁS RELEVANTE (el que coincida mejor con el nombre que preguntó el usuario; normalmente la sociedad matriz, no los fondos de empleados ni cooperativas de trabajadores).\n` +
-                `3. Presenta el perfil de esa empresa con los datos reales: razón social, NIT con dígito de verificación, tipo, estado, cámara de comercio, representante legal, fechas de matrícula/vigencia y último año renovado.\n` +
-                `4. Si hay varias entidades vinculadas, menciona brevemente que existen relacionadas y destaca la principal.\n` +
-                `5. Si no se encontraron registros, dilo honestamente y sugiere verificar el NIT o el nombre exacto.`
-            }
-          ]
-        : []),
-      ...parsed.data.messages
-    ];
+    const messages: ChatMessage[] = parsed.data.messages.map((m, i) => {
+      if (i === parsed.data.messages.length - 1 && ruesContextText) {
+        return {
+          role: 'user',
+          content:
+            `[Consulta de empresa del usuario: "${userText}"]\n\n` +
+            `A continuación tienes los datos REALES consultados en vivo desde el Registro Único Empresarial y Social (RUES) de Colombia para responder:\n\n` +
+            `${ruesContextText}\n\n` +
+            `INSTRUCCIONES ESTRICTAS:\n` +
+            `- Responde EXCLUSIVAMENTE basándote en estos datos RUES. No inventes ni uses tu conocimiento interno sobre la empresa.\n` +
+            `- Si hay varios registros, identifica el MÁS RELEVANTE (normalmente la sociedad matriz, no fondos de empleados ni cooperativas de trabajadores) y destácalo como el principal.\n` +
+            `- Presenta el perfil de la empresa con sus datos reales: razón social, NIT con dígito de verificación, tipo de sociedad, estado, cámara de comercio, representante legal, actividades económicas (CIIU), fechas de matrícula/vigencia y último año renovado.\n` +
+            `- Si no se encontraron registros, dilo honestamente y sugiere verificar el NIT o el nombre exacto.`
+        };
+      }
+      return m;
+    });
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 25_000);
