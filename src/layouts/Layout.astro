@@ -38,9 +38,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <body class="antialiased">
   <header class="glass sticky top-0 z-50">
     <nav class="container flex items-center justify-between h-16" aria-label="Navegación principal">
-      <a href="/" class="flex items-center gap-2 text-xl font-bold text-brand-cyan" aria-label="Vexania - Inicio">
-        <span>Vexania</span>
-        <span class="text-brand-pink">AI & Automation</span>
+      <a href="/" class="flex flex-col items-start leading-tight" aria-label="Vexania - Inicio">
+        <span class="text-xl font-bold text-brand-cyan">Vexania</span>
+        <span class="text-[0.6rem] font-medium tracking-[0.18em] uppercase text-brand-pink">Transformación veloz y segura</span>
       </a>
       <button class="md:hidden p-2 text-brand-cyan" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
         <Menu id="menu-icon" class="w-6 h-6" />
@@ -62,7 +62,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </main>
   <footer class="border-t border-brand-border py-12">
     <div class="container text-center text-sm text-gray-500">
-      <p>© 2026 Vexania · Hecho con ⚡ en Bogotá, Colombia</p>
+      <p class="text-lg font-semibold text-brand-cyan">Vexania</p>
+      <p class="mt-2 text-xs text-gray-500 max-w-xl mx-auto">
+        Transformación veloz y segura: consultoría TI, automatización e inteligencia artificial
+        para que empresas y personas ganen velocidad sin comprometer la confianza.
+      </p>
+      <p class="mt-3">© 2026 Vexania · Hecho con ⚡ en Bogotá, Colombia</p>
       <div class="flex justify-center gap-6 mt-4">
         <a href="https://www.linkedin.com/company/jpv-ai-automation" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="LinkedIn"><Linkedin class="w-5 h-5" /></a>
         <a href="mailto:aiyautomation@zohomail.com" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="Email"><Mail class="w-5 h-5" /></a>
