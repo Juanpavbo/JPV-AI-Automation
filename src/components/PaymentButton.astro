@@ -21,9 +21,9 @@ const {
 } = Astro.props;
 ---
 
-<script define:vars={{ amountInCents, paymentMethod, customerEmail, customerName, customerPhone, children }}>
-  async function handlePaymentClick(event: Event) {
-    const btn = event.currentTarget as HTMLButtonElement;
+<script define:vars={{ amountInCents, paymentMethod, customerEmail, customerName, customerPhone, children }} is:inline>
+  async function handlePaymentClick(event) {
+    const btn = event.currentTarget;
     if (btn.disabled) return;
     btn.disabled = true;
     btn.textContent = 'Redirigiendo...';
@@ -40,7 +40,7 @@ const {
           customer_name: customerName,
           customer_phone: customerPhone,
           reference_type: 'service',
-          redirect_url: `${window.location.origin}/gracias`
+          redirect_url: window.location.origin + '/gracias'
         })
       });
 
