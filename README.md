@@ -248,7 +248,7 @@ SUPABASE_URL=https://xxx.supabase.co
 SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=...
 RESEND_API_KEY=re_...
-CONTACT_EMAIL=aiyautomation@zohomail.com
+CONTACT_EMAIL=vexania@zohomail.com
 CRON_SECRET=...
 PUBLIC_CALCOM_USERNAME=juan-pablo-valero-buitrago-y07qzi
 PUBLIC_BOOKING_URL=https://cal.com/juan-pablo-valero-buitrago-y07qzi
@@ -284,4 +284,4 @@ MIT - Libre para uso comercial, modificación y distribución.
 
 ---
 
-**¿Preguntas?** [Agenda una llamada](https://cal.com/juan-pablo-valero-buitrago-y07qzi) o [escríbeme](mailto:aiyautomation@zohomail.com)
+**¿Preguntas?** [Agenda una llamada](https://cal.com/juan-pablo-valero-buitrago-y07qzi) o [escríbeme](mailto:vexania@zohomail.com)
