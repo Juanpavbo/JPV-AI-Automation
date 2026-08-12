@@ -87,7 +87,7 @@ export const POST: APIRoute = async ({ request }) => {
         source: 'web',
         interest: parsed.data.interes,
         interest_detail: parsed.data.mensaje,
-        service_interest: parsed.data.servicios_interes?.length > 0 ? parsed.data.servicios_interes : null,
+        service_interest: (parsed.data.servicios_interes ?? []).length > 0 ? parsed.data.servicios_interes : null,
         utm_source: formData.get('utm_source')?.toString() || null,
         utm_medium: formData.get('utm_medium')?.toString() || null,
         utm_campaign: formData.get('utm_campaign')?.toString() || null,
@@ -120,7 +120,7 @@ export const POST: APIRoute = async ({ request }) => {
         email: parsed.data.email,
         interest: parsed.data.interes,
         message: parsed.data.mensaje,
-        service_interest: parsed.data.servicios_interes?.length > 0 ? parsed.data.servicios_interes : undefined,
+        service_interest: (parsed.data.servicios_interes ?? []).length > 0 ? parsed.data.servicios_interes : undefined,
         company: parsed.data.empresa || undefined,
         role: parsed.data.cargo || undefined,
         phone: parsed.data.telefono || undefined
