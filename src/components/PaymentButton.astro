@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 ---
 
-<script>
+<script define:vars={{ amountInCents, paymentMethod, customerEmail, customerName, customerPhone, children }}>
   async function handlePaymentClick(event: Event) {
     const btn = event.currentTarget as HTMLButtonElement;
     if (btn.disabled) return;

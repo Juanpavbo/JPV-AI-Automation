@@ -56,7 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const event = JSON.parse(rawBody);
-    const { type, data } = event;
+    const { type: _type, data } = event;
 
     if (!data?.transaction) {
       console.warn('Webhook event without transaction data:', event);

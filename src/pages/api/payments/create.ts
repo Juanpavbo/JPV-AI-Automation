@@ -90,10 +90,9 @@ async function createWompiTransaction(params: {
   };
 }
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
-    const user = locals?.user;
-    const userId = user?.id ?? import.meta.env.SUPABASE_SERVICE_USER_ID ?? '00000000-0000-0000-0000-000000000000';
+    const userId = import.meta.env.SUPABASE_SERVICE_USER_ID ?? '00000000-0000-0000-0000-000000000000';
 
     const json = await request.json();
     const parsed = createPaymentSchema.safeParse(json);
