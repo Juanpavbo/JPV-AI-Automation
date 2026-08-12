@@ -126,6 +126,7 @@ export interface PageViewParams {
   device_type?: string | null;
   browser?: string | null;
   os?: string | null;
+  duration_seconds?: number | null;
 }
 
 export async function insertPageView(params: PageViewParams) {

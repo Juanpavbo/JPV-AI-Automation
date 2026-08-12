@@ -282,7 +282,7 @@ function buildPaymentHtml(data: PaymentData): string {
 }
 
 async function sendPaymentEmail(data: PaymentData): Promise<string[]> {
-  const to = emailRecipients();
+  const to = getAllEmailRecipients();
   if (to.length === 0) return [];
 
   const smtpUser = env('ZOHO_SMTP_USER');

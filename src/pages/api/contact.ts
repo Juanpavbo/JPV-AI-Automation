@@ -78,7 +78,7 @@ export const POST: APIRoute = async ({ request }) => {
     let leadId: string | null = null;
     try {
       leadId = await createLead({
-        contact_id: contact.id, // asume que insertContact devuelve el id
+        contact_id: contact.id,
         name: parsed.data.nombre,
         email: parsed.data.email,
         phone: parsed.data.telefono || null,
@@ -87,7 +87,7 @@ export const POST: APIRoute = async ({ request }) => {
         source: 'web',
         interest: parsed.data.interes,
         interest_detail: parsed.data.mensaje,
-        service_interest: parsed.data.servicios_interes.length > 0 ? parsed.data.servicios_interes : null,
+        service_interest: parsed.data.servicios_interes?.length > 0 ? parsed.data.servicios_interes : null,
         utm_source: formData.get('utm_source')?.toString() || null,
         utm_medium: formData.get('utm_medium')?.toString() || null,
         utm_campaign: formData.get('utm_campaign')?.toString() || null,
@@ -114,21 +114,13 @@ export const POST: APIRoute = async ({ request }) => {
       // No fallamos el request si CRM falla
     }
 
-    const emailLimit = rateLimit(`contact-email:${parsed.data.email}`, 3, 60_000);
-    if (!emailLimit.allowed) {
-      return new Response(JSON.stringify({ error: 'Demasiadas solicitudes' }), {
-        status: 429,
-        headers: { 'Content-Type': 'application/json', 'Retry-After': String(emailLimit.retryAfter) }
-      });
-    }
-
     try {
       const notify = await notifyContact({
         name: parsed.data.nombre,
         email: parsed.data.email,
         interest: parsed.data.interes,
         message: parsed.data.mensaje,
-        service_interest: parsed.data.servicios_interes.length > 0 ? parsed.data.servicios_interes : undefined,
+        service_interest: parsed.data.servicios_interes?.length > 0 ? parsed.data.servicios_interes : undefined,
         company: parsed.data.empresa || undefined,
         role: parsed.data.cargo || undefined,
         phone: parsed.data.telefono || undefined
