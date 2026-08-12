@@ -1,4 +1,6 @@
 ---
+import PaymentButton from './PaymentButton.astro';
+
 const interests = [
   { value: 'automatizacion', label: 'Automatización de procesos' },
   { value: 'bi', label: 'Analítica / Power BI / Tableros' },
@@ -70,6 +72,24 @@ const interests = [
               <span>aiyautomation@zohomail.com</span>
             </a>
             <a href="#agendar" class="btn btn-accent justify-center mt-2">Agendar videollamada →</a>
+          </div>
+
+          <hr class="my-6 border-brand-border" />
+
+          <div>
+            <h4 class="font-semibold mb-3">Pagar servicio</h4>
+            <PaymentButton
+              amountInCents={150000}
+              concept="Consultoría inicial (1h)"
+              customerEmail=""
+              customerName=""
+              customerPhone=""
+              paymentMethod="NEQUI"
+              children="Pagar $150.000 COP con Nequi / Daviplata"
+            />
+            <p class="mt-2 text-xs text-gray-500 text-center">
+              Redirección segura a Wompi (Bancolombia). Acepta Nequi, Daviplata, tarjetas y transferencia.
+            </p>
           </div>
         </div>
       </div>

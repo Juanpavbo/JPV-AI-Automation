@@ -7,6 +7,16 @@ export interface ContactData {
   message: string;
 }
 
+export interface PaymentData {
+  customer_name: string;
+  customer_email: string;
+  amount_in_cents: number;
+  currency: string;
+  payment_method: string;
+  reference: string;
+  paid_at: string | null;
+}
+
 export interface NotifyResult {
   email: string[];
   telegram: boolean;
@@ -194,6 +204,151 @@ export async function notifyContact(data: ContactData): Promise<NotifyResult> {
     sendEmail(data),
     sendTelegram(data),
     sendTeams(data)
+  ]);
+
+  return {
+    email: email.status === 'fulfilled' ? email.value : [],
+    telegram: telegram.status === 'fulfilled' && telegram.value,
+    teams: teams.status === 'fulfilled' && teams.value
+  };
+}
+
+function buildPaymentHtml(data: PaymentData): string {
+  const amount = (data.amount_in_cents / 100).toLocaleString('es-CO', { style: 'currency', currency: data.currency, minimumFractionDigits: 0 });
+  return `
+    <div style="font-family: system-ui; max-width: 600px; margin: 0 auto; background: #0a0a0f; color: #e0e0e0; padding: 24px; border-radius: 12px; border: 1px solid rgba(0,212,255,0.1);">
+      <h2 style="color: #00d4ff; margin-bottom: 16px;">✅ Pago aprobado</h2>
+      <p><strong>Cliente:</strong> ${data.customer_name}</p>
+      <p><strong>Email:</strong> ${data.customer_email}</p>
+      <p><strong>Método:</strong> ${data.payment_method}</p>
+      <p><strong>Monto:</strong> ${amount}</p>
+      <p><strong>Referencia:</strong> ${data.reference}</p>
+      <p><strong>Fecha:</strong> ${data.paid_at ? new Date(data.paid_at).toLocaleString('es-CO', { timeZone: 'America/Bogota' }) : 'N/A'}</p>
+      <hr style="border-color: rgba(0,212,255,0.1); margin: 24px 0;" />
+      <p style="font-size: 12px; color: #606070;">Enviado desde vexania.vercel.app</p>
+    </div>
+  `;
+}
+
+async function sendPaymentEmail(data: PaymentData): Promise<string[]> {
+  const to = emailRecipients();
+  if (to.length === 0) return [];
+
+  const smtpUser = env('ZOHO_SMTP_USER');
+  const smtpPass = env('ZOHO_SMTP_PASS');
+
+  if (smtpUser && smtpPass) {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.zoho.com',
+      port: 465,
+      secure: true,
+      auth: { user: smtpUser, pass: smtpPass }
+    });
+    await transporter.sendMail({
+      from: `"Vexania" <${smtpUser}>`,
+      to: to.join(', '),
+      subject: `💰 Pago aprobado: ${data.customer_name} - ${(data.amount_in_cents / 100).toLocaleString('es-CO', { style: 'currency', currency: data.currency })}`,
+      html: buildPaymentHtml(data)
+    });
+    return ['zoho'];
+  }
+
+  const resendKey = env('RESEND_API_KEY');
+  if (resendKey) {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: env('RESEND_FROM', 'onboarding@resend.dev'),
+        to,
+        subject: `💰 Pago aprobado: ${data.customer_name}`,
+        html: buildPaymentHtml(data)
+      })
+    });
+    if (res.ok) return ['resend'];
+  }
+
+  return [];
+}
+
+async function sendPaymentTelegram(data: PaymentData): Promise<boolean> {
+  const token = env('TELEGRAM_BOT_TOKEN');
+  const chatId = env('TELEGRAM_CHAT_ID');
+  if (!token || !chatId) return false;
+
+  const amount = (data.amount_in_cents / 100).toLocaleString('es-CO', { style: 'currency', currency: data.currency, minimumFractionDigits: 0 });
+  const text = [
+    '💰 *Pago aprobado*',
+    `👤 ${data.customer_name}`,
+    `📧 ${data.customer_email}`,
+    `💳 ${data.payment_method}`,
+    `💵 ${amount}`,
+    `🔖 ${data.reference}`,
+    `🕐 ${data.paid_at ? new Date(data.paid_at).toLocaleString('es-CO', { timeZone: 'America/Bogota' }) : 'N/A'}`
+  ].join('\n');
+
+  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
+  });
+  return res.ok;
+}
+
+async function sendPaymentTeams(data: PaymentData): Promise<boolean> {
+  const url = env('TEAMS_WEBHOOK_URL');
+  if (!url) return false;
+
+  const amount = (data.amount_in_cents / 100).toLocaleString('es-CO', { style: 'currency', currency: data.currency, minimumFractionDigits: 0 });
+  const isDirectWebhook = url.includes('webhook.office.com');
+
+  const payload = isDirectWebhook
+    ? {
+        '@type': 'MessageCard',
+        '@context': 'http://schema.org/extensions',
+        summary: `Pago aprobado: ${data.customer_name}`,
+        title: '💰 Pago aprobado',
+        sections: [
+          {
+            facts: [
+              { name: 'Cliente', value: data.customer_name },
+              { name: 'Email', value: data.customer_email },
+              { name: 'Método', value: data.payment_method },
+              { name: 'Monto', value: amount },
+              { name: 'Referencia', value: data.reference },
+              { name: 'Fecha', value: data.paid_at ? new Date(data.paid_at).toLocaleString('es-CO', { timeZone: 'America/Bogota' }) : 'N/A' }
+            ]
+          }
+        ]
+      }
+    : {
+        customer_name: data.customer_name,
+        customer_email: data.customer_email,
+        amount: amount,
+        payment_method: data.payment_method,
+        reference: data.reference,
+        paid_at: data.paid_at
+      };
+
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (!isDirectWebhook) {
+    const token = await getTeamsToken();
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(payload)
+  });
+  return res.ok;
+}
+
+export async function notifyPayment(data: PaymentData): Promise<NotifyResult> {
+  const [email, telegram, teams] = await Promise.allSettled([
+    sendPaymentEmail(data),
+    sendPaymentTelegram(data),
+    sendPaymentTeams(data)
   ]);
 
   return {

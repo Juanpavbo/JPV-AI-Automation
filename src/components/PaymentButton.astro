@@ -1,0 +1,109 @@
+---
+interface Props {
+  amountInCents?: number;
+  concept?: string;
+  customerEmail?: string;
+  customerName?: string;
+  customerPhone?: string;
+  paymentMethod?: 'NEQUI' | 'DAVIPLATA' | 'CARD';
+  className?: string;
+  children?: string;
+}
+const {
+  amountInCents = 50000,
+  concept = 'Servicio de consultoría',
+  customerEmail = '',
+  customerName = '',
+  customerPhone = '',
+  paymentMethod = 'NEQUI',
+  className = '',
+  children = 'Pagar con Nequi / Daviplata'
+} = Astro.props;
+---
+
+<script>
+  async function handlePaymentClick(event: Event) {
+    const btn = event.currentTarget as HTMLButtonElement;
+    if (btn.disabled) return;
+    btn.disabled = true;
+    btn.textContent = 'Redirigiendo...';
+
+    try {
+      const res = await fetch('/api/payments/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount_in_cents: amountInCents,
+          currency: 'COP',
+          payment_method: paymentMethod,
+          customer_email: customerEmail,
+          customer_name: customerName,
+          customer_phone: customerPhone,
+          reference_type: 'service',
+          redirect_url: `${window.location.origin}/gracias`
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Error creando el pago');
+      }
+
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+      } else {
+        throw new Error('No se recibió URL de pago');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = children;
+      alert(err instanceof Error ? err.message : 'Error al iniciar el pago');
+    }
+  }
+
+  const btn = document.getElementById('pay-btn');
+  btn?.addEventListener('click', handlePaymentClick);
+</script>
+
+<button
+  id="pay-btn"
+  type="button"
+  class={`btn btn-primary w-full sm:w-auto ${className}`}
+  data-payment-method={paymentMethod}
+>
+  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+  </svg>
+  {children}
+</button>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: 0;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #00d4ff, #0090b0);
+    color: #0a0a0f;
+  }
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,212,255,0.3);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+</style>
