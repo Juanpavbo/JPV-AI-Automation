@@ -5,6 +5,10 @@ export interface ContactData {
   email: string;
   interest: string | null;
   message: string;
+  service_interest?: string[];
+  company?: string | null;
+  role?: string | null;
+  phone?: string | null;
 }
 
 export interface PaymentData {
@@ -23,23 +27,43 @@ export interface NotifyResult {
   teams: boolean;
 }
 
+export interface EmailRecipients {
+  personal: string[];
+  institutional: string[];
+  business: string[];
+}
+
 const env = (key: string, fallback = ''): string => import.meta.env[key] || fallback;
 
-function emailRecipients(): string[] {
-  const raw = env('NOTIFY_EMAILS', env('CONTACT_EMAIL', ''));
-  return raw
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean);
+function getEmailRecipients(): EmailRecipients {
+  return {
+    personal: (env('NOTIFY_EMAIL_PERSONAL', '') || '').split(',').map(s => s.trim()).filter(Boolean),
+    institutional: (env('NOTIFY_EMAIL_INSTITUTIONAL', '') || '').split(',').map(s => s.trim()).filter(Boolean),
+    business: (env('NOTIFY_EMAIL_BUSINESS', '') || '').split(',').map(s => s.trim()).filter(Boolean)
+  };
+}
+
+function getAllEmailRecipients(): string[] {
+  const recipients = getEmailRecipients();
+  return [...recipients.personal, ...recipients.institutional, ...recipients.business];
 }
 
 function buildHtml(data: ContactData): string {
+  const serviceInterest = data.service_interest && data.service_interest.length > 0
+    ? data.service_interest.join(', ')
+    : 'No especificado';
   return `
     <div style="font-family: system-ui; max-width: 600px; margin: 0 auto; background: #0a0a0f; color: #e0e0e0; padding: 24px; border-radius: 12px; border: 1px solid rgba(0,212,255,0.1);">
-      <h2 style="color: #00d4ff; margin-bottom: 16px;">Nuevo mensaje de contacto</h2>
-      <p><strong>Nombre:</strong> ${data.name}</p>
-      <p><strong>Email:</strong> ${data.email}</p>
-      <p><strong>Interés:</strong> ${data.interest || 'No especificado'}</p>
+      <h2 style="color: #00d4ff; margin-bottom: 16px;">📥 Nuevo lead: ${data.name}</h2>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+        <tr><td style="padding: 8px 0; color: #888;">Nombre</td><td style="padding: 8px 0; font-weight: 600;">${data.name}</td></tr>
+        <tr><td style="padding: 8px 0; color: #888;">Email</td><td style="padding: 8px 0;">${data.email}</td></tr>
+        <tr><td style="padding: 8px 0; color: #888;">Teléfono</td><td style="padding: 8px 0;">${data.phone || 'No especificado'}</td></tr>
+        <tr><td style="padding: 8px 0; color: #888;">Empresa</td><td style="padding: 8px 0;">${data.company || 'No especificada'}</td></tr>
+        <tr><td style="padding: 8px 0; color: #888;">Cargo</td><td style="padding: 8px 0;">${data.role || 'No especificado'}</td></tr>
+        <tr><td style="padding: 8px 0; color: #888;">Interés principal</td><td style="padding: 8px 0;">${data.interest || 'No especificado'}</td></tr>
+        <tr><td style="padding: 8px 0; color: #888;">Servicios de interés</td><td style="padding: 8px 0;">${serviceInterest}</td></tr>
+      </table>
       <div style="margin-top: 16px; padding: 16px; background: rgba(0,212,255,0.05); border-radius: 8px; border: 1px solid rgba(0,212,255,0.1);">
         <strong>Mensaje:</strong>
         <p style="margin-top: 8px; white-space: pre-wrap;">${data.message}</p>
@@ -50,9 +74,8 @@ function buildHtml(data: ContactData): string {
   `;
 }
 
-async function sendEmail(data: ContactData): Promise<string[]> {
-  const to = emailRecipients();
-  if (to.length === 0) return [];
+async function sendEmailToGroup(data: ContactData, emails: string[], groupName: string): Promise<string[]> {
+  if (emails.length === 0) return [];
 
   const smtpUser = env('ZOHO_SMTP_USER');
   const smtpPass = env('ZOHO_SMTP_PASS');
@@ -66,11 +89,11 @@ async function sendEmail(data: ContactData): Promise<string[]> {
     });
     await transporter.sendMail({
       from: `"Vexania" <${smtpUser}>`,
-      to: to.join(', '),
-      subject: `Nuevo contacto: ${data.name} - ${data.interest || 'Sin categoría'}`,
+      to: emails.join(', '),
+      subject: `[${groupName.toUpperCase()}] Nuevo lead: ${data.name} - ${data.interest || 'Sin categoría'}`,
       html: buildHtml(data)
     });
-    return ['zoho'];
+    return [`zoho-${groupName}`];
   }
 
   const resendKey = env('RESEND_API_KEY');
@@ -80,12 +103,12 @@ async function sendEmail(data: ContactData): Promise<string[]> {
       headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: env('RESEND_FROM', 'onboarding@resend.dev'),
-        to,
-        subject: `Nuevo contacto: ${data.name} - ${data.interest || 'Sin categoría'}`,
+        to: emails,
+        subject: `[${groupName.toUpperCase()}] Nuevo lead: ${data.name} - ${data.interest || 'Sin categoría'}`,
         html: buildHtml(data)
       })
     });
-    if (res.ok) return ['resend'];
+    if (res.ok) return [`resend-${groupName}`];
   }
 
   return [];
@@ -96,11 +119,19 @@ async function sendTelegram(data: ContactData): Promise<boolean> {
   const chatId = env('TELEGRAM_CHAT_ID');
   if (!token || !chatId) return false;
 
+  const serviceInterest = data.service_interest && data.service_interest.length > 0
+    ? data.service_interest.join(', ')
+    : 'No especificado';
+
   const text = [
-    '📥 *Nuevo contacto*',
+    '📥 *Nuevo lead*',
     `👤 ${data.name}`,
     `📧 ${data.email}`,
+    `📞 ${data.phone || 'No especificado'}`,
+    `🏢 ${data.company || 'No especificada'}`,
+    `💼 ${data.role || 'No especificado'}`,
     `🏷️ ${data.interest || 'Sin categoría'}`,
+    `⚙️ ${serviceInterest}`,
     '',
     `📝 ${data.message}`
   ].join('\n');
@@ -159,20 +190,28 @@ async function sendTeams(data: ContactData): Promise<boolean> {
   const url = env('TEAMS_WEBHOOK_URL');
   if (!url) return false;
 
+  const serviceInterest = data.service_interest && data.service_interest.length > 0
+    ? data.service_interest.join(', ')
+    : 'No especificado';
+
   const isDirectWebhook = url.includes('webhook.office.com');
 
   const payload = isDirectWebhook
     ? {
         '@type': 'MessageCard',
         '@context': 'http://schema.org/extensions',
-        summary: `Nuevo contacto: ${data.name}`,
-        title: '📥 Nuevo contacto recibido',
+        summary: `Nuevo lead: ${data.name}`,
+        title: '📥 Nuevo lead recibido',
         sections: [
           {
             facts: [
               { name: 'Nombre', value: data.name },
               { name: 'Email', value: data.email },
-              { name: 'Interés', value: data.interest || 'Sin categoría' },
+              { name: 'Teléfono', value: data.phone || 'No especificado' },
+              { name: 'Empresa', value: data.company || 'No especificada' },
+              { name: 'Cargo', value: data.role || 'No especificado' },
+              { name: 'Interés principal', value: data.interest || 'Sin categoría' },
+              { name: 'Servicios de interés', value: serviceInterest },
               { name: 'Mensaje', value: data.message }
             ]
           }
@@ -181,7 +220,11 @@ async function sendTeams(data: ContactData): Promise<boolean> {
     : {
         name: data.name,
         email: data.email,
-        interest: data.interest || 'Sin categoría',
+        phone: data.phone,
+        company: data.company,
+        role: data.role,
+        interest: data.interest,
+        service_interest: serviceInterest,
         message: data.message
       };
 
@@ -200,14 +243,22 @@ async function sendTeams(data: ContactData): Promise<boolean> {
 }
 
 export async function notifyContact(data: ContactData): Promise<NotifyResult> {
-  const [email, telegram, teams] = await Promise.allSettled([
-    sendEmail(data),
+  const recipients = getEmailRecipients();
+
+  const [emailPersonal, emailInstitutional, emailBusiness, telegram, teams] = await Promise.allSettled([
+    sendEmailToGroup(data, recipients.personal, 'personal'),
+    sendEmailToGroup(data, recipients.institutional, 'institucional'),
+    sendEmailToGroup(data, recipients.business, 'empresarial'),
     sendTelegram(data),
     sendTeams(data)
   ]);
 
   return {
-    email: email.status === 'fulfilled' ? email.value : [],
+    email: [
+      ...(emailPersonal.status === 'fulfilled' ? emailPersonal.value : []),
+      ...(emailInstitutional.status === 'fulfilled' ? emailInstitutional.value : []),
+      ...(emailBusiness.status === 'fulfilled' ? emailBusiness.value : [])
+    ],
     telegram: telegram.status === 'fulfilled' && telegram.value,
     teams: teams.status === 'fulfilled' && teams.value
   };

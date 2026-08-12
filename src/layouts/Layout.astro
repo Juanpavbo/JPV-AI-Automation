@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { Calendar, Mail, Linkedin, Menu, X } from 'lucide-preact';
 import Chat from '../components/Chat.astro';
+import TelegramButton from '../components/TelegramButton.astro';
 
 interface Props {
   title: string;
@@ -75,6 +76,41 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
   </footer>
   <Chat />
+  <TelegramButton username="vexania_bot" welcomeMessage="Hola 👋 ¿En qué puedo ayudarte con automatización, IA o validación de pagos Nequi/Daviplata?" />
+  <script is:inline>
+    // Page view tracking
+    (function() {
+      const sessionId = sessionStorage.getItem('vex_session_id') || crypto.randomUUID();
+      sessionStorage.setItem('vex_session_id', sessionId);
+
+      const payload = {
+        session_id: sessionId,
+        path: window.location.pathname,
+        referrer: document.referrer || null,
+        utm_source: new URLSearchParams(window.location.search).get('utm_source'),
+        utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
+        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
+        utm_content: new URLSearchParams(window.location.search).get('utm_content'),
+        utm_term: new URLSearchParams(window.location.search).get('utm_term'),
+        user_agent: navigator.userAgent,
+        device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+        browser: navigator.userAgent.match(/(Chrome|Firefox|Safari|Edge)/)?.[0] || 'unknown',
+        os: navigator.userAgent.match(/(Windows|Mac|Linux|Android|iOS)/)?.[0] || 'unknown'
+      };
+
+      // Enviar via sendBeacon (no bloquea, funciona en background)
+      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+      navigator.sendBeacon('/api/analytics/pageview', blob);
+
+      // Track duration on page unload
+      let startTime = Date.now();
+      window.addEventListener('beforeunload', () => {
+        const duration = Math.round((Date.now() - startTime) / 1000);
+        const endPayload = { session_id: sessionId, path: window.location.pathname, duration_seconds: duration };
+        navigator.sendBeacon('/api/analytics/pageview', new Blob([JSON.stringify(endPayload)], { type: 'application/json' }));
+      });
+    })();
+  </script>
   <script is:inline>
     const btn = document.querySelector('header button');
     const menu = document.getElementById('mobile-menu');
