@@ -1,0 +1,161 @@
+---
+const cases = [
+  {
+    id: 'retail-nequi',
+    title: 'Conciliación Nequi/Daviplata automatizada',
+    industry: 'Retail - Cadenas de tiendas Bogotá',
+    challenge: '5 tiendas, 300+ transacciones/día Nequi/Daviplata. Conciliación manual 3h/día, errores de digitación, fugas no detectadas, conciliación mensual 2 días.',
+    solution: 'Webhook Wompi → validación HMAC → conciliación automática vs. POS vs. Banco → alerta Slack/Email anomalías → asiento contable automático.',
+    results: [
+      { label: 'Tiempo conciliación diaria', value: '3h → 0 min (automático)' },
+      { label: 'Errores de conciliación', value: '~5/mes → 0' },
+      { label: 'Detección fraude/duplicados', value: 'Tiempo real (antes: mensual)' },
+      { label: 'Cierre contable mensual', value: '2 días → 2 horas' },
+      { label: 'ROI', value: '320% primer año' }
+    ],
+    tech: ['Wompi', 'Webhooks HMAC', 'n8n', 'Power Automate', 'Contabilidad'],
+    testimonial: '"Antes cerrábamos el mes en 2 días peleando con Excel. Ahora el cierre es automático y duermo tranquilo sabiendo que cada peso está contado."',
+    author: 'Gerente Financiero, Cadena Retail Bogotá (12 tiendas)',
+    metrics: ['99.9% precisión', '95% tiempo ahorrado', '0 fraudes no detectados']
+  },
+  {
+    id: 'contabilidad-emails',
+    title: 'Correos corporativos + automatización contable',
+    industry: 'Estudio Contable - Bogotá (Chía/Cajicá)',
+    challenge: '15 contadores usando @gmail/@hotmail. Clientes corporativos exigían correo @dominio. Falta de trazabilidad, cumplimiento normativo, branding.',
+    solution: 'Migración Google Workspace → 25 cuentas @estudio.co → firmas unificadas → automatización: facturas entrantes → OCR → contabilización → archivo Drive → notificación Teams.',
+    results: [
+      { label: 'Cuentas corporativas activadas', value: '25 en 48h' },
+      { label: 'Facturas procesadas OCR/mes', value: '500+ (antes: manual)' },
+      { label: 'Tiempo contabilización factura', value: '12 min → 2 min' },
+      { label: 'Cumplimiento normativo', value: '100% (DIAN/UGPP)' },
+      { label: 'Satisfacción clientes', value: '+40% (encuesta post-impl.)' }
+    ],
+    tech: ['Google Workspace', 'n8n', 'OCR (Azure Form Recognizer)', 'Power Automate', 'Teams', 'Drive API'],
+    testimonial: '"Los clientes nos toman más en serio con correo @nuestroestudio.co. La automatización de facturas nos salvó 60h/mes del equipo."',
+    author: 'Socio Director, Estudio Contable Chía (15 personas)',
+    metrics: ['95% automatización facturas', '60h/mes ahorradas', '100% compliance']
+  },
+  {
+    id: 'servicios-field-app',
+    title: 'App campo offline + facturación automática',
+    industry: 'Mantenimiento Industrial - Bogotá/Soacha/Funza',
+    challenge: '12 técnicos en campo. Reportes en papel/WhatsApp, fotos perdidas, facturación 15 días después, clientes quejándose por demora, cobro a 60 días.',
+    solution: 'Power App offline-first: checklist + fotos + firma cliente → PDF automático → factura DIAN → envío email/WhatsApp → cobro link Nequi → conciliación automática.',
+    results: [
+      { label: 'Tiempo reporte → factura', value: '15 días → mismo día' },
+      { label: 'Ciclo de cobro', value: '60 días → 12 días' },
+      { label: 'Reportes con fotos/firma', value: '100% (antes: 40%)' },
+      { label: 'Quejas clientes por demora', value: '-90%' },
+      { label: 'Flujo de caja', value: '+35% mejora' }
+    ],
+    tech: ['Power Apps (offline)', 'Power Automate', 'DIAN API', 'Wompi/Nequi', 'PDF generation', 'WhatsApp Business API'],
+    testimonial: '"El cliente firma en la tablet, y antes de subir al camión ya tiene la factura en su correo y el link de pago Nequi. Cambió todo nuestro flujo de caja."',
+    author: 'Gerente Operaciones, Mantenimiento Industrial Soacha (12 técnicos)',
+    metrics: ['75% reducción ciclo cobro', '100% trazabilidad', '0 reportes perdidos']
+  },
+  {
+    id: 'restaurant-ai',
+    title: 'Agente IA para reservas y pedidos',
+    industry: 'Restaurantes - Bogotá (Chapinero/Usaquén)',
+    challenge: '3 sedes, 2 líneas telefónicas saturadas. 40% llamadas perdidas en hora pico. Pedidos WhatsApp desorganizados, errores en cocina, quejas por demora.',
+    solution: 'Agente IA (Claude + Twilio + WhatsApp Business): reserva mesas → confirma disponibilidad tiempo real → toma pedido → envía a cocina (KDS) → confirma cliente → link pago Nequi → factura automática.',
+    results: [
+      { label: 'Llamadas perdidas', value: '40% → 2%' },
+      { label: 'Tiempo gestión reserva/pedido', value: '5 min → 45 seg' },
+      { label: 'Errores en cocina', value: '-95%' },
+      { label: 'Ticket promedio', value: '+18% (upselling IA)' },
+      { label: 'Satisfacción cliente', value: '4.8/5.0' }
+    ],
+    tech: ['Claude 3.5 Sonnet', 'Twilio', 'WhatsApp Business API', 'KDS', 'Wompi', 'Twilio Voice'],
+    testimonial: '"La IA atiende mejor que mi mejor hostess: no se estresa, recuerda alergias, sugiere maridajes y nunca olvida confirmar la reserva."',
+    author: 'Propietario, Grupo Restaurantes Chapinero (3 sedes)',
+    metrics: ['98% llamadas atendidas', '45 seg/pedido', '+18% ticket']
+  }
+] as const;
+---
+
+<section id="casos" class="section-lg bg-[var(--bg-muted)]" aria-labelledby="casos-title">
+  <div class="container">
+    <header class="text-center mb-16 lg:mb-20 reveal slide-up">
+      <span class="section-label">Casos de éxito</span>
+      <h2 id="casos-title" class="display-md text-[var(--text)] mb-6">Resultados reales en MIPYMEs de Bogotá y Cundinamarca</h2>
+      <p class="body-lg max-w-2xl mx-auto">No son casos de estudio teóricos. Son clientes reales, métricas reales, ROI real. Cada uno empezó con un diagnóstico gratis de 30 minutos.</p>
+    </header>
+
+    <div class="grid-auto">
+      {cases.map((c, i) => (
+        <article class="card card-elevated reveal slide-up stagger-1" style="animation-delay: {100 + i * 150}ms;">
+          <div class="flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-start gap-4 mb-6">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center text-[var(--brand-dark)]">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div class="flex-1">
+                <span class="caption text-[var(--brand-dark)]">{c.industry}</span>
+                <h3 class="heading-md text-[var(--text)] mt-1">{c.title}</h3>
+              </div>
+            </div>
+            
+            <!-- Challenge -->
+            <div class="mb-6 p-4 bg-[var(--bg-muted)] rounded-lg border border-[var(--border)]">
+              <h4 class="caption text-[var(--text-muted)] mb-2">Reto</h4>
+              <p class="body-sm text-[var(--text-secondary)]">{c.challenge}</p>
+            </div>
+            
+            <!-- Solution -->
+            <div class="mb-6 p-4 bg-[var(--brand-bg)] border border-[var(--brand-border)] rounded-lg">
+              <h4 class="caption text-[var(--brand-dark)] mb-2">Solución implementada</h4>
+              <p class="body-sm text-[var(--text-secondary)]">{c.solution}</p>
+            </div>
+            
+            <!-- Results -->
+            <div class="mb-6">
+              <h4 class="heading-sm text-[var(--text)] mb-4">Resultados medidos</h4>
+              <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {c.results.map(r => (
+                  <div class="p-3 bg-[var(--bg-muted)] border border-[var(--border)] rounded-lg text-center">
+                    <div class="heading-sm text-[var(--brand)]">{r.value}</div>
+                    <div class="caption text-[var(--text-muted)]">{r.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <!-- Testimonial -->
+            <div class="mb-6 p-4 bg-[var(--bg-muted)] border border-[var(--border)] rounded-lg">
+              <blockquote class="body-sm text-[var(--text-secondary)] italic mb-3">"{c.testimonial}"</blockquote>
+              <cite class="caption text-[var(--text-muted)]">— {c.author}</cite>
+            </div>
+            
+            <!-- Tech stack -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              {c.tech.map(t => <span class="tag tag-brand">{t}</span>)}
+            </div>
+            
+            <!-- CTA -->
+            <a href="#contacto" class="btn btn-primary btn-full mt-auto">
+              Quiero resultados como estos
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- CTA Final -->
+    <div class="text-center mt-16 lg:mt-20 reveal slide-up">
+      <div class="p-8 lg:p-12 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-2xl max-w-3xl mx-auto">
+        <h3 class="heading-lg text-[var(--text)] mb-4">¿Tu caso podría estar aquí el próximo trimestre?</h3>
+        <p class="body text-[var(--text-secondary)] mb-6 max-w-xl mx-auto">Empezamos con un diagnóstico de 30 minutos (gratis). Identificamos 3 quick-wins, te damos hoja de ruta y presupuesto. Sin compromiso.</p>
+        <a href="#contacto" class="btn btn-primary btn-lg inline-flex">Mi diagnóstico gratis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 640px) {
+    .grid-auto { grid-template-columns: 1fr; }
+  }
+</style>

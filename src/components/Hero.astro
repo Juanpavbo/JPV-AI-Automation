@@ -1,54 +1,115 @@
 ---
-import { Calendar, Mail } from 'lucide-preact';
-
 interface Props {
   ctaText?: string;
   ctaHref?: string;
   secondaryCtaText?: string;
   secondaryCtaHref?: string;
 }
-const { ctaText = 'Contactar', ctaHref = '#contacto', secondaryCtaText = 'Agendar cita', secondaryCtaHref = '#agendar' } = Astro.props;
+const { ctaText = 'Agendar diagnóstico gratis', ctaHref = '#contacto', secondaryCtaText = 'Ver casos de éxito', secondaryCtaHref = '#casos' } = Astro.props;
 ---
 
-<section class="hero min-h-[90vh] flex items-center relative" id="inicio">
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(0,212,255,.08)_0%,transparent_50%),radial-gradient(ellipse_at_80%_50%,rgba(255,0,110,.06)_0%,transparent_50%)]" aria-hidden="true" />
-  <div class="container hero-content relative z-10 max-w-3xl">
-    <div class="hero-badge mb-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/25 text-brand-cyan text-sm font-medium">
-      <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" aria-hidden="true" />
-      Vexania · Consultoría TI · Automatización · IA · Validación Pagos Nequi/Daviplata
+<section id="inicio" class="relative min-h-[90vh] lg:min-h-[100vh] flex items-center overflow-hidden" aria-labelledby="hero-title">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[var(--brand)]/10 rounded-full blur-[120px] animate-blob-slow" />
+    <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[var(--accent)]/10 rounded-full blur-[100px] animate-blob-slow-reverse" />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[var(--brand)]/5 rounded-full blur-[150px]" />
+  </div>
+  
+  <!-- Floating geometric shapes -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-20 left-10 w-8 h-8 border border-[var(--brand)]/20 rounded-lg rotate-12 animate-float-slow" />
+    <div class="absolute top-40 right-20 w-6 h-6 bg-[var(--accent)]/10 rounded-full animate-float-slow-reverse" />
+    <div class="absolute bottom-32 left-20 w-10 h-10 border border-[var(--accent)]/20 rounded-xl -rotate-6 animate-float-slow" />
+    <div class="absolute bottom-20 right-10 w-4 h-4 bg-[var(--brand)]/10 rounded-md animate-float-slow-reverse" />
+  </div>
+
+  <div class="container relative z-10 py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-dark)] text-sm font-medium mb-8 slide-up stagger-1" style="animation-delay: 100ms;">
+        <span class="w-2 h-2 rounded-full bg-[var(--brand)] animate-pulse" aria-hidden="true" />
+        <span class="font-medium">Campaña RUES: Correos corporativos gratis para MIPYMEs Bogotá/Cundinamarca</span>
+      </div>
+      
+      <!-- Main Headline -->
+      <h1 id="hero-title" class="display-xl text-[var(--text)] mb-8 slide-up stagger-2" style="animation-delay: 200ms;">
+        Automatizamos tu operación<br />
+        <span class="text-gradient-brand">para que crezcas sin fricción</span>
+      </h1>
+      
+      <!-- Subheadline -->
+      <p class="body-lg max-w-2xl mx-auto mb-12 slide-up stagger-3" style="animation-delay: 300ms;">
+        Liberamos a MIPYMEs de Bogotá y Cundinamarca de tareas manuales: correos corporativos, validación de pagos Nequi/Daviplata, reportes automáticos y agentes de IA que trabajan 24/7.
+      </p>
+      
+      <!-- CTA Group -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 slide-up stagger-4" style="animation-delay: 400ms;">
+        <a href="#contacto" class="btn btn-primary btn-lg">
+          <Send class="w-5 h-5" aria-hidden="true" />
+          Agendar diagnóstico gratis (30 min)
+        </a>
+        <a href="#casos" class="btn btn-secondary btn-lg">
+          Ver casos reales por industria
+        </a>
+      </div>
+      
+      <!-- Trust Indicators -->
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm text-[var(--text-muted)] slide-up stagger-5" style="animation-delay: 500ms;">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-[var(--brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Empresas registradas en RUES Bogotá/Cundinamarca</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Validación Nequi/Daviplata en tiempo real</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-[var(--brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          <span>Diagnóstico gratis en 48h</span>
+        </div>
+      </div>
     </div>
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-5">
-      Transformo procesos en<br />
-      <span class="highlight bg-gradient-to-r from-brand-cyan to-brand-pink bg-clip-text text-transparent">
-        soluciones inteligentes
-      </span>
-    </h1>
-    <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl leading-relaxed">
-      Ingeniero Industrial especializado en analítica de datos, automatización Low-Code/NoCode e inteligencia artificial.
-      Ayudo a <strong>empresas</strong> a digitalizar procesos y liberar capacidad operativa, y a <strong>personas</strong> a optimizar su trabajo diario, crecer profesionalmente y tomar control de su tiempo con tecnología.
-    </p>
-    <div class="hero-actions flex flex-wrap gap-4">
-      <a href={ctaHref} class="btn btn-primary group">
-        <Mail class="w-5 h-5 mr-2" aria-hidden="true" />
-        {ctaText}
-      </a>
-      <a href={secondaryCtaHref} class="btn btn-accent group">
-        <Calendar class="w-5 h-5 mr-2" aria-hidden="true" />
-        {secondaryCtaText}
-      </a>
+    
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-slow" aria-hidden="true">
+      <svg class="w-6 h-6 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
     </div>
   </div>
 </section>
 
-<style is:global>
-  .hero { background: #0a0a0f; }
-  .highlight { background: linear-gradient(135deg, #00d4ff, #ff006e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; font-size: 0.95rem; transition: all 0.25s; cursor: pointer; border: 0; }
-  .btn-primary { background: linear-gradient(135deg, #00d4ff, #0090b0); color: #0a0a0f; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.3); }
-  .btn-accent { background: linear-gradient(135deg, #ff006e, #b0004e); color: #fff; }
-  .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,110,0.3); }
-  .btn-outline { border: 1px solid rgba(0,212,255,0.4); color: #00d4ff; background: transparent; }
-  .btn-outline:hover { background: rgba(0,212,255,0.08); }
-  @media (max-width: 768px) { .btn { width: 100%; justify-content: center; } }
+<style>
+  @keyframes blob-slow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+  }
+  @keyframes blob-slow-reverse {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-25px, 25px) scale(1.03); }
+    66% { transform: translate(15px, -15px) scale(0.97); }
+  }
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+  @keyframes float-slow-reverse {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(15px) rotate(-3deg); }
+  }
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+  }
+  .animate-blob-slow { animation: blob-slow 20s ease-in-out infinite; }
+  .animate-blob-slow-reverse { animation: blob-slow-reverse 25s ease-in-out infinite; }
+  .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+  .animate-float-slow-reverse { animation: float-slow-reverse 7s ease-in-out infinite; }
+  .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blob-slow, .animate-blob-slow-reverse, .animate-float-slow, .animate-float-slow-reverse, .animate-bounce-slow {
+      animation: none;
+    }
+  }
 </style>

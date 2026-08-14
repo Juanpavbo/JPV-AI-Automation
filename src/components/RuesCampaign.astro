@@ -1,0 +1,155 @@
+---
+interface Props {
+  campaignEndDate?: string;
+}
+const { campaignEndDate = '2026-12-31' } = Astro.props;
+
+const stats = [
+  { value: '1.2M+', label: 'MIPYMEs registradas en RUES Bogotá/Cundinamarca' },
+  { value: '72%', label: 'No tienen correo corporativo activo' },
+  { value: '48h', label: 'Tiempo promedio activación correo corporativo' },
+  { value: '$0 COP', label: 'Costo para la empresa (promoción vigente)' }
+] as const;
+
+const steps = [
+  { step: 1, title: 'Verificamos tu RUES', desc: 'Ingresas tu NIT. Consultamos Cámara de Comercio y validamos que estás activo en Bogotá o municipios aledaños (Chía, Cajicá, Soacha, Funza, Mosquera, Madrid, Facatativá, Zipaquirá, etc.).', icon: 'Search' },
+  { step: 2, title: 'Activamos tu correo @tudominio.co', desc: 'Configuramos Google Workspace o Microsoft 365 Business: cuentas @tuempresa.co, 30GB/usuario, Drive, Meet, Calendar, seguridad 2FA. Incluye migración de contactos/calendario.', icon: 'Mail' },
+  { step: 3, title: 'Automatizamos tu operación', desc: 'Incluimos 3 automatizaciones starter: (1) Facturas entrantes → OCR → Contabilidad, (2) Validación pagos Nequi/Daviplata webhook, (3) Reportes mensuales automáticos a tu email/Teams.', icon: 'Zap' },
+  { step: 4, title: 'Capacitación y soporte 90 días', desc: 'Sesión de onboarding 1h (virtual/presencial Bogotá), guías en video, soporte prioritario WhatsApp/Email 90 días. Tu equipo usa las herramientas desde día 1.', icon: 'GraduationCap' }
+] as const;
+
+const icons = {
+  Search: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>',
+  Mail: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>',
+  Zap: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>',
+  GraduationCap: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5zM12 14l9 5-9 5-9-5 9-5zM21 21l-6-6m6 6l-6 6"/></svg>'
+} as const;
+
+const faqs = [
+  { q: '¿Realmente es gratis el correo corporativo?', a: 'Sí, durante la campaña RUES (vigente hasta el 31/12/2026) activamos hasta 10 cuentas @tudominio.co sin costo el primer año. Luego renovación estándar Google Workspace / Microsoft 365.' },
+  { q: '¿Mi empresa debe estar en Bogotá exactamente?', a: 'Aplicamos a empresas registradas en RUES con domicilio en Bogotá D.C. o municipios de Cundinamarca del área metropolitana: Chía, Cajicá, Soacha, Funza, Mosquera, Madrid, Facatativá, Zipaquirá, Sopó, Tenjo, Tabio, Cota, La Calera, Guasca, Sopo, etc.' },
+  { q: '¿Qué pasa si ya tengo dominio pero uso Gmail/Outlook personal?', a: 'Migramos tu dominio a Google Workspace / Microsoft 365 Business, configuramos MX, SPF, DKIM, DMARC. Migramos contactos, calendario y emails históricos. Cero downtime.' },
+  { q: '¿Las 3 automatizaciones vienen incluidas o son extra?', a: 'Vienen incluidas en la campaña: (1) Facturas → OCR → Contabilidad, (2) Validación Nequi/Daviplata webhook, (3) Reportes mensuales automáticos. Configuración base incluida; personalización avanzada se cotiza aparte.' },
+  { q: '¿Qué pasa después de los 90 días de soporte?', a: 'Puedes renovar soporte mensual (planes desde $150k COP/mes) o gestionar internamente. Te dejamos toda la documentación, videos y accesos. Sin ataduras.' },
+  { q: '¿Aplica para empresas recién constituidas?', a: 'Sí, siempre que tengan matrícula RUES activa y domicilio en la zona de cobertura. Incluso ayudamos con la constitución digital si la necesitas.' }
+] as const;
+---
+
+<section id="rues" class="section-lg relative overflow-hidden" aria-labelledby="rues-title">
+  <!-- Background -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-[var(--brand)]/5 rounded-full blur-[200px] -translate-x-1/4 -translate-y-1/4" />
+    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[var(--accent)]/5 rounded-full blur-[150px] translate-x-1/4 translate-y-1/4" />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--brand)]/3 rounded-full blur-[200px]" />
+  </div>
+
+  <div class="container relative z-10">
+    <!-- Hero Section -->
+    <header class="text-center mb-16 lg:mb-20 reveal slide-up">
+      <span class="section-label" style="background: var(--accent-bg); color: var(--accent-dark); border-color: #fecdd3;">🎯 Campaña RUES Bogotá & Cundinamarca</span>
+      <h2 id="rues-title" class="display-md text-[var(--text)] mb-6">Liberamos tu correo corporativo y automatizamos tu operación <span class="text-gradient-accent">GRATIS</span> si estás en RUES Bogotá/Cundinamarca</h2>
+      <p class="body-lg max-w-3xl mx-auto mb-10">Hasta el <strong>{new Date(campaignEndDate).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}</strong>. Para MIPYMEs registradas en RUES con domicilio en Bogotá D.C. y municipios aledaños de Cundinamarca. <strong>Cupos limitados: 200 empresas.</strong></p>
+      
+      <!-- Stats Bar -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto reveal slide-up stagger-1" style="animation-delay: 300ms;">
+        {stats.map((s, i) => (
+          <div class="text-center p-4 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-xl reveal slide-up" style="animation-delay: {300 + i * 100}ms;">
+            <div class="heading-lg text-[var(--brand)] font-bold">{s.value}</div>
+            <div class="caption text-[var(--text-secondary)] mt-1">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </header>
+
+    <!-- Process Steps -->
+    <div class="mb-16 lg:mb-20">
+      <h3 class="heading-lg text-center text-[var(--text)] mb-10 reveal slide-up">En 4 pasos tienes correo corporativo + automatización funcionando</h3>
+      <div class="grid lg:grid-cols-4 gap-6">
+        {steps.map((s, i) => (
+          <article class="card card-elevated relative reveal slide-up" style="animation-delay: {100 + i * 150}ms;">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-12 rounded-xl bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center text-[var(--brand-dark)]" set:html={icons[s.icon]} />
+            <div class="pt-10 text-center">
+              <span class="tag tag-brand mb-3">Paso {s.step}</span>
+              <h3 class="heading-md text-[var(--text)] mb-3">{s.title}</h3>
+              <p class="body-sm text-[var(--text-secondary)]">{s.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- What's Included -->
+    <div class="mb-16 lg:mb-20">
+      <h3 class="heading-lg text-center text-[var(--text)] mb-10 reveal slide-up">¿Qué incluye exactamente la campaña?</h3>
+      <div class="grid lg:grid-cols-3 gap-6">
+        <article class="card card-elevated reveal slide-up stagger-1">
+          <h3 class="heading-md text-[var(--text)] mb-4 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center text-[var(--brand-dark)]"><Mail class="w-5 h-5" /></span> Correo Corporativo</h3>
+          <ul class="space-y-3 text-sm text-[var(--text-secondary)]">
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Hasta 10 cuentas @tudominio.co (1 año gratis)</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 30 GB / usuario (Drive + Gmail/Outlook)</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Meet/Teams, Calendar, Drive, Chat incluidos</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 2FA obligatorio, seguridad empresarial</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Migración contactos/calendario/emails históricos</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Configuración SPF/DKIM/DMARC (entregabilidad 99%)</li>
+          </ul>
+        </article>
+        
+        <article class="card card-elevated reveal slide-up stagger-2">
+          <h3 class="heading-md text-[var(--text)] mb-4 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-[var(--accent-bg)] border border-[#fecdd3] flex items-center justify-center text-[var(--accent-dark)]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span> 3 Automatizaciones Starter</h3>
+          <ul class="space-y-3 text-sm text-[var(--text-secondary)]">
+            <li class="flex items-start gap-2"><span class="flex-shrink-0 w-6 h-6 rounded-lg bg-[var(--accent-bg)] border border-[#fecdd3] flex items-center justify-center text-[var(--accent-dark)]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><div><strong class="text-[var(--text)]">Facturas → OCR → Contabilidad</div></li>
+            <li class="flex items-start gap-2"><span class="flex-shrink-0 w-6 h-6 rounded-lg bg-[var(--accent-bg)] border border-[#fecdd3] flex items-center justify-center text-[var(--accent-dark)]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span><div><strong class="text-[var(--text)]">Validación Nequi/Daviplata webhook</div></li>
+            <li class="flex items-start gap-2"><span class="flex-shrink-0 w-6 h-6 rounded-lg bg-[var(--accent-bg)] border border-[#fecdd3] flex items-center justify-center text-[var(--accent-dark)]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></span><div><strong class="text-[var(--text)]">Reportes mensuales automáticos</div></li>
+          </ul>
+        </article>
+        
+        <article class="card card-elevated reveal slide-up stagger-3">
+          <h3 class="heading-md text-[var(--text)] mb-4 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-[var(--success-bg)] border border-[#a7f3d0] flex items-center justify-center text-[var(--success)]"><GraduationCap class="w-5 h-5" /></span> Capacitación + Soporte 90 días</h3>
+          <ul class="space-y-3 text-sm text-[var(--text-secondary)]">
+            <li class="flex items-start gap-2"><svg class="w-5 h-5 text-[var(--success)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><div><strong class="text-[var(--text)]">Onboarding 1h</div></li>
+            <li class="flex items-start gap-2"><svg class="w-5 h-5 text-[var(--success)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><div><strong class="text-[var(--text)]">Guías en video + documentación</div></li>
+            <li class="flex items-start gap-2"><svg class="w-5 h-5 text-[var(--success)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><div><strong class="text-[var(--text)]">Soporte WhatsApp/Email prioritario</div></li>
+            <li class="flex items-start gap-2"><svg class="w-5 h-5 text-[var(--success)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><div><strong class="text-[var(--text)]">Accesos y documentación completa</div></li>
+            <li class="flex items-start gap-2"><svg class="w-5 h-5 text-[var(--success)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><div><strong class="text-[var(--text)]">Sin ataduras: renuevas o gestionas tú</div></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mb-16 lg:mb-20">
+      <h3 class="heading-lg text-center text-[var(--text)] mb-10 reveal slide-up">Preguntas frecuentes</h3>
+      <div class="max-w-3xl mx-auto">
+        {faqs.map((f, i) => (
+          <details class="card reveal slide-up" style="animation-delay: {i * 100}ms;">
+            <summary class="flex items-start justify-between gap-4 p-4 cursor-pointer">
+              <span class="heading-sm text-[var(--text)] flex-1">{f.q}</span>
+              <svg class="w-5 h-5 text-[var(--text-muted)] flex-shrink-0 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-4 pb-4 pt-0 text-[var(--text-secondary)] body-sm animate-in">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center reveal slide-up">
+      <div class="p-8 lg:p-12 bg-[var(--brand)] rounded-2xl max-w-3xl mx-auto text-white">
+        <h3 class="display-md text-white mb-4">¿Tu empresa califica? Verifiquemos en 2 minutos</h3>
+        <p class="body-lg text-[var(--brand-light)] mb-8 max-w-xl mx-auto">Solo necesitas tu NIT. Hacemos la consulta RUES en vivo, confirmamos elegibilidad y agendamos la activación. Sin compromiso, sin letra chica.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#contacto" class="btn btn-secondary btn-lg" style="background: white; color: var(--brand); border: 2px solid white;">Verificar mi NIT ahora</a>
+          <a href="https://cal.com/vexania" target="_blank" rel="noopener noreferrer" class="btn btn-lg" style="background: transparent; border: 2px solid white; color: white;">Agendar llamada 15 min</a>
+        </div>
+        <p class="caption text-[var(--brand-light)] mt-6">Vigente hasta {new Date(campaignEndDate).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })} · Cupos limitados: 200 empresas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary { color: var(--brand-dark); }
+  details > summary::marker { display: none; }
+</style>

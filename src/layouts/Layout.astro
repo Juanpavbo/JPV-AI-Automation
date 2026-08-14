@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { Calendar, Mail, Linkedin, Menu, X } from 'lucide-preact';
+import { Calendar, Mail, Linkedin, Menu, X, Send } from 'lucide-preact';
 import Chat from '../components/Chat.astro';
 import TelegramButton from '../components/TelegramButton.astro';
 
@@ -9,12 +9,26 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Vexania - Transformación veloz y segura: consultoría TI, automatización e inteligencia artificial' } = Astro.props;
+const { title, description = 'Vexania — Consultoría TI, automatización e IA para MIPYMEs en Bogotá y Cundinamarca. Validación de pagos Nequi/Daviplata, automatización inteligente, analítica de datos.' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const navLinks = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#casos', label: 'Casos de éxito' },
+  { href: '#rues', label: 'Campaña RUES' },
+  { href: '#contacto', label: 'Contacto' },
+] as const;
+
+const socialLinks = [
+  { href: 'https://www.linkedin.com/company/136065577', label: 'LinkedIn', icon: Linkedin },
+  { href: 'mailto:vexania@zohomail.com', label: 'Email', icon: Mail },
+  { href: '#agendar', label: 'Calendario', icon: Calendar },
+] as const;
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,12 +38,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content="/og-default.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <meta name="twitter:image" content="/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="theme-color" content="#06b6d4" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Vexania" />
   <script is:inline>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
@@ -37,78 +56,121 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </script>
 </head>
 <body class="antialiased">
-  <header class="glass sticky top-0 z-50">
-    <nav class="container flex items-center justify-between h-16" aria-label="Navegación principal">
-      <a href="/" class="flex flex-col items-start leading-tight" aria-label="Vexania - Inicio">
-        <span class="text-xl font-bold text-brand-cyan">Vexania</span>
-        <span class="text-[0.6rem] font-medium leading-snug text-brand-pink">Transformación veloz y segura: consultoría TI, automatización e inteligencia artificial</span>
+  <header class="glass sticky top-0 z-50 border-b border-[var(--border)]">
+    <nav class="container flex items-center justify-between h-[72px]" aria-label="Navegación principal">
+      <a href="/" class="flex items-center gap-3" aria-label="Vexania - Inicio">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="text-[var(--brand)]">
+          <rect width="32" height="32" rx="8" fill="currentColor"/>
+          <path d="M8 10h16M8 16h16M8 22h10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-xl font-bold tracking-tight text-[var(--text)]">Vexania</span>
       </a>
-      <button class="md:hidden p-2 text-brand-cyan" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
+      
+      <button class="md:hidden p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] transition-colors" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
         <Menu id="menu-icon" class="w-6 h-6" />
         <X id="close-icon" class="w-6 h-6 hidden" />
       </button>
-      <ul id="mobile-menu" class="hidden md:flex items-center gap-8" role="navigation">
-        <li><a href="#inicio" class="text-sm text-gray-400 hover:text-brand-cyan transition-colors">Inicio</a></li>
-        <li><a href="#porque" class="text-sm text-gray-400 hover:text-brand-cyan transition-colors">Por qué</a></li>
-        <li><a href="#servicios" class="text-sm text-gray-400 hover:text-brand-cyan">Servicios</a></li>
-        <li><a href="#about" class="text-sm text-gray-400 hover:text-brand-cyan">Sobre mí</a></li>
-        <li><a href="#stack" class="text-sm text-gray-400 hover:text-brand-cyan">Stack</a></li>
-        <li><a href="#agendar" class="text-sm text-gray-400 hover:text-brand-cyan">Agendar</a></li>
-        <li><a href="#contacto" class="btn btn-primary text-sm">Contactar</a></li>
-      </ul>
+      
+      <nav id="mobile-menu" class="hidden md:flex items-center gap-6" role="navigation" aria-label="Principal">
+        <ul class="flex items-center gap-8">
+          {navLinks.map(link => (
+            <li><a href={link.href} class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors duration-200">{link.label}</a></li>
+          ))}
+        </ul>
+        <div class="flex items-center gap-3 ml-4">
+          {socialLinks.map(s => (
+            <a href={s.href} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-muted)] transition-all duration-200" aria-label={s.label}>
+              <s.icon class="w-5 h-5" />
+            </a>
+          ))}
+          <a href="#contacto" class="btn btn-primary btn-sm hidden sm:inline-flex">Contactar</a>
+        </div>
+      </nav>
     </nav>
   </header>
+  
   <main id="main-content">
     <slot />
   </main>
-  <footer class="border-t border-brand-border py-12">
-    <div class="container text-center text-sm text-gray-500">
-      <p class="text-lg font-semibold text-brand-cyan">Vexania</p>
-      <p class="mt-2 text-xs text-gray-500 max-w-xl mx-auto">
-        Transformación veloz y segura: consultoría TI, automatización e inteligencia artificial.
-      </p>
-      <p class="mt-3">© 2026 Vexania · Hecho con ⚡ en Bogotá, Colombia</p>
-      <div class="flex justify-center gap-6 mt-4">
-        <a href="https://www.linkedin.com/company/136065577" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="LinkedIn"><Linkedin class="w-5 h-5" /></a>
-        <a href="mailto:vexania@zohomail.com" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="Email"><Mail class="w-5 h-5" /></a>
-        <a href="#agendar" class="text-gray-400 hover:text-brand-cyan transition-colors" aria-label="Calendario"><Calendar class="w-5 h-5" /></a>
+  
+  <footer class="bg-[var(--bg-elevated)] border-t border-[var(--border)]">
+    <div class="container py-16 lg:py-24">
+      <div class="grid lg:grid-cols-4 gap-12 lg:gap-16 mb-12 lg:mb-16">
+        <div class="lg:col-span-2">
+          <a href="/" class="flex items-center gap-3 mb-6" aria-label="Vexania - Inicio">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="text-[var(--brand)]">
+              <rect width="32" height="32" rx="8" fill="currentColor"/>
+              <path d="M8 10h16M8 16h16M8 22h10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-xl font-bold tracking-tight text-[var(--text)]">Vexania</span>
+          </a>
+          <p class="text-[var(--text-secondary)] max-w-xs mb-6 leading-relaxed">
+            Consultoría TI, automatización e IA para MIPYMEs en Bogotá y Cundinamarca.
+            Liberamos correos corporativos, validamos pagos Nequi/Daviplata y automatizamos procesos.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="tag tag-brand">Bogotá & Cundinamarca</span>
+            <span class="tag tag-brand">MIPYMEs</span>
+            <span class="tag tag-accent">Validación Nequi/Daviplata</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="heading-sm mb-4">Servicios</h4>
+          <nav class="flex flex-col gap-3">
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Automatización Inteligente</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Analítica & BI</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Agentes de IA & LLMs</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Low-Code / No-Code</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Cloud & DevOps</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">ERP & Optimización</a>
+            <a href="#servicios" class="text-sm text-[var(--brand)] font-medium hover:underline">Validación Pagos Nequi/Daviplata</a>
+          </nav>
+        </div>
+        
+        <div>
+          <h4 class="heading-sm mb-4">Contacto</h4>
+          <address class="not-italic text-sm text-[var(--text-secondary)] space-y-3">
+            <a href="mailto:vexania@zohomail.com" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+              <Mail class="w-4 h-4" aria-hidden="true" /> vexania@zohomail.com
+            </a>
+            <a href="https://www.linkedin.com/company/136065577" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+              <Linkedin class="w-4 h-4" aria-hidden="true" /> LinkedIn
+            </a>
+            <a href="#agendar" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+              <Calendar class="w-4 h-4" aria-hidden="true" /> Agendar videollamada
+            </a>
+            <p class="flex items-center gap-2">
+              <span class="w-4 h-4">📍</span> Bogotá, Chía, Cajicá, Soacha, Funza, Mosquera
+            </p>
+          </address>
+        </div>
+      </div>
+      
+      <div class="border-t border-[var(--border)] pt-8 flex flex-col lg:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-[var(--text-muted)]">© 2026 Vexania. Hecho con dedicación en Bogotá, Colombia.</p>
+        <div class="flex items-center gap-6">
+          <a href="/politica-privacidad" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Privacidad</a>
+          <a href="/terminos" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Términos</a>
+          <a href="/cookies" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Cookies</a>
+        </div>
       </div>
     </div>
   </footer>
+  
   <Chat />
   <TelegramButton username="vexania_bot" welcomeMessage="Hola 👋 ¿En qué puedo ayudarte con automatización, IA o validación de pagos Nequi/Daviplata?" />
+  
   <script is:inline>
     // Page view tracking
     (function() {
       const sessionId = sessionStorage.getItem('vex_session_id') || crypto.randomUUID();
       sessionStorage.setItem('vex_session_id', sessionId);
-
-      const payload = {
-        session_id: sessionId,
-        path: window.location.pathname,
-        referrer: document.referrer || null,
-        utm_source: new URLSearchParams(window.location.search).get('utm_source'),
-        utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
-        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
-        utm_content: new URLSearchParams(window.location.search).get('utm_content'),
-        utm_term: new URLSearchParams(window.location.search).get('utm_term'),
-        user_agent: navigator.userAgent,
-        device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-        browser: navigator.userAgent.match(/(Chrome|Firefox|Safari|Edge)/)?.[0] || 'unknown',
-        os: navigator.userAgent.match(/(Windows|Mac|Linux|Android|iOS)/)?.[0] || 'unknown'
-      };
-
-      // Enviar via sendBeacon (no bloquea, funciona en background)
+      const payload = { session_id: sessionId, path: window.location.pathname, referrer: document.referrer || null, utm_source: new URLSearchParams(window.location.search).get('utm_source'), utm_medium: new URLSearchParams(window.location.search).get('utm_medium'), utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'), utm_content: new URLSearchParams(window.location.search).get('utm_content'), utm_term: new URLSearchParams(window.location.search).get('utm_term'), user_agent: navigator.userAgent, device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop', browser: navigator.userAgent.match(/(Chrome|Firefox|Safari|Edge)/)?.[0] || 'unknown', os: navigator.userAgent.match(/(Windows|Mac|Linux|Android|iOS)/)?.[0] || 'unknown' };
       const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
       navigator.sendBeacon('/api/analytics/pageview', blob);
-
-      // Track duration on page unload
       let startTime = Date.now();
-      window.addEventListener('beforeunload', () => {
-        const duration = Math.round((Date.now() - startTime) / 1000);
-        const endPayload = { session_id: sessionId, path: window.location.pathname, duration_seconds: duration };
-        navigator.sendBeacon('/api/analytics/pageview', new Blob([JSON.stringify(endPayload)], { type: 'application/json' }));
-      });
+      window.addEventListener('beforeunload', () => { const duration = Math.round((Date.now() - startTime) / 1000); const endPayload = { session_id: sessionId, path: window.location.pathname, duration_seconds: duration }; navigator.sendBeacon('/api/analytics/pageview', new Blob([JSON.stringify(endPayload)], { type: 'application/json' })); });
     })();
   </script>
   <script is:inline>
@@ -116,12 +178,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     const menu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
-    btn?.addEventListener('click', () => {
-      const open = menu?.classList.toggle('hidden');
-      menuIcon?.classList.toggle('hidden', !open);
-      closeIcon?.classList.toggle('hidden', open);
-      btn.setAttribute('aria-expanded', String(!open));
-    });
+    btn?.addEventListener('click', () => { const open = menu?.classList.toggle('hidden'); menuIcon?.classList.toggle('hidden', !open); closeIcon?.classList.toggle('hidden', open); btn.setAttribute('aria-expanded', String(!open)); });
   </script>
 </body>
 </html>

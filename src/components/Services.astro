@@ -1,47 +1,197 @@
 ---
 const services = [
-  { icon: 'Zap', title: 'Automatización Inteligente', desc: 'n8n, Power Automate, RPA, OCR y MCP para eliminar tareas repetitivas y conectar sistemas.', tags: ['n8n', 'Power Automate', 'RPA', 'OCR'] },
-  { icon: 'BarChart', title: 'Analítica & BI', desc: 'Power BI, Databricks, Python, Spark y SQL. Datos dispersos convertidos en decisiones.', tags: ['Power BI', 'Databricks', 'Python', 'SQL'] },
-  { icon: 'Bot', title: 'Agentes de IA & LLMs', desc: 'Agentes con Claude, OpenAI, DeepSeek, Ollama y MCP integrados en procesos empresariales.', tags: ['Claude', 'ChatGPT', 'DeepSeek', 'Ollama'] },
-  { icon: 'Layout', title: 'Low-Code / No-Code', desc: 'Power Apps, Copilot Studio, Power Automate, n8n. Automatización sin programar.', tags: ['Power Apps', 'Copilot Studio', 'Power Automate'] },
-  { icon: 'Cloud', title: 'Cloud & DevOps', desc: 'Azure, Docker, SQL Server, MongoDB. Infraestructura escalable y segura.', tags: ['Azure', 'Docker', 'SQL Server', 'MongoDB'] },
-  { icon: 'Cpu', title: 'ERP & Optimización', desc: 'Automatización SAP Ariba, SAP ERP, integración con Oracle, Power BI y SharePoint.', tags: ['SAP Ariba', 'SAP ERP', 'Oracle', 'SharePoint'] },
-  { icon: 'Shield', title: 'Validación de Pagos Nequi/Daviplata', desc: 'Automatización anti-fraude: webhooks, conciliación en tiempo real, detección de transacciones sospechosas y garantía de legitimidad en billeteras digitales.', tags: ['Wompi', 'Webhooks', 'Conciliación', 'Anti-fraude'] }
+  {
+    id: 'automatizacion',
+    icon: 'Zap',
+    title: 'Automatización Inteligente',
+    shortDesc: 'Eliminamos tareas repetitivas y conectamos tus sistemas.',
+    fullDesc: 'Diseñamos e implementamos flujos de trabajo automatizados que eliminan el trabajo manual: descargas de bancos, conciliaciones, envío de correos, generación de documentos, sincronización entre ERP/CRM/Contabilidad. Usamos n8n, Power Automate, RPA y OCR para que tus datos fluyan solos.',
+    industries: [
+      { name: 'Comercio/Retail', example: 'Conciliación diaria Nequi/Daviplata vs. POS vs. Bancos → 0 errores, 3h/día ahorradas' },
+      { name: 'Contabilidad', example: 'Descarga automática bancaria → contabilidad → conciliación bancaria automática' },
+      { name: 'Logística', example: 'Tracking automático guías → notificación cliente → actualización ERP' },
+      { name: 'Servicios', example: 'Facturación recurrente → envío email + WhatsApp → conciliación pago' }
+    ],
+    tech: ['n8n', 'Power Automate', 'RPA', 'OCR', 'MCP', 'APIs bancarias'],
+    icon: 'Zap',
+    color: 'brand'
+  },
+  {
+    id: 'validacion-pagos',
+    icon: 'ShieldCheck',
+    title: 'Validación Pagos Nequi/Daviplata',
+    shortDesc: 'Validamos, conciliamos y blindamos tus pagos por billeteras digitales en tiempo real.',
+    fullDesc: 'Implementamos webhooks seguros (Wompi/Bancolombia) que validan cada transacción Nequi/Daviplata en tiempo real: verifican monto, referencia, estado, detectan fraude, concilian automáticamente contra tu contabilidad/ERP y alertan anomalías en segundos. Cumplimiento normativo, cero conciliación manual.',
+    industries: [
+      { name: 'Comercio/Retail', example: 'Validación 500+ transacciones/día Nequi/Daviplata → 0 conciliación manual, 0 fraudes' },
+      { name: 'Restaurantes/Delivery', example: 'Validación pago QR mesa → confirmación cocina automática → ticket impreso' },
+      { name: 'E-commerce', example: 'Validación pago link → confirmación pedido → envío automático guía' },
+      { name: 'Servicios profesionales', example: 'Validación pago honorarios → factura automática → conciliación contable' }
+    ],
+    tech: ['Wompi', 'Webhooks', 'APIs Bancolombia', 'Validación HMAC', 'Conciliación automática'],
+    icon: 'ShieldCheck',
+    color: 'accent'
+  },
+  {
+    id: 'bi',
+    icon: 'BarChart2',
+    title: 'Analítica & Business Intelligence',
+    shortDesc: 'Transformamos datos dispersos en decisiones con tableros que se actualizan solos.',
+    fullDesc: 'Centralizamos tus datos (ERP, CRM, bancos, Excel, APIs) en un almacén único y construimos tableros ejecutivos y operativos en Power BI / Looker Studio que se actualizan solos. KPIs de ventas, cobranza, inventario, rentabilidad por cliente/proyecto/canal. Alertas automáticas cuando un KPI se desvía.',
+    industries: [
+      { name: 'Retail/Comercio', example: 'Dashboard ventas por tienda/canal/producto → alerta stock bajo → reorden automático' },
+      { name: 'Servicios', example: 'Pipeline comercial → conversión por etapa → forecast automático' },
+      { name: 'Manufactura', example: 'OEE tiempo real → paradas no planificadas → alerta mantenimiento predictivo' },
+      { name: 'Profesionales', example: 'Rentabilidad por cliente/proyecto → alerta proyectos en pérdida' }
+    ],
+    tech: ['Power BI', 'Looker Studio', 'Python', 'SQL', 'Databricks', 'ETL automatizado'],
+    icon: 'BarChart2',
+    color: 'brand'
+  },
+  {
+    id: 'ia',
+    icon: 'Bot',
+    title: 'Agentes de IA & LLMs',
+    shortDesc: 'Agentes que leen, clasifican, responden y ejecutan tareas 24/7.',
+    fullDesc: 'Creamos agentes de IA que se integran a tu operación: clasificación automática de emails/documentos, respuesta a consultas frecuentes, extracción de datos de PDFs/facturas/contratos, generación de propuestas/cotizaciones, análisis de contratos/riesgos. Modelos: Claude, GPT-4, DeepSeek, Ollama (local). Privacidad: opción 100% on-premise.',
+    industries: [
+      { name: 'Legal/Contable', example: 'Agente lee contratos → extrae cláusulas clave → alerta riesgos → resumen ejecutivo' },
+      { name: 'Atención cliente', example: 'Agente responde FAQs → escala complejo a humano → registra en CRM' },
+      { name: 'Compras/Proveedores', example: 'Agente lee facturas PDF → extrae datos → valida contra OC → contabiliza' },
+      { name: 'RRHH', example: 'Agente filtra CVs → ranking vs. requisitos → agenda entrevistas' }
+    ],
+    tech: ['Claude', 'GPT-4', 'DeepSeek', 'Ollama', 'MCP', 'RAG', 'Vector DB'],
+    icon: 'Bot',
+    color: 'accent'
+  },
+  {
+    id: 'lowcode',
+    icon: 'LayoutGrid',
+    title: 'Low-Code / No-Code',
+    shortDesc: 'Apps y flujos sin programar: Power Apps, Copilot Studio, n8n.',
+    fullDesc: 'Construimos aplicaciones de negocio sin código pesado: formularios inteligentes, portales de clientes/proveedores, aprobadores de gastos/vacaciones/compras, dashboards operativos, formularios de campo offline. Mantenibles por tu equipo, escalables, integrados a tus datos.',
+    industries: [
+      { name: 'RRHH', example: 'Portal solicitudes vacaciones/gastos → aprobación jerárquica → nómina automática' },
+      { name: 'Campo/Servicios', example: 'App offline técnicos → checklist + fotos + firma cliente → reporte PDF automático' },
+      { name: 'Compras', example: 'Portal proveedores → cotizaciones → OC automática → seguimiento entrega' },
+      { name: 'Calidad/HSE', example: 'Checklist inspecciones offline → fotos + firma → reporte + alertas no conformidades' }
+    ],
+    tech: ['Power Apps', 'Copilot Studio', 'Power Automate', 'n8n', 'Power Pages'],
+    icon: 'LayoutGrid',
+    color: 'brand'
+  },
+  {
+    id: 'cloud',
+    icon: 'Cloud',
+    title: 'Cloud & DevOps',
+    shortDesc: 'Infraestructura escalable, segura y observable en Azure.',
+    fullDesc: 'Arquitectura cloud nativa: contenedores (AKS/ACA), serverless (Functions/Logic Apps), bases de datos gestionadas, CI/CD pipelines, GitOps, observabilidad completa (logs, métricas, trazas, alertas). Migración on-premise → cloud. Optimización de costos (FinOps). Seguridad: Zero Trust, Private Endpoints, Policy as Code.',
+    industries: [
+      { name: 'SaaS/Startups', example: 'Arquitectura serverless → autoescala 0→10k users → costo 80% menor' },
+      { name: 'Empresas tradicionales', example: 'Migración on-prem → Azure → alta disponibilidad 99.99% → DR automático' },
+      { name: 'Data/IA', example: 'MLOps pipeline → reentreno automático modelos → deploy canary' }
+    ],
+    tech: ['Azure', 'AKS/ACA', 'Functions', 'Bicep/Terraform', 'GitHub Actions', 'Azure Monitor'],
+    icon: 'Cloud',
+    color: 'brand'
+  },
+  {
+    id: 'erp',
+    icon: 'Cpu',
+    title: 'ERP & Optimización',
+    shortDesc: 'Automatizamos SAP, Oracle, Dynamics y conectamos con tu ecosistema.',
+    fullDesc: 'Integración profunda con ERP: automatización de asientos contables, conciliación bancaria, facturación masiva, portal proveedores, compras automáticas, control presupuestario, reportes regulatorios (DIAN, UGPP). Conectores: SAP BAPI/RFC, OData, B1WS, Oracle REST, Dynamics APIs. RPA para pantallas legacy sin API.',
+    industries: [
+      { name: 'Manufactura', example: 'MRP automático → OC proveedores → recepción → contabilización' },
+      { name: 'Distribución', example: 'Portal proveedores → ASN → recepción ciega → factura automática' },
+      { name: 'Servicios', example: 'Proyectos → horas → facturación hitos → contabilidad proyecto' }
+    ],
+    tech: ['SAP', 'Oracle', 'Dynamics', 'OData', 'RPA', 'APIs nativas'],
+    icon: 'Cpu',
+    color: 'brand'
+  }
 ] as const;
 
 const icons = {
-  Zap: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>',
-  BarChart: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>',
-  Bot: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>',
-  Layout: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>',
-  Cloud: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>',
-  Cpu: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>',
-  Shield: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>'
-};
+  Zap: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>',
+  ShieldCheck: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>',
+  BarChart2: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13v8a1 1 0 001 1h6a1 1 0 001-1v-8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V17a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2a1 1 0 00-1-1H5a1 1 0 01-1-1v-3a1 1 0 011-1h2.586a1 1 0 01.707-.293l3.414-3.414a1 1 0 01.293-.707V3a1 1 0 011-1h2a1 1 0 011 1v2"/></svg>',
+  Bot: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>',
+  LayoutGrid: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>',
+  Cloud: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>',
+  Cpu: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>'
+} as const;
 ---
 
-<section id="servicios" class="py-20 md:py-28">
+<section id="servicios" class="section-lg" aria-labelledby="servicios-title">
   <div class="container">
-    <div class="section-label mb-3 inline-block">Servicios</div>
-    <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">Lo que hago</h2>
-    <p class="section-desc text-gray-400 max-w-2xl mb-12">Consultoría integral en transformación digital, desde el diagnóstico hasta la implementación, para empresas y profesionales.</p>
-    <div class="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service) => (
-        <div class="service-card p-8 transition-all duration-300" style="background: linear-gradient(145deg, #12121a, #0e0e15); border: 1px solid rgba(0,212,255,.1); border-radius: 1rem;">
-          <div class="service-icon text-brand-cyan mb-4" set:html={icons[service.icon]}></div>
-          <h3 class="text-xl font-semibold mb-3">{service.title}</h3>
-          <p class="text-gray-500 text-sm mb-4">{service.desc}</p>
-          <div class="service-tags flex flex-wrap gap-2">
-            {service.tags.map((tag) => (
-              <span class="px-3 py-1 rounded-full text-xs font-medium" style="background: rgba(0,212,255,.08); color: #00d4ff;">{tag}</span>
-            ))}
+    <header class="text-center mb-16 lg:mb-20 reveal slide-up">
+      <span class="section-label">Servicios</span>
+      <h2 id="servicios-title" class="display-md text-[var(--text)] mb-6">Servicios diseñados para MIPYMEs que quieren operar sin fricción</h2>
+      <p class="body-lg max-w-2xl mx-auto">Cada servicio incluye diagnóstico, implementación, capacitación y acompañamiento. Eliges lo que necesitas, escalamos juntos.</p>
+    </header>
+
+    <div class="grid-auto">
+      {services.map((service, i) => (
+        <article class="card card-elevated reveal slide-up stagger-1" style="animation-delay: {100 + i * 100}ms;">
+          <div class="flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-start gap-4 mb-6">
+              <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-[var(--{service.color}-bg)] border border-[var(--{service.color}-border)] flex items-center justify-center text-[var(--{service.color}-dark)]" set:html={icons[service.icon]} />
+              <div class="flex-1">
+                <span class="caption text-[var(--{service.color}-dark)]">{service.id.charAt(0).toUpperCase() + service.id.slice(1).replace('-', ' ')}</span>
+                <h3 class="heading-md text-[var(--text)] mt-1">{service.title}</h3>
+              </div>
+            </div>
+            
+            <!-- Short description -->
+            <p class="body text-[var(--text-secondary)] mb-6">{service.shortDesc}</p>
+            
+            <!-- Expandable details -->
+            <details class="group mb-6">
+              <summary class="flex items-center justify-between cursor-pointer text-sm font-medium text-[var(--brand)] hover:text-[var(--brand-dark)] transition-colors">
+                <span>Ver detalles y casos por industria</span>
+                <svg class="w-5 h-5 text-[var(--text-muted)] transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="mt-4 p-4 bg-[var(--bg-muted)] rounded-lg space-y-4 animate-in">
+                <p class="body text-[var(--text-secondary)]">{service.fullDesc}</p>
+                <div>
+                  <h4 class="heading-sm text-[var(--text)] mb-3">Casos reales por industria</h4>
+                  <div class="grid gap-3 sm:grid-cols-2">
+                    {service.industries.map(ind => (
+                      <div class="p-3 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-lg">
+                        <span class="caption text-[var(--brand-dark)]">{ind.name}</span>
+                        <p class="body-sm text-[var(--text-secondary)] mt-1">{ind.example}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  {service.tech.map(t => <span class="tag tag-neutral">{t}</span>)}
+                </div>
+              </div>
+            </details>
+            
+            <!-- CTA -->
+            <a href="#contacto" class="btn btn-primary btn-full mt-auto">
+              Solicitar propuesta para {service.title.toLowerCase()}
+            </a>
           </div>
-        </div>
+        </article>
       ))}
+    </div>
+
+    <!-- CTA Global -->
+    <div class="text-center mt-16 lg:mt-20 reveal slide-up">
+      <p class="body text-[var(--text-secondary)] mb-4 max-w-xl mx-auto">¿Necesitas combinar varios servicios? Diseñamos un plan a tu medida.</p>
+      <a href="#contacto" class="btn btn-primary btn-lg inline-flex">Diseñar mi plan</a>
     </div>
   </div>
 </section>
 
-<style is:global>
-  .service-card:hover { border-color: rgba(0,212,255,.3); transform: translateY(-4px); }
+<style>
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary { color: var(--brand-dark); }
+  details > summary::marker { display: none; }
 </style>
