@@ -7,7 +7,10 @@ interface Props {
   secondaryCtaText?: string;
   secondaryCtaHref?: string;
 }
-const { ctaText = 'Agendar diagnóstico gratis', ctaHref = '#contacto', secondaryCtaText = 'Ver casos de éxito', secondaryCtaHref = '#casos' } = Astro.props;
+const ctaText = Astro.props.ctaText ?? 'Agendar diagnóstico gratis';
+const ctaHref = Astro.props.ctaHref ?? '#contacto';
+const secondaryCtaText = Astro.props.secondaryCtaText ?? 'Ver casos de éxito';
+const secondaryCtaHref = Astro.props.secondaryCtaHref ?? '#casos';
 ---
 
 <section id="inicio" class="relative min-h-[90vh] lg:min-h-[100vh] flex items-center overflow-hidden" aria-labelledby="hero-title">
