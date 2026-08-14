@@ -45,13 +45,11 @@
   const WELCOME = 'Hola 👋 Soy el asistente de Vexania. Pregúntame por automatización, IA, validación de pagos Nequi/Daviplata, campaña RUES gratis, o agenda tu diagnóstico.';
 
   function initChat() {
-    const messagesEl = document.getElementById('vex-chat-messages') as HTMLElement | null;
-    const form = document.getElementById('vex-chat-form') as HTMLFormElement | null;
-    const input = document.getElementById('vex-chat-input') as HTMLInputElement | null;
+    const messagesEl = document.getElementById('vex-chat-messages');
+    const form = document.getElementById('vex-chat-form');
+    const input = document.getElementById('vex-chat-input');
     const toggle = document.getElementById('vex-chat-toggle');
     const panel = document.getElementById('vex-chat-panel');
-    const openIcon = document.getElementById('vex-chat-open-icon');
-    const closeIcon = document.getElementById('vex-chat-close-icon');
     const minimizeBtn = document.getElementById('vex-chat-minimize');
     const suggestionsEl = document.getElementById('vex-chat-suggestions');
     if (!messagesEl || !form || !input || !toggle || !panel) return;
@@ -63,8 +61,8 @@
       const el = document.createElement('div');
       el.className = `vex-chat-msg vex-chat-${role}`;
       el.textContent = content;
-      messagesEl.appendChild(el);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      messagesEl!.appendChild(el);
+      messagesEl!.scrollTop = messagesEl!.scrollHeight;
       return el;
     }
 
