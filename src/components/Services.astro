@@ -114,6 +114,8 @@ const icons = {
   Cloud: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>',
   Cpu: '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>'
 } as const;
+
+const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1).replace('-', ' ');
 ---
 
 <section id="servicios" class="section-lg" aria-labelledby="servicios-title">
@@ -124,49 +126,68 @@ const icons = {
       <p class="body-lg max-w-2xl mx-auto">Cada servicio incluye diagnóstico, implementación, capacitación y acompañamiento. Eliges lo que necesitas, escalamos juntos.</p>
     </header>
 
-    <div class="grid-auto">
+    <div class="vex-services">
       {services.map((service, i) => (
-        <article class="card card-elevated reveal slide-up stagger-1" style="animation-delay: {100 + i * 100}ms;">
-          <div class="flex flex-col h-full">
-            <!-- Header -->
-            <div class="flex items-start gap-4 mb-6">
-              <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-[var(--{service.color}-bg)] border border-[var(--{service.color}-border)] flex items-center justify-center text-[var(--{service.color}-dark)]" set:html={icons[service.icon]} />
-              <div class="flex-1">
-                <span class="caption text-[var(--{service.color}-dark)]">{service.id.charAt(0).toUpperCase() + service.id.slice(1).replace('-', ' ')}</span>
-                <h3 class="heading-md text-[var(--text)] mt-1">{service.title}</h3>
-              </div>
+        <article class="vex-service reveal slide-up" data-service style="animation-delay: {100 + i * 80}ms;">
+          <!-- Head -->
+          <div class="vex-service__head">
+            <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-[var(--{service.color}-bg)] border border-[var(--{service.color}-border)] flex items-center justify-center text-[var(--{service.color}-dark)]" set:html={icons[service.icon]} />
+            <div class="flex-1 min-w-0">
+              <span class="caption text-[var(--{service.color}-dark)]">{label(service.id)}</span>
+              <h3 class="heading-md text-[var(--text)] mt-1">{service.title}</h3>
+              <p class="body text-[var(--text-secondary)] mt-1">{service.shortDesc}</p>
             </div>
-            
-            <!-- Short description -->
-            <p class="body text-[var(--text-secondary)] mb-6">{service.shortDesc}</p>
-            
-            <!-- Expandable details -->
-            <details class="group mb-6">
-              <summary class="flex items-center justify-between cursor-pointer text-sm font-medium text-[var(--brand)] hover:text-[var(--brand-dark)] transition-colors">
-                <span>Ver detalles y casos por industria</span>
-                <svg class="w-5 h-5 text-[var(--text-muted)] transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-              </summary>
-              <div class="mt-4 p-4 bg-[var(--bg-muted)] rounded-lg space-y-4 animate-in">
-                <p class="body text-[var(--text-secondary)]">{service.fullDesc}</p>
-                <div>
-                  <h4 class="heading-sm text-[var(--text)] mb-3">Casos reales por industria</h4>
-                  <div class="grid gap-3 sm:grid-cols-2">
-                    {service.industries.map(ind => (
-                      <div class="p-3 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-lg">
-                        <span class="caption text-[var(--brand-dark)]">{ind.name}</span>
-                        <p class="body-sm text-[var(--text-secondary)] mt-1">{ind.example}</p>
-                      </div>
-                    ))}
+            <div class="vex-service__num" aria-hidden="true">{(i + 1).toString().padStart(2, '0')}</div>
+          </div>
+
+          <!-- Horizontal deploy (revealed when the service enters viewport) -->
+          <div class="vex-service__detail">
+            <div class="vex-service__detail-inner">
+              <div class="vex-service__meta">
+                <span class="vex-service__hint">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16l-4-4 4-4m5 4H3" /></svg>
+                  Desliza para ver alcance, casos por industria y tecnología
+                </span>
+                <div class="vex-service__controls">
+                  <button type="button" class="vex-arrow" data-prev aria-label="Anterior">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                  </button>
+                  <div class="vex-progress" aria-hidden="true"><div class="vex-progress__bar" data-progress></div></div>
+                  <button type="button" class="vex-arrow" data-next aria-label="Siguiente">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="vex-service__rail" data-rail>
+                <!-- Alcance -->
+                <div class="vex-card vex-card--scope" style="--reveal-delay: 60ms;">
+                  <span class="vex-card__eyebrow">Alcance</span>
+                  <p class="body-sm text-[var(--text-secondary)]">{service.fullDesc}</p>
+                </div>
+
+                <!-- Casos por industria -->
+                {service.industries.map((ind, k) => (
+                  <div class="vex-card vex-card--case" style="--reveal-delay: {(60 + (k + 1) * 80).toString()}ms;">
+                    <span class="vex-card__eyebrow">{ind.name}</span>
+                    <p class="body-sm text-[var(--text-secondary)]">{ind.example}</p>
+                  </div>
+                ))}
+
+                <!-- Tecnología -->
+                <div class="vex-card vex-card--tech" style="--reveal-delay: {(60 + (service.industries.length + 1) * 80).toString()}ms;">
+                  <span class="vex-card__eyebrow">Tecnología</span>
+                  <div class="flex flex-wrap gap-2">
+                    {service.tech.map(t => <span class="tag tag-neutral">{t}</span>)}
                   </div>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                  {service.tech.map(t => <span class="tag tag-neutral">{t}</span>)}
-                </div>
               </div>
-            </details>
-            
-            <!-- CTA -->
-            <a href="#contacto" class="btn btn-primary btn-full mt-auto">
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="vex-service__cta">
+            <a href="#contacto" class="btn btn-primary">
               Solicitar propuesta para {service.title.toLowerCase()}
             </a>
           </div>
@@ -183,8 +204,206 @@ const icons = {
 </section>
 
 <style>
-  details > summary { list-style: none; cursor: pointer; }
-  details > summary::-webkit-details-marker { display: none; }
-  details[open] > summary { color: var(--brand-dark); }
-  details > summary::marker { display: none; }
+  .vex-services {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .vex-service {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 1.75rem 1.75rem 1.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+    transition: border-color .3s ease, box-shadow .3s ease;
+  }
+  .vex-service.is-active {
+    border-color: var(--brand-border);
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 16px 40px rgba(0,0,0,.08);
+  }
+
+  .vex-service__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .vex-service__num {
+    flex-shrink: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .02em;
+    color: var(--text-muted);
+    opacity: .45;
+  }
+
+  .vex-service__detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .7s cubic-bezier(.22,1,.36,1);
+  }
+  .vex-service.is-active .vex-service__detail {
+    grid-template-rows: 1fr;
+  }
+  .vex-service__detail-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .vex-service__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: .75rem;
+  }
+  .vex-service__hint {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .8125rem;
+    color: var(--text-muted);
+  }
+  .vex-service__controls {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .vex-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .vex-arrow:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+  }
+  .vex-progress {
+    width: 6rem;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .vex-progress__bar {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--brand), var(--accent));
+    transition: width .2s ease;
+  }
+
+  .vex-service__rail {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: .25rem .25rem 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+  .vex-service__rail::-webkit-scrollbar { height: 6px; }
+  .vex-service__rail::-webkit-scrollbar-track { background: transparent; }
+  .vex-service__rail::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+  }
+
+  .vex-card {
+    flex: 0 0 88%;
+    scroll-snap-align: start;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background: var(--bg);
+    padding: 1.25rem;
+    opacity: 0;
+    transform: translateX(48px);
+    transition: opacity .6s ease, transform .7s cubic-bezier(.22,1,.36,1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .vex-service.is-active .vex-card {
+    opacity: 1;
+    transform: none;
+  }
+  @media (min-width: 640px) {
+    .vex-card { flex-basis: 340px; }
+  }
+
+  .vex-card__eyebrow {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--brand-dark);
+    margin-bottom: .5rem;
+  }
+  .vex-card--case { border-top: 3px solid var(--brand); }
+  .vex-card--scope { background: var(--brand-bg); border-color: var(--brand-border); }
+
+  .vex-service__cta {
+    margin-top: 1.5rem;
+  }
 </style>
+
+<script>
+  function initServiceRails() {
+    const rails = document.querySelectorAll<HTMLElement>('[data-rail]');
+    rails.forEach((rail) => {
+      const root = rail.closest<HTMLElement>('[data-service]');
+      if (!root) return;
+      const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+      const next = root.querySelector<HTMLButtonElement>('[data-next]');
+      const bar = root.querySelector<HTMLElement>('[data-progress]');
+
+      const updateProgress = () => {
+        if (!bar) return;
+        const max = rail.scrollWidth - rail.clientWidth;
+        const pct = max > 0 ? (rail.scrollLeft / max) * 100 : 0;
+        bar.style.width = `${pct}%`;
+      };
+
+      const card = rail.querySelector<HTMLElement>('.vex-card');
+      const step = card ? card.getBoundingClientRect().width + 16 : 340;
+      prev?.addEventListener('click', () => rail.scrollBy({ left: -step, behavior: 'smooth' }));
+      next?.addEventListener('click', () => rail.scrollBy({ left: step, behavior: 'smooth' }));
+      rail.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+      updateProgress();
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-active');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    document.querySelectorAll<HTMLElement>('[data-service]').forEach((el) => observer.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServiceRails);
+  } else {
+    initServiceRails();
+  }
+</script>
