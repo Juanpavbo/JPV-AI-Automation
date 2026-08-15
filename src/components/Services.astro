@@ -118,85 +118,64 @@ const icons = {
 const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1).replace('-', ' ');
 ---
 
-<section id="servicios" class="section-lg" aria-labelledby="servicios-title">
+<section id="servicios" class="section-lg pb-0" aria-labelledby="servicios-title">
   <div class="container">
     <header class="text-center mb-16 lg:mb-20 reveal slide-up">
       <span class="section-label">Servicios</span>
       <h2 id="servicios-title" class="display-md text-[var(--text)] mb-6">Servicios diseñados para MIPYMEs que quieren operar sin fricción</h2>
-      <p class="body-lg max-w-2xl mx-auto">Cada servicio incluye diagnóstico, implementación, capacitación y acompañamiento. Eliges lo que necesitas, escalamos juntos.</p>
+      <p class="body-lg max-w-2xl mx-auto">Cada servicio es un recorrido: sigue bajando y el contenido se desliza de lado a lado. Eliges lo que necesitas, escalamos juntos.</p>
     </header>
+  </div>
 
-    <div class="vex-services">
-      {services.map((service, i) => (
-        <article class="vex-service reveal slide-up" data-service style="animation-delay: {100 + i * 80}ms;">
-          <!-- Head -->
-          <div class="vex-service__head">
-            <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-[var(--{service.color}-bg)] border border-[var(--{service.color}-border)] flex items-center justify-center text-[var(--{service.color}-dark)]" set:html={icons[service.icon]} />
-            <div class="flex-1 min-w-0">
+  <div class="vex-bands">
+    {services.map((service, i) => (
+      <article class="vex-band" data-band>
+        <div class="vex-band__sticky">
+          <header class="vex-band__head">
+            <div class="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[var(--{service.color}-bg)] border border-[var(--{service.color}-border)] flex items-center justify-center text-[var(--{service.color}-dark)]" set:html={icons[service.icon]} />
+            <div class="vex-band__titles">
               <span class="caption text-[var(--{service.color}-dark)]">{label(service.id)}</span>
               <h3 class="heading-md text-[var(--text)] mt-1">{service.title}</h3>
-              <p class="body text-[var(--text-secondary)] mt-1">{service.shortDesc}</p>
+              <p class="body body-sm text-[var(--text-secondary)] mt-1 max-w-xl">{service.shortDesc}</p>
             </div>
-            <div class="vex-service__num" aria-hidden="true">{(i + 1).toString().padStart(2, '0')}</div>
-          </div>
+            <div class="vex-band__num" aria-hidden="true">{(i + 1).toString().padStart(2, '0')}</div>
+            <span class="vex-band__hint" aria-hidden="true">
+              Sigue bajando
+              <svg class="w-4 h-4 animate-bounce-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+            </span>
+          </header>
 
-          <!-- Horizontal deploy (revealed when the service enters viewport) -->
-          <div class="vex-service__detail">
-            <div class="vex-service__detail-inner">
-              <div class="vex-service__meta">
-                <span class="vex-service__hint">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16l-4-4 4-4m5 4H3" /></svg>
-                  Desliza para ver alcance, casos por industria y tecnología
-                </span>
-                <div class="vex-service__controls">
-                  <button type="button" class="vex-arrow" data-prev aria-label="Anterior">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                  </button>
-                  <div class="vex-progress" aria-hidden="true"><div class="vex-progress__bar" data-progress></div></div>
-                  <button type="button" class="vex-arrow" data-next aria-label="Siguiente">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                  </button>
-                </div>
+          <div class="vex-band__track" data-track>
+            <section class="vex-band__panel vex-band__panel--scope">
+              <span class="vex-band__eyebrow">Alcance del servicio</span>
+              <p class="body text-[var(--text-secondary)]">{service.fullDesc}</p>
+            </section>
+
+            {service.industries.map((ind, k) => (
+              <section class="vex-band__panel" data-step={(k + 2).toString()}>
+                <span class="vex-band__eyebrow">{ind.name}</span>
+                <p class="body text-[var(--text-secondary)]">{ind.example}</p>
+              </section>
+            ))}
+
+            <section class="vex-band__panel vex-band__panel--tech" data-step="end">
+              <span class="vex-band__eyebrow">Tecnología</span>
+              <div class="flex flex-wrap gap-2">
+                {service.tech.map(t => <span class="tag tag-neutral">{t}</span>)}
               </div>
-
-              <div class="vex-service__rail" data-rail>
-                <!-- Alcance -->
-                <div class="vex-card vex-card--scope" style="--reveal-delay: 60ms;">
-                  <span class="vex-card__eyebrow">Alcance</span>
-                  <p class="body-sm text-[var(--text-secondary)]">{service.fullDesc}</p>
-                </div>
-
-                <!-- Casos por industria -->
-                {service.industries.map((ind, k) => (
-                  <div class="vex-card vex-card--case" style="--reveal-delay: {(60 + (k + 1) * 80).toString()}ms;">
-                    <span class="vex-card__eyebrow">{ind.name}</span>
-                    <p class="body-sm text-[var(--text-secondary)]">{ind.example}</p>
-                  </div>
-                ))}
-
-                <!-- Tecnología -->
-                <div class="vex-card vex-card--tech" style="--reveal-delay: {(60 + (service.industries.length + 1) * 80).toString()}ms;">
-                  <span class="vex-card__eyebrow">Tecnología</span>
-                  <div class="flex flex-wrap gap-2">
-                    {service.tech.map(t => <span class="tag tag-neutral">{t}</span>)}
-                  </div>
-                </div>
-              </div>
-            </div>
+            </section>
           </div>
 
-          <!-- CTA -->
-          <div class="vex-service__cta">
-            <a href="#contacto" class="btn btn-primary">
-              Solicitar propuesta para {service.title.toLowerCase()}
-            </a>
+          <div class="vex-band__progress" aria-hidden="true">
+            <div class="vex-band__progress-bar" data-band-progress></div>
           </div>
-        </article>
-      ))}
-    </div>
+        </div>
+      </article>
+    ))}
+  </div>
 
-    <!-- CTA Global -->
-    <div class="text-center mt-16 lg:mt-20 reveal slide-up">
+  <div class="container">
+    <div class="text-center mt-20 lg:mt-24 reveal slide-up">
       <p class="body text-[var(--text-secondary)] mb-4 max-w-xl mx-auto">¿Necesitas combinar varios servicios? Diseñamos un plan a tu medida.</p>
       <a href="#contacto" class="btn btn-primary btn-lg inline-flex">Diseñar mi plan</a>
     </div>
@@ -204,206 +183,140 @@ const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1).replace('
 </section>
 
 <style>
-  .vex-services {
+  .vex-bands {
+    margin-top: clamp(2rem, 5vh, 3rem);
+  }
+
+  .vex-band {
+    position: relative;
+    height: 190vh;
+  }
+
+  .vex-band__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    justify-content: center;
+    padding-block: clamp(1.25rem, 4vh, 2.5rem);
   }
 
-  .vex-service {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: 1.25rem;
-    padding: 1.75rem 1.75rem 1.5rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
-    transition: border-color .3s ease, box-shadow .3s ease;
-  }
-  .vex-service.is-active {
-    border-color: var(--brand-border);
-    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 16px 40px rgba(0,0,0,.08);
-  }
-
-  .vex-service__head {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-
-  .vex-service__num {
-    flex-shrink: 0;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: .02em;
-    color: var(--text-muted);
-    opacity: .45;
-  }
-
-  .vex-service__detail {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows .7s cubic-bezier(.22,1,.36,1);
-  }
-  .vex-service.is-active .vex-service__detail {
-    grid-template-rows: 1fr;
-  }
-  .vex-service__detail-inner {
-    overflow: hidden;
-    min-height: 0;
-  }
-
-  .vex-service__meta {
+  .vex-band__head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
-    margin-top: 1.5rem;
-    margin-bottom: .75rem;
+    padding-inline: max(1.25rem, calc((100vw - 72rem) / 2));
+    margin-bottom: clamp(1.25rem, 3.5vh, 2.25rem);
   }
-  .vex-service__hint {
+  .vex-band__titles { flex: 1; min-width: 0; }
+  .vex-band__num {
+    flex-shrink: 0;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text-muted);
+    opacity: .35;
+  }
+  .vex-band__hint {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     gap: .4rem;
     font-size: .8125rem;
     color: var(--text-muted);
+    white-space: nowrap;
   }
-  .vex-service__controls {
+
+  .vex-band__track {
+    width: max-content;
     display: flex;
-    align-items: center;
+    align-items: stretch;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding-inline: max(1.25rem, calc((100vw - 72rem) / 2)) max(2.5rem, 6vw);
+    will-change: transform;
+  }
+
+  .vex-band__panel {
+    flex: 0 0 auto;
+    width: min(460px, 82vw);
+    border-radius: 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: clamp(1.25rem, 3vh, 2rem);
+    display: flex;
+    flex-direction: column;
     gap: .75rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
   }
-  .vex-arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: background .2s ease, color .2s ease, border-color .2s ease;
-  }
-  .vex-arrow:hover {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: #fff;
-  }
-  .vex-progress {
-    width: 6rem;
-    height: 4px;
-    border-radius: 999px;
-    background: var(--border);
-    overflow: hidden;
-  }
-  .vex-progress__bar {
-    height: 100%;
-    width: 0;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--brand), var(--accent));
-    transition: width .2s ease;
-  }
+  .vex-band__panel--scope { background: var(--brand-bg); border-color: var(--brand-border); }
+  .vex-band__panel--tech { background: var(--accent-bg); border-color: var(--accent-border); }
 
-  .vex-service__rail {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    padding: .25rem .25rem 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
-    -webkit-overflow-scrolling: touch;
-  }
-  .vex-service__rail::-webkit-scrollbar { height: 6px; }
-  .vex-service__rail::-webkit-scrollbar-track { background: transparent; }
-  .vex-service__rail::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 999px;
-  }
-
-  .vex-card {
-    flex: 0 0 88%;
-    scroll-snap-align: start;
-    border: 1px solid var(--border);
-    border-radius: 1rem;
-    background: var(--bg);
-    padding: 1.25rem;
-    opacity: 0;
-    transform: translateX(48px);
-    transition: opacity .6s ease, transform .7s cubic-bezier(.22,1,.36,1);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-  .vex-service.is-active .vex-card {
-    opacity: 1;
-    transform: none;
-  }
-  @media (min-width: 640px) {
-    .vex-card { flex-basis: 340px; }
-  }
-
-  .vex-card__eyebrow {
-    display: inline-block;
+  .vex-band__eyebrow {
     font-size: .75rem;
     font-weight: 600;
-    letter-spacing: .02em;
+    letter-spacing: .03em;
     text-transform: uppercase;
     color: var(--brand-dark);
-    margin-bottom: .5rem;
   }
-  .vex-card--case { border-top: 3px solid var(--brand); }
-  .vex-card--scope { background: var(--brand-bg); border-color: var(--brand-border); }
 
-  .vex-service__cta {
-    margin-top: 1.5rem;
+  .vex-band__progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--border);
+  }
+  .vex-band__progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--brand), var(--accent));
   }
 </style>
 
 <script>
-  function initServiceRails() {
-    const rails = document.querySelectorAll<HTMLElement>('[data-rail]');
-    rails.forEach((rail) => {
-      const root = rail.closest<HTMLElement>('[data-service]');
-      if (!root) return;
-      const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
-      const next = root.querySelector<HTMLButtonElement>('[data-next]');
-      const bar = root.querySelector<HTMLElement>('[data-progress]');
-
-      const updateProgress = () => {
-        if (!bar) return;
-        const max = rail.scrollWidth - rail.clientWidth;
-        const pct = max > 0 ? (rail.scrollLeft / max) * 100 : 0;
-        bar.style.width = `${pct}%`;
-      };
-
-      const card = rail.querySelector<HTMLElement>('.vex-card');
-      const step = card ? card.getBoundingClientRect().width + 16 : 340;
-      prev?.addEventListener('click', () => rail.scrollBy({ left: -step, behavior: 'smooth' }));
-      next?.addEventListener('click', () => rail.scrollBy({ left: step, behavior: 'smooth' }));
-      rail.addEventListener('scroll', updateProgress, { passive: true });
-      window.addEventListener('resize', updateProgress);
-      updateProgress();
+  function initBands() {
+    const bands = Array.from(document.querySelectorAll<HTMLElement>('[data-band]'));
+    const tracks = new Map<HTMLElement, HTMLElement>();
+    bands.forEach((band) => {
+      const track = band.querySelector<HTMLElement>('[data-track]');
+      if (track) tracks.set(band, track);
     });
+    if (bands.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-active');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.25, rootMargin: '0px 0px -8% 0px' }
-    );
+    let raf = 0;
 
-    document.querySelectorAll<HTMLElement>('[data-service]').forEach((el) => observer.observe(el));
+    const compute = () => {
+      const vw = window.innerWidth;
+      bands.forEach((band) => {
+        const track = tracks.get(band);
+        if (!track) return;
+        const rect = band.getBoundingClientRect();
+        const range = band.offsetHeight - window.innerHeight;
+        let progress = range > 0 ? -rect.top / range : 0;
+        progress = Math.min(1, Math.max(0, progress));
+        const maxScroll = Math.max(0, track.scrollWidth - vw);
+        track.style.transform = `translate3d(${(-progress * maxScroll).toFixed(2)}px,0,0)`;
+        const bar = band.querySelector<HTMLElement>('[data-band-progress]');
+        if (bar) bar.style.width = `${progress * 100}%`;
+      });
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(() => { raf = 0; compute(); });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    compute();
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initServiceRails);
+    document.addEventListener('DOMContentLoaded', initBands);
   } else {
-    initServiceRails();
+    initBands();
   }
 </script>
