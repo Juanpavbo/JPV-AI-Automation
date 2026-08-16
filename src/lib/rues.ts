@@ -50,9 +50,114 @@ function cleanName(value: string): string {
   return value.replace(/\s+/g, ' ').trim();
 }
 
+// ============ FUENTE LOCAL: tabla rues_empresas en Supabase ============
+// Se consulta primero (más rápida, datos locales de Bogotá/Cundinamarca).
+// Si las env vars de Supabase no están configuradas o falla, se hace fallback
+// a la API pública de datos.gov.co.
+
+interface LocalRuesRow {
+  razon_social: string | null;
+  numero_identificacion: string | null;
+  digito_verificacion: string | null;
+  clase_identificacion: string | null;
+  tipo_sociedad: string | null;
+  organizacion_juridica: string | null;
+  estado_matricula: string | null;
+  camara_comercio: string | null;
+  representante_legal: string | null;
+  num_identificacion_representante_legal: string | null;
+  cod_ciiu_act_econ_pri: string | null;
+  cod_ciiu_act_econ_sec: string | null;
+  ciiu3: string | null;
+  ciiu4: string | null;
+  ultimo_ano_renovado: string | null;
+  fecha_matricula: string | null;
+  fecha_actualizacion: string | null;
+  codigo_tamano_empresa: string | null;
+  categoria_matricula: string | null;
+  municipio: string | null;
+  departamento: string | null;
+  direccion: string | null;
+  telefono: string | null;
+  correo_electronico: string | null;
+  cantidad_mujeres_empleadas: number | null;
+}
+
+function localRowToRecord(r: LocalRuesRow): RuesRecord {
+  return {
+    razon_social: r.razon_social ?? undefined,
+    numero_identificacion: r.numero_identificacion ?? undefined,
+    digito_verificacion: r.digito_verificacion ?? undefined,
+    clase_identificacion: r.clase_identificacion ?? undefined,
+    tipo_sociedad: r.tipo_sociedad ?? undefined,
+    organizacion_juridica: r.organizacion_juridica ?? undefined,
+    estado_matricula: r.estado_matricula ?? undefined,
+    camara_comercio: r.camara_comercio ?? undefined,
+    representante_legal: r.representante_legal ?? undefined,
+    num_identificacion_representante_legal: r.num_identificacion_representante_legal ?? undefined,
+    cod_ciiu_act_econ_pri: r.cod_ciiu_act_econ_pri ?? undefined,
+    cod_ciiu_act_econ_sec: r.cod_ciiu_act_econ_sec ?? undefined,
+    ciiu3: r.ciiu3 ?? undefined,
+    ciiu4: r.ciiu4 ?? undefined,
+    ultimo_ano_renovado: r.ultimo_ano_renovado ?? undefined,
+    fecha_matricula: r.fecha_matricula ?? undefined,
+    fecha_actualizacion: r.fecha_actualizacion ?? undefined,
+    codigo_tamano_empresa: r.codigo_tamano_empresa ?? undefined,
+    categoria_matricula: r.categoria_matricula ?? undefined,
+    municipio: r.municipio ?? undefined,
+    departamento: r.departamento ?? undefined,
+    direccion: r.direccion ?? undefined,
+    telefono: r.telefono ?? undefined,
+    correo_electronico: r.correo_electronico ?? undefined,
+    cantidad_mujeres_empleadas: r.cantidad_mujeres_empleadas ?? undefined
+  };
+}
+
+function hasLocalSource(): boolean {
+  return Boolean(import.meta.env.SUPABASE_URL && import.meta.env.SUPABASE_ANON_KEY);
+}
+
+async function queryLocalByNit(nit: string): Promise<RuesRecord[] | null> {
+  if (!hasLocalSource()) return null;
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(
+      import.meta.env.SUPABASE_URL as string,
+      import.meta.env.SUPABASE_ANON_KEY as string
+    );
+    const { data, error } = await supabase.rpc('search_rues_by_nit', { p_nit: nit });
+    if (error) throw error;
+    if (!Array.isArray(data) || data.length === 0) return [];
+    return (data as LocalRuesRow[]).map(localRowToRecord);
+  } catch {
+    return null; // fallback a datos.gov.co
+  }
+}
+
+async function queryLocalByName(name: string, limit = 10): Promise<RuesRecord[] | null> {
+  if (!hasLocalSource()) return null;
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(
+      import.meta.env.SUPABASE_URL as string,
+      import.meta.env.SUPABASE_ANON_KEY as string
+    );
+    const { data, error } = await supabase.rpc('search_rues_by_name', { p_name: name, p_limit: limit });
+    if (error) throw error;
+    if (!Array.isArray(data) || data.length === 0) return [];
+    return (data as LocalRuesRow[]).map(localRowToRecord);
+  } catch {
+    return null; // fallback a datos.gov.co
+  }
+}
+
 export async function queryRuesByNit(nit: string): Promise<RuesRecord[]> {
   const cleanNit = nit.replace(/[^0-9]/g, '');
   if (!/^\d{6,10}$/.test(cleanNit)) return [];
+
+  const local = await queryLocalByNit(cleanNit);
+  if (local !== null) return local;
+
   const url =
     `${RUES_ENDPOINT}?` +
     `$where=numero_identificacion%20%3D%20${esc(cleanNit).replace(/"/g, '%22').replace(/\s/g, '%20')}` +
@@ -70,6 +175,10 @@ export async function queryRuesByNit(nit: string): Promise<RuesRecord[]> {
 export async function queryRuesByName(name: string, limit = 10): Promise<RuesRecord[]> {
   const clean = cleanName(name);
   if (!clean) return [];
+
+  const local = await queryLocalByName(clean, limit);
+  if (local !== null) return local;
+
   const url =
     `${RUES_ENDPOINT}?` +
     `$q=${encodeURIComponent(clean)}` +
@@ -85,6 +194,64 @@ export async function queryRuesByName(name: string, limit = 10): Promise<RuesRec
     razon_social: cleanName(r.razon_social ?? ''),
     camara_comercio: cleanName(r.camara_comercio ?? '')
   }));
+}
+
+export interface RuesFilterParams {
+  municipio?: string;
+  departamento?: string;
+  camara?: string;
+  tamano?: string;
+  ciiu?: string;
+  limit?: number;
+}
+
+export async function queryRuesByFilters(params: RuesFilterParams): Promise<RuesRecord[]> {
+  if (!hasLocalSource()) return [];
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(
+      import.meta.env.SUPABASE_URL as string,
+      import.meta.env.SUPABASE_ANON_KEY as string
+    );
+    const { data, error } = await supabase.rpc('search_rues_by_filters', {
+      p_municipio: params.municipio ?? null,
+      p_departamento: params.departamento ?? null,
+      p_camara: params.camara ?? null,
+      p_tamano: params.tamano ?? null,
+      p_ciiu: params.ciiu ?? null,
+      p_limit: params.limit ?? 25
+    });
+    if (error) throw error;
+    if (!Array.isArray(data)) return [];
+    return (data as LocalRuesRow[]).map(localRowToRecord);
+  } catch {
+    return [];
+  }
+}
+
+export interface MunicipioCount {
+  municipio: string | null;
+  total: number;
+  con_email: number;
+}
+
+export async function queryRuesCountsByMunicipio(departamento?: string): Promise<MunicipioCount[]> {
+  if (!hasLocalSource()) return [];
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(
+      import.meta.env.SUPABASE_URL as string,
+      import.meta.env.SUPABASE_ANON_KEY as string
+    );
+    const { data, error } = await supabase.rpc('rues_counts_by_municipio', {
+      p_departamento: departamento ?? null
+    });
+    if (error) throw error;
+    if (!Array.isArray(data)) return [];
+    return data as MunicipioCount[];
+  } catch {
+    return [];
+  }
 }
 
 export function formatRuesRecord(r: RuesRecord): string {
