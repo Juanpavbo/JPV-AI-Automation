@@ -1,0 +1,20 @@
+---
+import RpaStudio from '../islands/RpaStudio';
+---
+
+<section id="procesos" class="section-lg relative overflow-hidden" aria-labelledby="procesos-title">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-[var(--brand)]/5 rounded-full blur-[150px]" />
+    <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[var(--accent)]/5 rounded-full blur-[120px]" />
+  </div>
+
+  <div class="container relative z-10">
+    <header class="text-center mb-12 lg:mb-16 reveal slide-up">
+      <span class="section-label">Cotizador interactivo</span>
+      <h2 id="procesos-title" class="display-md text-[var(--text)] mb-6">Selecciona tus procesos y mira cuánto puedes ahorrar</h2>
+      <p class="body-lg max-w-2xl mx-auto">Es el catálogo real de automatizaciones que implementamos. Marca los procesos de tu operación y verás en vivo las horas ahorradas, la inversión estimada y el punto de equilibrio.</p>
+    </header>
+
+    <RpaStudio client:load />
+  </div>
+</section>

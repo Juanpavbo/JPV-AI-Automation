@@ -64,14 +64,13 @@ language sql stable security invoker as $$
   limit 5;
 $$;
 
--- Función: búsqueda por razón social (similarity / trigram)
+-- Función: búsqueda por razón social (ILIKE con índice trigram)
 create or replace function public.search_rues_by_name(p_name text, p_limit integer default 10)
 returns setof public.rues_empresas
 language sql stable security invoker as $$
   select * from public.rues_empresas
-  where razon_social % p_name
-     or razon_social ilike '%' || p_name || '%'
-  order by similarity(razon_social, p_name) desc
+  where razon_social ilike '%' || p_name || '%'
+  order by ultimo_ano_renovado desc
   limit p_limit;
 $$;
 

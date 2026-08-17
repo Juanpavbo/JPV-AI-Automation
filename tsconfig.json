@@ -10,6 +10,8 @@
       "@lib/*": ["src/lib/*"],
       "@styles/*": ["src/styles/*"]
     },
-    "types": ["astro/client", "vite/client"]
+    "types": ["astro/client", "vite/client"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   }
 }

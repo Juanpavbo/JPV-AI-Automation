@@ -2,12 +2,12 @@
 import { Send } from 'lucide-preact';
 
 const interests = [
-  { value: 'automatizacion', label: 'Automatización de procesos' },
+  { value: 'rpa', label: 'Automatización RPA' },
   { value: 'bi', label: 'Analítica / Power BI / Tableros' },
   { value: 'ia', label: 'Agentes de IA & LLMs' },
+  { value: 'ocr', label: 'OCR de facturas' },
   { value: 'lowcode', label: 'Low-Code / No-Code' },
   { value: 'consultoria', label: 'Consultoría general' },
-  { value: 'personal', label: 'Optimización personal / laboral' },
   { value: 'validacion-pagos', label: 'Validación Pagos Nequi/Daviplata' },
   { value: 'otro', label: 'Otro' }
 ] as const;
@@ -17,8 +17,8 @@ const interests = [
   <div class="container">
     <header class="text-center mb-12 lg:mb-16 reveal slide-up">
       <span class="section-label">Contacto</span>
-      <h2 id="contacto-title" class="display-md text-[var(--text)] mb-6">Hablemos de tu proyecto</h2>
-      <p class="body-lg max-w-2xl mx-auto">Cuéntame qué necesitas. En 24h tendrás una propuesta preliminar. Sin compromiso, sin spam.</p>
+      <h2 id="contacto-title" class="display-md text-[var(--text)] mb-6">Hablemos de tu automatización</h2>
+      <p class="body-lg max-w-2xl mx-auto">Cuéntame qué procesos quieres automatizar. En 24h tendrás una propuesta preliminar. Sin compromiso, sin spam.</p>
     </header>
 
     <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -68,8 +68,8 @@ const interests = [
             <label class="form-label">Servicios de interés <span class="text-sm text-[var(--text-muted)] font-normal">(múltiples)</span></label>
             <div class="checkbox-group">
               <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="automatizacion" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>Automatización Inteligente</span>
+                <input type="checkbox" name="servicios_interes" value="rpa" class="w-4 h-4 accent-[var(--brand)]" />
+                <span>Automatización RPA</span>
               </label>
               <label class="checkbox-item">
                 <input type="checkbox" name="servicios_interes" value="bi" class="w-4 h-4 accent-[var(--brand)]" />
@@ -78,6 +78,10 @@ const interests = [
               <label class="checkbox-item">
                 <input type="checkbox" name="servicios_interes" value="ia" class="w-4 h-4 accent-[var(--brand)]" />
                 <span>Agentes de IA & LLMs</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="servicios_interes" value="ocr" class="w-4 h-4 accent-[var(--brand)]" />
+                <span>OCR de facturas</span>
               </label>
               <label class="checkbox-item">
                 <input type="checkbox" name="servicios_interes" value="lowcode" class="w-4 h-4 accent-[var(--brand)]" />
