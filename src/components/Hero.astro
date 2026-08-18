@@ -1,0 +1,108 @@
+---
+import { Send } from 'lucide-preact';
+---
+
+<section id="inicio" class="relative min-h-[90vh] lg:min-h-[100vh] flex items-center overflow-hidden" aria-labelledby="hero-title">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[var(--brand)]/10 rounded-full blur-[120px] animate-blob-slow" />
+    <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[#8b5cf6]/10 rounded-full blur-[100px] animate-blob-slow-reverse" />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[var(--brand)]/5 rounded-full blur-[150px]" />
+  </div>
+
+  <!-- Floating geometric shapes -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-20 left-10 w-8 h-8 border border-[var(--brand)]/20 rounded-lg rotate-12 animate-float-slow" />
+    <div class="absolute top-40 right-20 w-6 h-6 bg-[#8b5cf6]/10 rounded-full animate-float-slow-reverse" />
+    <div class="absolute bottom-32 left-20 w-10 h-10 border border-[var(--accent)]/20 rounded-xl -rotate-6 animate-float-slow" />
+    <div class="absolute bottom-20 right-10 w-4 h-4 bg-[var(--brand)]/10 rounded-md animate-float-slow-reverse" />
+  </div>
+
+  <div class="container relative z-10 py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Main Headline -->
+      <h1 id="hero-title" class="display-xl text-[var(--text)] mb-8 slide-up stagger-1" style="animation-delay: 200ms;">
+        Tu negocio puede trabajar solo,<br />
+        <span class="bg-gradient-to-r from-[var(--brand)] to-[#8b5cf6] bg-clip-text text-transparent">mientras tú lo haces crecer</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="body-lg max-w-2xl mx-auto mb-6 slide-up stagger-3" style="animation-delay: 300ms;">
+        Somos una consultoría que ayuda a empresas y negocios a ahorrar tiempo, vender más y decidir con datos, usando automatización, aplicaciones a la medida, inteligencia artificial y reportes inteligentes.
+      </p>
+      <p class="body max-w-2xl mx-auto mb-12 text-[var(--text-secondary)] slide-up stagger-3" style="animation-delay: 350ms;">
+        Te lo explicamos sin palabras técnicas.
+      </p>
+
+      <!-- CTA Group -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 slide-up stagger-4" style="animation-delay: 400ms;">
+        <a href="#diagnostico" class="btn btn-primary btn-lg">
+          <Send class="w-5 h-5" aria-hidden="true" />
+          Descubre qué necesita tu negocio
+        </a>
+        <a href="#servicios" class="btn btn-secondary btn-lg">
+          Ver los servicios explicados fácil
+        </a>
+      </div>
+
+      <!-- Trust Indicators -->
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[var(--text-secondary)] slide-up stagger-5" style="animation-delay: 500ms;">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Sin necesidad de saber de tecnología</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Sobre las herramientas que ya usas</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Diagnóstico inicial gratuito</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-slow" aria-hidden="true">
+      <a href="#servicios" aria-label="Ver los servicios">
+        <svg class="w-6 h-6 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes blob-slow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+  }
+  @keyframes blob-slow-reverse {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-25px, 25px) scale(1.03); }
+    66% { transform: translate(15px, -15px) scale(0.97); }
+  }
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+  @keyframes float-slow-reverse {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(15px) rotate(-3deg); }
+  }
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+  }
+  .animate-blob-slow { animation: blob-slow 20s ease-in-out infinite; }
+  .animate-blob-slow-reverse { animation: blob-slow-reverse 25s ease-in-out infinite; }
+  .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+  .animate-float-slow-reverse { animation: float-slow-reverse 7s ease-in-out infinite; }
+  .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blob-slow, .animate-blob-slow-reverse, .animate-float-slow, .animate-float-slow-reverse, .animate-bounce-slow {
+      animation: none;
+    }
+  }
+</style>

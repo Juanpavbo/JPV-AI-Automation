@@ -1,0 +1,18 @@
+---
+import FaqAccordion from '../islands/FaqAccordion';
+---
+
+<section id="preguntas" class="section-lg relative overflow-hidden" aria-labelledby="faq-title">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#8b5cf6]/5 rounded-full blur-[150px]" />
+  </div>
+
+  <div class="container relative z-10">
+    <header class="text-center mb-12 lg:mb-16 reveal slide-up">
+      <span class="section-label">Preguntas frecuentes</span>
+      <h2 id="faq-title" class="display-md text-[var(--text)] mb-6">Lo que todo dueño de negocio nos pregunta</h2>
+    </header>
+
+    <FaqAccordion client:load />
+  </div>
+</section>

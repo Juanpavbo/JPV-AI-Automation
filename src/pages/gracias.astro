@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Gracias por tu pago | vexanIA">
+  <section class="py-20 md:py-28 min-h-[70vh] flex items-center">
+    <div class="container text-center">
+      <div class="max-w-xl mx-auto">
+        <div class="mb-8">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 text-green-400 mb-6">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">¡Pago confirmado!</h1>
+          <p class="text-gray-400 text-lg leading-relaxed">
+            Tu pago ha sido procesado correctamente. Recibirás un correo de confirmación en los próximos minutos.
+          </p>
+        </div>
+
+        <div class="bg-[rgba(0,212,255,0.05)] border border-brand-cyan/20 rounded-xl p-6 mb-8 text-left">
+          <h2 class="font-semibold text-brand-cyan mb-4">Detalles del pago</h2>
+          <dl class="space-y-3 text-gray-300">
+            <div class="flex justify-between">
+              <dt class="text-gray-500">Concepto</dt>
+              <dd id="pay-concept" class="font-medium">—</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-gray-500">Monto</dt>
+              <dd id="pay-amount" class="font-medium">—</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-gray-500">Método</dt>
+              <dd id="pay-method" class="font-medium">—</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-gray-500">Referencia</dt>
+              <dd id="pay-reference" class="font-mono text-sm">—</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-gray-500">Estado</dt>
+              <dd id="pay-status" class="font-medium text-green-400">Aprobado</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/" class="btn btn-primary">Volver al inicio</a>
+          <a href="#contacto" class="btn btn-outline">Contactar soporte</a>
+        </div>
+
+        <p class="mt-8 text-sm text-gray-600">
+          Si tienes alguna duda sobre tu pago, escríbenos a
+          <a href="mailto:vexania@zohomail.com" class="text-brand-cyan hover:underline ml-1">vexania@zohomail.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      payment_id: params.get('payment_id'),
+      reference: params.get('reference'),
+      amount: params.get('amount'),
+      method: params.get('method'),
+      status: params.get('status')
+    };
+  }
+
+  function formatAmount(cents: string) {
+    const amount = parseInt(cents, 10) / 100;
+    return amount.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+  }
+
+  async function loadPaymentDetails() {
+    const { payment_id, reference, amount, method, status } = getQueryParams();
+
+    if (reference) {
+      document.getElementById('pay-reference')!.textContent = reference;
+    }
+    if (amount) {
+      document.getElementById('pay-amount')!.textContent = formatAmount(amount);
+    }
+    if (method) {
+      document.getElementById('pay-method')!.textContent = method;
+    }
+    if (status) {
+      const statusEl = document.getElementById('pay-status')!;
+      statusEl.textContent = status === 'approved' ? 'Aprobado' : status;
+      statusEl.className = 'font-medium ' + (status === 'approved' ? 'text-green-400' : 'text-yellow-400');
+    }
+
+    if (payment_id) {
+      try {
+        const res = await fetch(`/api/payments/status?payment_id=${payment_id}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.payment) {
+            const p = data.payment;
+            document.getElementById('pay-concept')!.textContent = p.reference_type ? `${p.reference_type} (${p.reference_id})` : 'Servicio';
+            document.getElementById('pay-amount')!.textContent = formatAmount(p.amount_in_cents.toString());
+            document.getElementById('pay-method')!.textContent = p.payment_method;
+            document.getElementById('pay-reference')!.textContent = p.wompi_reference;
+            document.getElementById('pay-status')!.textContent = p.status === 'approved' ? 'Aprobado' : p.status;
+          }
+        }
+      } catch (e) {
+        console.warn('No se pudo cargar detalle del pago:', e);
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadPaymentDetails);
+</script>

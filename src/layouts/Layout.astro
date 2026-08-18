@@ -1,0 +1,178 @@
+---
+import '../styles/global.css';
+import { Calendar, Mail, Linkedin, Menu, X } from 'lucide-preact';
+import Chat from '../components/Chat.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'vexanIA — Consultoría de automatización, aplicaciones a la medida, agentes de IA y reportes inteligentes para empresas y negocios. Diagnóstico gratuito.' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const navLinks = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#diagnostico', label: 'Diagnóstico' },
+  { href: '#como-trabajamos', label: 'Cómo trabajamos' },
+  { href: '#preguntas', label: 'Preguntas frecuentes' },
+  { href: '#contacto', label: 'Contacto' },
+] as const;
+
+const socialLinks = [
+  { href: 'https://www.linkedin.com/company/vexania', label: 'LinkedIn', icon: Linkedin },
+  { href: 'mailto:vexania@zohomail.com', label: 'Email', icon: Mail },
+  { href: 'https://cal.com/vexania', label: 'Calendario', icon: Calendar },
+] as const;
+---
+
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content="/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#06b6d4" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="vexanIA" />
+  <script is:inline>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</head>
+<body class="antialiased">
+  <header class="glass sticky top-0 z-50 border-b border-[var(--border)]">
+    <nav class="container flex items-center justify-between h-[72px]" aria-label="Navegación principal">
+      <a href="/" class="flex items-center gap-3" aria-label="vexanIA - Inicio">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="text-[var(--brand)]">
+          <rect width="32" height="32" rx="8" fill="currentColor"/>
+          <path d="M8 10h16M8 16h16M8 22h10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-xl font-bold tracking-tight text-[var(--text)]">vexanIA</span>
+      </a>
+      
+      <button class="md:hidden p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] transition-colors" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
+        <Menu id="menu-icon" class="w-6 h-6" />
+        <X id="close-icon" class="w-6 h-6 hidden" />
+      </button>
+      
+      <nav id="mobile-menu" class="hidden md:flex items-center gap-6" role="navigation" aria-label="Principal">
+        <ul class="flex items-center gap-8">
+          {navLinks.map(link => (
+            <li><a href={link.href} class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors duration-200">{link.label}</a></li>
+          ))}
+        </ul>
+        <div class="flex items-center gap-3 ml-4">
+          {socialLinks.map(s => (
+            <a href={s.href} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-muted)] transition-all duration-200" aria-label={s.label}>
+              <s.icon class="w-5 h-5" />
+            </a>
+          ))}
+          <a href="#contacto" class="btn btn-primary btn-sm hidden sm:inline-flex">Diagnóstico gratuito</a>
+        </div>
+      </nav>
+    </nav>
+  </header>
+  
+  <main id="main-content">
+    <slot />
+  </main>
+  
+  <footer class="bg-[var(--bg-elevated)] border-t border-[var(--border)]">
+    <div class="container py-16 lg:py-24">
+      <div class="grid lg:grid-cols-4 gap-12 lg:gap-16 mb-12 lg:mb-16">
+        <div class="lg:col-span-2">
+          <a href="/" class="flex items-center gap-3 mb-6" aria-label="vexanIA - Inicio">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="text-[var(--brand)]">
+              <rect width="32" height="32" rx="8" fill="currentColor"/>
+              <path d="M8 10h16M8 16h16M8 22h10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-xl font-bold tracking-tight text-[var(--text)]">vexanIA</span>
+          </a>
+          <p class="text-[var(--text-secondary)] max-w-xs mb-6 leading-relaxed">
+            Consultoría de automatización, aplicaciones a la medida, agentes de IA y reportes inteligentes para empresas y negocios.
+            Te lo explicamos sin palabras técnicas.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="tag tag-brand">Empresas y negocios</span>
+            <span class="tag tag-accent">Diagnóstico gratuito</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="heading-sm mb-4">Servicios</h4>
+          <nav class="flex flex-col gap-3">
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Automatización de tareas repetitivas</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Aplicaciones a la medida</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Agentes de IA</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Reportes e inteligencia de negocio</a>
+            <a href="#diagnostico" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Diagnóstico exprés</a>
+            <a href="#preguntas" class="text-sm text-[var(--brand)] font-medium hover:underline">Preguntas frecuentes</a>
+          </nav>
+        </div>
+        
+        <div>
+          <h4 class="heading-sm mb-4">Contacto</h4>
+          <address class="not-italic text-sm text-[var(--text-secondary)] space-y-3">
+            <a href="mailto:vexania@zohomail.com" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+              <Mail class="w-4 h-4" aria-hidden="true" /> vexania@zohomail.com
+            </a>
+            <a href="https://www.linkedin.com/company/vexania" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+              <Linkedin class="w-4 h-4" aria-hidden="true" /> LinkedIn
+            </a>
+            <a href="https://cal.com/vexania" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+              <Calendar class="w-4 h-4" aria-hidden="true" /> Agendar videollamada
+            </a>
+          </address>
+        </div>
+      </div>
+      
+      <div class="border-t border-[var(--border)] pt-8 flex flex-col lg:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-[var(--text-muted)]">© 2026 vexanIA. Hecho con dedicación en Colombia.</p>
+        <div class="flex items-center gap-6">
+          <a href="/politica-privacidad" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Privacidad</a>
+          <a href="/terminos" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Términos</a>
+          <a href="/cookies" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <Chat />
+  
+  <script is:inline>
+    // Page view tracking
+    (function() {
+      const sessionId = sessionStorage.getItem('vex_session_id') || crypto.randomUUID();
+      sessionStorage.setItem('vex_session_id', sessionId);
+      const payload = { session_id: sessionId, path: window.location.pathname, referrer: document.referrer || null, utm_source: new URLSearchParams(window.location.search).get('utm_source'), utm_medium: new URLSearchParams(window.location.search).get('utm_medium'), utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'), utm_content: new URLSearchParams(window.location.search).get('utm_content'), utm_term: new URLSearchParams(window.location.search).get('utm_term'), user_agent: navigator.userAgent, device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop', browser: navigator.userAgent.match(/(Chrome|Firefox|Safari|Edge)/)?.[0] || 'unknown', os: navigator.userAgent.match(/(Windows|Mac|Linux|Android|iOS)/)?.[0] || 'unknown' };
+      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+      navigator.sendBeacon('/api/analytics/pageview', blob);
+      let startTime = Date.now();
+      window.addEventListener('beforeunload', () => { const duration = Math.round((Date.now() - startTime) / 1000); const endPayload = { session_id: sessionId, path: window.location.pathname, duration_seconds: duration }; navigator.sendBeacon('/api/analytics/pageview', new Blob([JSON.stringify(endPayload)], { type: 'application/json' })); });
+    })();
+  </script>
+  <script is:inline>
+    const btn = document.querySelector('header button');
+    const menu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    btn?.addEventListener('click', () => { const open = menu?.classList.toggle('hidden'); menuIcon?.classList.toggle('hidden', !open); closeIcon?.classList.toggle('hidden', open); btn.setAttribute('aria-expanded', String(!open)); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<div id="vex-chat-root" data-variant="modal">
+  <div id="vex-chat-backdrop" class="vex-chat-backdrop" hidden></div>
+  <button id="vex-chat-toggle" type="button" aria-label="Abrir chat con vexanIA" aria-expanded="false">
+    <svg id="vex-chat-open-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 12l4-4L16 8M8 12l4 4L16 16"/>
+    </svg>
+    <span>¡Hola!</span>
+  </button>
+  <div id="vex-chat-panel" class="vex-chat-panel" hidden>
+    <div class="vex-chat-header">
+      <div class="flex items-center gap-3">
+        <div class="vex-chat-avatar">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10.4 10.4l1.4 1.4M18.4 5.6l-1.4 1.4M6.4 17.6l-1.4 1.4M12 8a4 4 0 110 8 4 4 0 010-8z" /></svg>
+        </div>
+        <div>
+          <div class="font-semibold text-[var(--text)]">Asistente vexanIA</div>
+          <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+            <span class="vex-online-dot" aria-hidden="true"></span> En línea · Responde en segundos
+          </div>
+        </div>
+      </div>
+      <button id="vex-chat-minimize" type="button" class="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-muted)] transition-colors" aria-label="Minimizar chat">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+      </button>
+    </div>
+    <div id="vex-chat-messages" class="vex-chat-messages" aria-live="polite"></div>
+    <div class="vex-chat-suggestions" id="vex-chat-suggestions" aria-label="Sugerencias rápidas">
+      <button type="button" class="vex-suggestion-chip" data-prompt="¿Qué puedo automatizar en mi empresa?">¿Qué puedo automatizar?</button>
+      <button type="button" class="vex-suggestion-chip" data-prompt="¿Qué es un agente de IA y para qué sirve?">Agentes de IA</button>
+      <button type="button" class="vex-suggestion-chip" data-prompt="¿Cómo funcionan los reportes con datos claros?">Reportes con datos</button>
+      <button type="button" class="vex-suggestion-chip" data-prompt="Quiero agendar un diagnóstico gratis">Agendar diagnóstico</button>
+    </div>
+    <form id="vex-chat-form" class="vex-chat-form">
+      <input id="vex-chat-input" type="text" autocomplete="off" placeholder="Escribe tu mensaje..." aria-label="Mensaje" />
+      <button type="submit" aria-label="Enviar" class="btn btn-primary btn-sm">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+      </button>
+    </form>
+    <div class="vex-chat-privacy-notice">
+      <span class="text-xs text-[var(--text-muted)] italic">
+        Las respuestas generadas por IA pueden ser incorrectas; verifica la información. Podemos recopilar tu información personal; al utilizar este chat estás confirmando que aceptas la Política de Privacidad de vexanIA.
+      </span>
+    </div>
+  </div>
+</div>
+<script>
+  const WELCOME = 'Soy el asistente de IA de vexanIA.\n\nPuedo ayudarte a encontrar las mejores soluciones para tu negocio.\n\n¿Qué es vexan.IA?';
+
+  function initChat() {
+    const messagesEl = document.getElementById('vex-chat-messages') as HTMLElement;
+    const form = document.getElementById('vex-chat-form') as HTMLFormElement;
+    const input = document.getElementById('vex-chat-input') as HTMLInputElement;
+    const toggle = document.getElementById('vex-chat-toggle') as HTMLButtonElement;
+    const panel = document.getElementById('vex-chat-panel') as HTMLElement;
+    const minimizeBtn = document.getElementById('vex-chat-minimize') as HTMLButtonElement;
+    const suggestionsEl = document.getElementById('vex-chat-suggestions') as HTMLElement;
+    const backdrop = document.getElementById('vex-chat-backdrop') as HTMLElement;
+    if (!messagesEl || !form || !input || !toggle || !panel) return;
+
+    const history: { role: 'user' | 'assistant'; content: string }[] = [];
+    let busy = false;
+
+    function appendMessage(role: 'user' | 'assistant', content: string) {
+      const el = document.createElement('div');
+      el.className = `vex-chat-msg vex-chat-${role}`;
+      el.textContent = content;
+      messagesEl.appendChild(el);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return el;
+    }
+
+    function setSuggestionsVisible(visible: boolean) {
+      if (suggestionsEl) suggestionsEl.style.display = visible ? 'flex' : 'none';
+    }
+
+    toggle.addEventListener('click', () => {
+      const open = panel.hidden;
+      panel.hidden = !open;
+      if (backdrop) backdrop.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      const openIcon = document.getElementById('vex-chat-open-icon');
+      const closeIcon = document.getElementById('vex-chat-close-icon');
+      if (openIcon) openIcon.style.display = open ? 'none' : '';
+      if (closeIcon) closeIcon.style.display = open ? '' : 'none';
+      if (open && messagesEl.children.length === 0) {
+        appendMessage('assistant', WELCOME);
+        setSuggestionsVisible(true);
+        input.focus();
+      } else if (!open) {
+        setSuggestionsVisible(false);
+      }
+    });
+
+    backdrop?.addEventListener('click', () => {
+      panel.hidden = true;
+      backdrop.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      const openIcon = document.getElementById('vex-chat-open-icon');
+      const closeIcon = document.getElementById('vex-chat-close-icon');
+      if (openIcon) openIcon.style.display = '';
+      if (closeIcon) closeIcon.style.display = 'none';
+    });
+
+    minimizeBtn?.addEventListener('click', () => {
+      panel.hidden = true;
+      if (backdrop) backdrop.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      const openIcon = document.getElementById('vex-chat-open-icon');
+      const closeIcon = document.getElementById('vex-chat-close-icon');
+      if (openIcon) openIcon.style.display = '';
+      if (closeIcon) closeIcon.style.display = 'none';
+    });
+
+    function handleSuggestionClick(e: Event) {
+      const btn = e.target as HTMLButtonElement;
+      if (!btn.matches('.vex-suggestion-chip')) return;
+      const prompt = btn.dataset.prompt;
+      if (!prompt) return;
+      input.value = prompt;
+      form.dispatchEvent(new Event('submit'));
+    }
+    suggestionsEl?.addEventListener('click', handleSuggestionClick);
+
+    form.addEventListener('submit', (ev: Event) => {
+      ev.preventDefault();
+      const text = input.value.trim();
+      if (!text || busy) return;
+      input.value = '';
+      setSuggestionsVisible(false);
+      busy = true;
+      appendMessage('user', text);
+      history.push({ role: 'user', content: text });
+      if (history.length > 20) history.shift();
+
+      const thinking = appendMessage('assistant', '…');
+      thinking.classList.add('vex-chat-thinking');
+
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history.slice(-10) })
+      })
+        .then(res => res.json())
+        .then(data => {
+          thinking.remove();
+          if (!data.reply) {
+            appendMessage('assistant', data.error || 'Algo salió mal. Inténtalo en un momento.');
+            return;
+          }
+          appendMessage('assistant', data.reply);
+          history.push({ role: 'assistant', content: data.reply });
+        })
+        .catch(() => {
+          thinking.remove();
+          appendMessage('assistant', 'No pude conectar con el servicio. Revisa tu conexión e inténtalo de nuevo.');
+        })
+        .finally(() => { busy = false; input.focus(); });
+    });
+
+    // Hide suggestions on first user message
+    input.addEventListener('input', () => {
+      if (input.value.length > 0) setSuggestionsVisible(false);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initChat());
+  } else { initChat(); }
+</script>
+
+<style>
+  #vex-chat-root[data-variant='modal'] {
+    position: fixed;
+    right: var(--space-lg);
+    bottom: var(--space-lg);
+    z-index: 70;
+  }
+  .vex-chat-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(2px);
+    animation: fadeIn var(--duration-fast) var(--ease-out);
+  }
+  #vex-chat-toggle {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-inverse);
+    background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+    position: relative;
+  }
+  #vex-chat-toggle:hover { transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-xl); }
+  #vex-chat-toggle:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+  .vex-chat-pulse {
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 10px; height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--success, #22c55e);
+    border: 2px solid var(--bg);
+    animation: pulse var(--duration-base) var(--ease-out) infinite;
+  }
+
+  .vex-chat-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 440px;
+    max-width: calc(100vw - 24px);
+    height: min(600px, calc(100vh - 96px));
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    animation: pop var(--duration-base) var(--ease-out);
+  }
+  .vex-chat-panel[hidden] { display: none; }
+
+  .vex-chat-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elevated);
+  }
+  .vex-chat-header .flex { gap: var(--space-md); }
+
+  .vex-chat-avatar {
+    width: 40px; height: 40px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+    color: var(--text-inverse);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .vex-online-dot {
+    width: 8px; height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--success, #22c55e);
+    display: inline-block;
+  }
+
+  .vex-chat-messages {
+    flex: 1; overflow-y: auto;
+    padding: var(--space-lg);
+    display: flex; flex-direction: column; gap: var(--space-md);
+  }
+
+  .vex-chat-msg {
+    max-width: 85%;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg);
+    font-size: 0.9375rem; line-height: 1.6;
+    white-space: pre-wrap; word-break: break-word;
+    animation: fadeIn var(--duration-fast) var(--ease-out);
+  }
+  .vex-chat-user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+    color: var(--text-inverse);
+    border-bottom-right-radius: var(--radius-sm);
+  }
+  .vex-chat-assistant {
+    align-self: flex-start;
+    background: var(--bg-muted);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: var(--radius-sm);
+  }
+  .vex-chat-thinking { color: var(--brand); opacity: 0.8; font-style: italic; }
+
+  .vex-chat-suggestions {
+    display: flex; flex-wrap: wrap; gap: var(--space-sm);
+    padding: 0 var(--space-lg) var(--space-md);
+    border-bottom: 1px solid var(--border);
+  }
+  .vex-suggestion-chip {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.8125rem; font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+  .vex-suggestion-chip:hover { color: var(--brand); border-color: var(--brand); background: var(--brand-bg); }
+  .vex-suggestion-chip:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+  .vex-chat-form {
+    display: flex; gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid var(--border);
+    background: var(--bg-elevated);
+  }
+  .vex-chat-form input {
+    flex: 1; padding: var(--space-md) var(--space-md);
+    font-size: 0.9375rem; font-family: inherit;
+    background: var(--bg-muted); border: 1px solid var(--border);
+    border-radius: var(--radius-full); color: var(--text);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+  .vex-chat-form input::placeholder { color: var(--text-muted); }
+  .vex-chat-form input:hover { border-color: var(--border-strong); }
+  .vex-chat-form input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-bg); }
+  .vex-chat-form .btn-primary { padding: var(--space-md) var(--space-lg); border-radius: var(--radius-full); }
+
+  .vex-chat-privacy-notice {
+    padding: var(--space-xs) var(--space-lg);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background: var(--bg-elevated);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .vex-chat-panel { width: calc(100vw - 24px); height: calc(100vh - 48px); max-height: none; }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: 0.7; }
+  }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+</style>

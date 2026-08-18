@@ -1,0 +1,20 @@
+---
+import ServicesExplorer from '../islands/ServicesExplorer';
+---
+
+<section id="servicios" class="section-lg relative overflow-hidden" aria-labelledby="servicios-title">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[var(--brand)]/5 rounded-full blur-[150px]" />
+    <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[#8b5cf6]/5 rounded-full blur-[120px]" />
+  </div>
+
+  <div class="container relative z-10">
+    <header class="text-center mb-12 lg:mb-16 reveal slide-up">
+      <span class="section-label">Nuestros servicios</span>
+      <h2 id="servicios-title" class="display-md text-[var(--text)] mb-6">Cuatro formas de hacer tu empresa más fácil de manejar</h2>
+      <p class="body-lg max-w-2xl mx-auto">Haz clic en cada servicio para entender qué es, para quién es, qué incluye y cómo ha funcionado en negocios reales.</p>
+    </header>
+
+    <ServicesExplorer client:load />
+  </div>
+</section>

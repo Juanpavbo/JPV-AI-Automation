@@ -1,0 +1,483 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vexania | Consultoría TI · Automatización · IA</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    ::selection { background: #00d4ff; color: #0a0a0f; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px; background: rgba(10,10,15,.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,255,.15); position: sticky; top: 0; z-index: 50;
+    }
+    header .logo { font-size: 1.25rem; font-weight: 700; color: #00d4ff; }
+    header .logo span { color: #ff006e; }
+    nav a {
+      color: #a0a0b0; text-decoration: none; margin-left: 24px; font-size: .9rem;
+      transition: color .2s;
+    }
+    nav a:hover { color: #00d4ff; }
+    .menu-toggle { display: none; background: none; border: 0; color: #00d4ff; font-size: 1.5rem; cursor: pointer; }
+    .hero {
+      min-height: 90vh; display: flex; align-items: center; position: relative;
+      background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 50%, rgba(255,0,110,.06) 0%, transparent 50%);
+    }
+    .hero-content { max-width: 720px; }
+    .hero-badge {
+      display: inline-block; padding: 6px 16px; border-radius: 20px;
+      background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.25);
+      color: #00d4ff; font-size: .85rem; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+    .hero h1 .highlight { background: linear-gradient(135deg, #00d4ff, #ff006e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.1rem; color: #a0a0b0; margin-bottom: 32px; max-width: 580px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
+      border-radius: 8px; font-weight: 600; text-decoration: none; font-size: .95rem;
+      transition: all .25s; cursor: pointer; border: 0;
+    }
+    .btn-primary { background: linear-gradient(135deg, #00d4ff, #0090b0); color: #0a0a0f; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,.3); }
+    .btn-outline { border: 1px solid rgba(0,212,255,.4); color: #00d4ff; background: transparent; }
+    .btn-outline:hover { background: rgba(0,212,255,.08); }
+    .btn-accent { background: linear-gradient(135deg, #ff006e, #b0004e); color: #fff; }
+    .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,110,.3); }
+    section { padding: 100px 0; }
+    .section-label {
+      display: inline-block; padding: 4px 14px; border-radius: 12px;
+      background: rgba(0,212,255,.1); color: #00d4ff; font-size: .8rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+    }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px; }
+    .section-desc { color: #a0a0b0; max-width: 600px; margin-bottom: 48px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .service-card {
+      background: linear-gradient(145deg, #12121a, #0e0e15);
+      border: 1px solid rgba(0,212,255,.1); border-radius: 16px; padding: 32px;
+      transition: all .3s;
+    }
+    .service-card:hover { border-color: rgba(0,212,255,.3); transform: translateY(-4px); }
+    .service-icon { font-size: 2rem; margin-bottom: 16px; }
+    .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .service-card p { color: #a0a0b0; font-size: .9rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .service-tags span {
+      padding: 4px 12px; border-radius: 12px; font-size: .75rem;
+      background: rgba(0,212,255,.08); color: #00d4ff;
+    }
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+    .pain-card {
+      background: linear-gradient(145deg, #12121a, #0e0e15);
+      border: 1px solid rgba(255,0,110,.12); border-radius: 16px; padding: 28px;
+      text-align: center; transition: all .3s;
+    }
+    .pain-card:hover { border-color: rgba(255,0,110,.3); transform: translateY(-4px); }
+    .pain-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .pain-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .pain-card p { color: #a0a0b0; font-size: .85rem; }
+    .pain-result {
+      margin-top: 40px; text-align: center; padding: 32px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0,212,255,.06), rgba(255,0,110,.06));
+      border: 1px solid rgba(0,212,255,.15);
+    }
+    .pain-result h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .pain-result p { color: #a0a0b0; font-size: .95rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .about-text p { color: #a0a0b0; margin-bottom: 16px; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .stat { text-align: center; padding: 20px; background: rgba(0,212,255,.04); border-radius: 12px; }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: #00d4ff; }
+    .stat-label { font-size: .8rem; color: #a0a0b0; margin-top: 4px; }
+    .stack-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+    .stack-item {
+      padding: 10px 20px; border-radius: 8px; font-size: .85rem;
+      background: rgba(0,212,255,.06); border: 1px solid rgba(0,212,255,.12);
+      color: #c0c0d0; transition: all .2s;
+    }
+    .stack-item:hover { border-color: #00d4ff; color: #00d4ff; }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .booking-info p { color: #a0a0b0; margin-bottom: 16px; font-size: .95rem; }
+    .booking-types { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .booking-type {
+      display: flex; align-items: center; gap: 14px; padding: 16px 20px;
+      background: #12121a; border: 1px solid rgba(0,212,255,.1); border-radius: 12px;
+      transition: all .2s;
+    }
+    .booking-type:hover { border-color: rgba(0,212,255,.3); }
+    .booking-type .bt-icon { font-size: 1.4rem; }
+    .booking-type .bt-info h4 { font-size: .95rem; }
+    .booking-type .bt-info span { font-size: .8rem; color: #a0a0b0; }
+    .calendly-placeholder {
+      background: #12121a; border: 1px solid rgba(0,212,255,.1); border-radius: 16px;
+      padding: 48px 32px; text-align: center; min-height: 400px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .calendly-placeholder .cp-icon { font-size: 3rem; margin-bottom: 16px; }
+    .calendly-placeholder h3 { margin-bottom: 8px; }
+    .calendly-placeholder p { color: #a0a0b0; font-size: .85rem; max-width: 360px; margin-bottom: 20px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .contact-form { background: #12121a; border-radius: 16px; padding: 32px; border: 1px solid rgba(0,212,255,.1); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: .85rem; color: #a0a0b0; margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(0,212,255,.15);
+      background: #0e0e15; color: #e0e0e0; font-size: .9rem; font-family: inherit;
+      transition: border .2s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #00d4ff; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #12121a; color: #e0e0e0; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-section { text-align: center; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+    .contact-card {
+      display: flex; align-items: center; gap: 12px; padding: 16px 24px;
+      background: #12121a; border: 1px solid rgba(0,212,255,.12); border-radius: 12px;
+      text-decoration: none; color: #e0e0e0; transition: all .25s;
+    }
+    .contact-card:hover { border-color: #00d4ff; transform: translateY(-2px); }
+    .contact-card .icon { font-size: 1.4rem; }
+    footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(0,212,255,.08); color: #606070; font-size: .85rem; }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+            background: rgba(10,10,15,.98); padding: 16px 24px; border-bottom: 1px solid rgba(0,212,255,.15); }
+      nav.open { display: flex; }
+      nav a { margin: 8px 0; }
+      .about-grid, .booking-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header>
+    <div class="logo">Vexania <span>AI & Automation</span></div>
+  <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#porque">¿Por qué?</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#about">Sobre mí</a>
+    <a href="#stack">Stack</a>
+    <a href="#agendar">Agendar</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="container hero-content">
+    <div class="hero-badge">⚡ Consultoría TI · Automatización · IA</div>
+    <h1>Transformo procesos en<br><span class="highlight">soluciones inteligentes</span></h1>
+    <p>
+      Ingeniero Industrial especializado en analítica de datos, automatización Low-Code/NoCode
+      e inteligencia artificial. Ayudo a <strong>empresas</strong> a digitalizar procesos y liberar capacidad operativa,
+      y a <strong>personas</strong> a optimizar su trabajo diario, crecer profesionalmente y tomar control
+      de su tiempo con tecnología.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn btn-primary">📩 Contáctame</a>
+      <a href="#agendar" class="btn btn-accent">📅 Agendar cita</a>
+    </div>
+  </div>
+</section>
+
+<section id="porque" style="background: radial-gradient(ellipse at 50% 50%, rgba(255,0,110,.04) 0%, transparent 50%);">
+  <div class="container">
+    <div class="section-label">¿Por qué automatizar?</div>
+    <h2 class="section-title">¿Te suena familiar?</h2>
+    <p class="section-desc">Tareas que consumen horas, datos dispersos, reportes a última hora. No tiene que ser así.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">🔁</div>
+        <h3>Tareas repetitivas</h3>
+        <p>Descargas manuales, cruces en Excel, copiar y pegar entre sistemas. Horas que podrías recuperar.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <h3>Reportes diarios</h3>
+        <p>Generar el mismo informe una y otra vez. Que se autogenere y llegue a tu bandeja cada mañana.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔗</div>
+        <h3>Cruces de datos</h3>
+        <p>Conciliar bases, validar información entre sistemas, detectar inconsistencias en segundos.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⏰</div>
+        <h3>Seguimientos & Alertas</h3>
+        <p>Vencer fechas, aprobaciones pendientes, cambios críticos. Alertas automáticas antes de que sea tarde.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📉</div>
+        <h3>Datos sin orden</h3>
+        <p>Información en correos, carpetas compartidas, chats. Un tablero que unifique todo.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📄</div>
+        <h3>Documentación dispersa</h3>
+        <p>Versiones de archivos por todos lados, procesos no documentados, pérdida de conocimiento.</p>
+      </div>
+    </div>
+    <div class="pain-result">
+      <h3>⚡ Imagina que todo eso simplemente... funcione solo</h3>
+      <p>Automatizaciones que ejecutan tareas, agentes de IA que monitorean y alertan, tableros que se actualizan solos, y procesos que fluyen sin intervención manual. Eso es lo que construyo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="container">
+    <div class="section-label">Servicios</div>
+    <h2 class="section-title">Lo que hago</h2>
+    <p class="section-desc">Consultoría integral en transformación digital, desde el diagnóstico hasta la implementación, para empresas y profesionales.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>Automatización Inteligente</h3>
+        <p>n8n, Power Automate, RPA, OCR y MCP para eliminar tareas repetitivas y conectar sistemas.</p>
+        <div class="service-tags"><span>n8n</span><span>Power Automate</span><span>RPA</span><span>OCR</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Analítica & BI</h3>
+        <p>Power BI, Databricks, Python, Spark y SQL. Datos dispersos convertidos en decisiones.</p>
+        <div class="service-tags"><span>Power BI</span><span>Databricks</span><span>Python</span><span>SQL</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <h3>Agentes de IA & LLMs</h3>
+        <p>Agentes con Claude, OpenAI, DeepSeek, Ollama y MCP integrados en procesos empresariales.</p>
+        <div class="service-tags"><span>Claude</span><span>ChatGPT</span><span>DeepSeek</span><span>Ollama</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Low-Code / No-Code</h3>
+        <p>Power Apps, Copilot Studio, Power Automate, n8n. Automatización sin programar.</p>
+        <div class="service-tags"><span>Power Apps</span><span>Copilot Studio</span><span>Power Automate</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">☁️</div>
+        <h3>Cloud & DevOps</h3>
+        <p>Azure, Docker, SQL Server, MongoDB. Infraestructura escalable y segura.</p>
+        <div class="service-tags"><span>Azure</span><span>Docker</span><span>SQL Server</span><span>MongoDB</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔄</div>
+        <h3>ERP & Optimización</h3>
+        <p>Automatización SAP Ariba, SAP ERP, integración con Oracle, Power BI y SharePoint.</p>
+        <div class="service-tags"><span>SAP Ariba</span><span>SAP ERP</span><span>Oracle</span><span>SharePoint</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background: radial-gradient(ellipse at 70% 50%, rgba(255,0,110,.04) 0%, transparent 50%);">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">Sobre mí</div>
+        <h2 class="section-title">Juan Pablo Valero Buitrago</h2>
+        <p>
+          A lo largo de mi trayectoria he construido, desarrollado y desplegado
+          soluciones tecnológicas que resuelven problemas reales: automatización de procesos,
+          integración de sistemas, analítica de datos e inteligencia artificial.
+        </p>
+        <p>
+          He creado automatizaciones con Python y Power Automate, desarrollado agentes de IA,
+          implementado pipelines ETL, diseñado tableros Power BI,
+          estructurado repositorios documentales y conectado plataformas empresariales
+          para eliminar cuellos de botella y liberar tiempo valioso.
+        </p>
+        <p>
+          Hoy ofrezco esa misma capacidad a <strong>empresas</strong> que quieren digitalizarse
+          sin perder el foco en el negocio, y a <strong>profesionales</strong> que buscan optimizar
+          su día a día, destacar en su carrera y aprovechar la IA para crecer.
+        </p>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-num">+2</div><div class="stat-label">Años experiencia</div></div>
+          <div class="stat"><div class="stat-num">+8</div><div class="stat-label">Automatizaciones</div></div>
+          <div class="stat"><div class="stat-num">+6</div><div class="stat-label">Tecnologías</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="background: linear-gradient(145deg, #12121a, #0e0e15); border: 1px solid rgba(0,212,255,.1); border-radius: 16px; padding: 32px;">
+          <h3 style="margin-bottom: 16px;">🎓 Áreas de formación</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">🏛️</span>
+              <div><strong>Ingeniería Industrial</strong></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">🔧</span>
+              <div><strong>Gestión de Procesos Industriales</strong></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">💻</span>
+              <div><strong>Técnico en Sistemas</strong></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <span style="color: #00d4ff;">🚚</span>
+              <div><strong>Logística Cadena de Suministro</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="container">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title">Tecnologías que domino</h2>
+    <p class="section-desc">Un ecosistema completo para llevar ideas a producción.</p>
+    <div class="stack-grid">
+      <span class="stack-item">Python</span><span class="stack-item">SQL Server</span><span class="stack-item">MongoDB</span>
+      <span class="stack-item">MySQL</span><span class="stack-item">Power BI</span><span class="stack-item">Databricks</span>
+      <span class="stack-item">Apache Spark</span><span class="stack-item">n8n</span><span class="stack-item">Power Automate</span>
+      <span class="stack-item">Power Apps</span><span class="stack-item">Copilot Studio</span><span class="stack-item">Claude</span>
+      <span class="stack-item">ChatGPT</span><span class="stack-item">DeepSeek</span><span class="stack-item">Ollama</span>
+      <span class="stack-item">MCP</span><span class="stack-item">Azure</span><span class="stack-item">Docker</span>
+      <span class="stack-item">SAP Ariba</span><span class="stack-item">SAP ERP</span><span class="stack-item">Oracle</span>
+      <span class="stack-item">HTML/CSS</span><span class="stack-item">React</span><span class="stack-item">PHP</span>
+      <span class="stack-item">Git</span><span class="stack-item">Looker Studio</span><span class="stack-item">RPA</span>
+      <span class="stack-item">OCR</span><span class="stack-item">OpenCode</span><span class="stack-item">OpenClaw</span>
+      <span class="stack-item">Hermes</span>
+    </div>
+  </div>
+</section>
+
+<section id="agendar" style="background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,.04) 0%, transparent 50%);">
+  <div class="container">
+    <div class="section-label">Agenda una cita</div>
+    <h2 class="section-title">Conversemos sin compromiso</h2>
+    <p class="section-desc">Elige el tipo de reunión y el horario que mejor se ajuste a ti. Por videollamada o presencial en Bogotá.</p>
+    <div class="booking-grid">
+      <div>
+        <div class="booking-info">
+          <p>
+            Una llamada de 15-30 minutos basta para entender tu situación, identificar
+            oportunidades y definir si puedo ayudarte. Sin presiones, sin contratos.
+          </p>
+          <div class="booking-types">
+            <div class="booking-type">
+              <div class="bt-icon">🔍</div>
+              <div class="bt-info">
+                <h4>Diagnóstico rápido</h4>
+                <span>15 min · Conozco tu caso y te doy una visión inicial</span>
+              </div>
+            </div>
+            <div class="booking-type">
+              <div class="bt-icon">📋</div>
+              <div class="bt-info">
+                <h4>Consulta completa</h4>
+                <span>30 min · Revisión a detalle y hoja de ruta</span>
+              </div>
+            </div>
+            <div class="booking-type">
+              <div class="bt-icon">🚀</div>
+              <div class="bt-info">
+                <h4>Proyecto nuevo</h4>
+                <span>45 min · Alcance, presupuesto y plan de trabajo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="calendly-placeholder">
+        <div class="cp-icon">📅</div>
+        <h3>Conecta tu Cal.com</h3>
+        <p>
+          Define tus 3 tipos de reunión y disponibilidad en tu cuenta de <a href="https://cal.com" target="_blank" rel="noopener noreferrer" style="color:#00d4ff;">Cal.com</a>.
+        </p>
+        <a href="https://cal.com/juan-pablo-valero-buitrago-y07qzi" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Abrir Cal.com →</a>
+        <p style="margin-top:12px; font-size:.75rem; color:#606070;">
+          Una vez configures tu Cal.com, el calendario se mostrará aquí mismo.
+        </p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container">
+    <div class="section-label" style="margin: 0 auto 12px; text-align:center;">Contacto</div>
+    <h2 class="section-title" style="text-align:center;">Trabajemos juntos</h2>
+    <p class="section-desc" style="margin: 0 auto 16px; text-align:center;">
+      ¿Tienes un proceso que automatizar, un tablero que construir o una idea
+      que necesita tecnología para despegar? Cuéntame.
+    </p>
+    <div class="contact-grid" style="margin-top:32px;">
+      <form class="contact-form" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contacto">
+        <p style="display:none;"><input name="bot-field"></p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required placeholder="tu@correo.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="interes">¿Qué necesitas?</label>
+          <select id="interes" name="interes">
+            <option value="">Selecciona una opción</option>
+            <option value="automatizacion">Automatización de procesos</option>
+            <option value="bi">Analítica / Power BI / Tableros</option>
+            <option value="ia">Agentes de IA / LLMs</option>
+            <option value="lowcode">Low-Code / No-Code</option>
+            <option value="consultoria">Consultoría general</option>
+            <option value="personal">Optimización personal / laboral</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Cuéntame más</label>
+          <textarea id="mensaje" name="mensaje" required placeholder="Describe tu situación, lo que necesitas o la idea que tienes..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Enviar mensaje ✉️</button>
+      </form>
+      <div>
+        <div style="background: #12121a; border: 1px solid rgba(0,212,255,.1); border-radius: 16px; padding: 32px; height:100%;">
+          <h3 style="margin-bottom: 16px;">📬 También puedes</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <a href="https://www.linkedin.com/in/juan-pablo-valero-buitrago-7b474316b" target="_blank" rel="noopener noreferrer" class="contact-card">
+              <span class="icon">🔗</span><span>Escribirme por LinkedIn</span>
+            </a>
+            <a href="mailto:vexania@zohomail.com" class="contact-card">
+              <span class="icon">📧</span><span>vexania@zohomail.com</span>
+            </a>
+            <a href="#agendar" class="btn btn-accent" style="justify-content:center; margin-top:8px;">📅 Agendar videollamada</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Juan Pablo Valero Buitrago · Hecho con ⚡ en Bogotá, Colombia</p>
+  </div>
+</footer>
+</body>
+</html>

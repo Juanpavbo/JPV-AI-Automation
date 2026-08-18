@@ -1,0 +1,55 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^\\/_image$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/analytics\\/pageview\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/chat\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/contact\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/cron\\/cleanup\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/cron\\/reminders\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/empresa\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/payments\\/create\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/payments\\/status\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/payments\\/webhook\\/?$",
+			"dest": "_render"
+		}
+	]
+}

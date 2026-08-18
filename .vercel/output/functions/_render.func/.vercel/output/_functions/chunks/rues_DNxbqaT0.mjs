@@ -1,0 +1,5726 @@
+const ciiuData = {
+	"10": {
+	desc: "Elaboración de productos alimenticios",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"11": {
+	desc: "Elaboración de bebidas",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"12": {
+	desc: "Elaboración de productos de tabaco",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"13": {
+	desc: "Fabricación de productos textiles",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"14": {
+	desc: "Confección de prendas de vestir",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"15": {
+	desc: "Curtido y recurtido de cueros; fabricación de calzado; fabricación de artículos de viaje, maletas, bolsos de mano y artículos similares, y fabricación de artículos de talabartería y guarnicionería; adobo y teñido de pieles",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"16": {
+	desc: "Transformación de la madera y fabricación de productos de madera y de corcho, excepto muebles; fabricación de artículos de cestería y espartería",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"17": {
+	desc: "Fabricación de papel, cartón y productos de papel y cartón",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"18": {
+	desc: "Actividades de impresión y de producción de copias a partir de grabaciones originales",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"19": {
+	desc: "Coquización, fabricación de productos de la refinación del petróleo y actividad de mezcla de combustibles",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"20": {
+	desc: "Fabricación de sustancias y productos químicos",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"21": {
+	desc: "Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"22": {
+	desc: "Fabricación de productos de caucho y de plástico",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"23": {
+	desc: "Fabricación de otros productos minerales no metálicos",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"24": {
+	desc: "Fabricación de productos metalúrgicos básicos",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"25": {
+	desc: "Fabricación de productos elaborados de metal, excepto maquinaria y equipo",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"26": {
+	desc: "Fabricación de productos informáticos, electrónicos y ópticos",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"27": {
+	desc: "Fabricación de aparatos y equipo eléctrico",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"28": {
+	desc: "Fabricación de maquinaria y equipo n.c.p.",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"29": {
+	desc: "Fabricación de vehículos automotores, remolques y semirremolques",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"30": {
+	desc: "Fabricación de otros tipos de equipo de transporte",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"31": {
+	desc: "Fabricación de muebles, colchones y somieres",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"32": {
+	desc: "Otras industrias manufactureras",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"33": {
+	desc: "Instalación, mantenimiento y reparación especializado de maquinaria y equipo",
+	level: "division",
+	section: "SECCIÓN C"
+},
+	"35": {
+	desc: "Suministro de electricidad, gas, vapor y aire acondicionado",
+	level: "division",
+	section: "SECCIÓN D"
+},
+	"36": {
+	desc: "Captación, tratamiento y distribución de agua",
+	level: "division",
+	section: "SECCIÓN E"
+},
+	"37": {
+	desc: "Evacuación y tratamiento de aguas residuales",
+	level: "division",
+	section: "SECCIÓN E"
+},
+	"38": {
+	desc: "Recolección, tratamiento y disposición de desechos, recuperación de materiales",
+	level: "division",
+	section: "SECCIÓN E"
+},
+	"39": {
+	desc: "Actividades de saneamiento ambiental y otros servicios de gestión de desechos",
+	level: "division",
+	section: "SECCIÓN E"
+},
+	"41": {
+	desc: "Construcción de edificios",
+	level: "division",
+	section: "SECCIÓN F"
+},
+	"42": {
+	desc: "Obras de ingeniería civil",
+	level: "division",
+	section: "SECCIÓN F"
+},
+	"43": {
+	desc: "Actividades especializadas para la construcción de edificios y obras de ingeniería civil",
+	level: "division",
+	section: "SECCIÓN F"
+},
+	"45": {
+	desc: "Comercio, mantenimiento y reparación de vehículos automotores y motocicletas, sus partes, piezas y accesorios",
+	level: "division",
+	section: "SECCIÓN G"
+},
+	"46": {
+	desc: "Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas",
+	level: "division",
+	section: "SECCIÓN G"
+},
+	"47": {
+	desc: "Comercio al por menor (incluso el comercio al por menor de combustibles), excepto el de vehículos automotores y motocicletas",
+	level: "division",
+	section: "SECCIÓN G"
+},
+	"49": {
+	desc: "Transporte terrestre; transporte por tuberías",
+	level: "division",
+	section: "SECCIÓN H"
+},
+	"50": {
+	desc: "Transporte acuático",
+	level: "division",
+	section: "SECCIÓN H"
+},
+	"51": {
+	desc: "Transporte aéreo",
+	level: "division",
+	section: "SECCIÓN H"
+},
+	"52": {
+	desc: "Almacenamiento y actividades complementarias al transporte",
+	level: "division",
+	section: "SECCIÓN H"
+},
+	"53": {
+	desc: "Correo y servicios de mensajería",
+	level: "division",
+	section: "SECCIÓN H"
+},
+	"55": {
+	desc: "Alojamiento",
+	level: "division",
+	section: "SECCIÓN I"
+},
+	"56": {
+	desc: "Actividades de servicios de comidas y bebidas",
+	level: "division",
+	section: "SECCIÓN I"
+},
+	"58": {
+	desc: "Actividades de edición",
+	level: "division",
+	section: "SECCIÓN J"
+},
+	"59": {
+	desc: "Actividades cinematográficas, de video y producción de programas de televisión, grabación de sonido y edición de música",
+	level: "division",
+	section: "SECCIÓN J"
+},
+	"60": {
+	desc: "Actividades de programación, transmisión y/o difusión",
+	level: "division",
+	section: "SECCIÓN J"
+},
+	"61": {
+	desc: "Telecomunicaciones",
+	level: "division",
+	section: "SECCIÓN J"
+},
+	"62": {
+	desc: "Desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas), consultoría informática y actividades relacionadas",
+	level: "division",
+	section: "SECCIÓN J"
+},
+	"63": {
+	desc: "Actividades de servicios de información",
+	level: "division",
+	section: "SECCIÓN J"
+},
+	"64": {
+	desc: "Actividades de servicios financieros, excepto las de seguros y de pensiones",
+	level: "division",
+	section: "SECCIÓN K"
+},
+	"65": {
+	desc: "Seguros (incluso el reaseguro), seguros sociales y fondos de pensiones, excepto la seguridad social",
+	level: "division",
+	section: "SECCIÓN K"
+},
+	"66": {
+	desc: "Actividades auxiliares de las actividades de servicios financieros",
+	level: "division",
+	section: "SECCIÓN K"
+},
+	"68": {
+	desc: "Actividades inmobiliarias",
+	level: "division",
+	section: "SECCIÓN L"
+},
+	"69": {
+	desc: "Actividades jurídicas y de contabilidad",
+	level: "division",
+	section: "SECCIÓN M"
+},
+	"70": {
+	desc: "Actividades de administración empresarial; actividades de consultoría de gestión",
+	level: "division",
+	section: "SECCIÓN M"
+},
+	"71": {
+	desc: "Actividades de arquitectura e ingeniería; ensayos y análisis técnicos",
+	level: "division",
+	section: "SECCIÓN M"
+},
+	"72": {
+	desc: "Investigación científica y desarrollo",
+	level: "division",
+	section: "SECCIÓN M"
+},
+	"73": {
+	desc: "Publicidad y estudios de mercado",
+	level: "division",
+	section: "SECCIÓN M"
+},
+	"74": {
+	desc: "Otras actividades profesionales, científicas y técnicas",
+	level: "division",
+	section: "SECCIÓN M"
+},
+	"75": {
+	desc: "Actividades veterinarias",
+	level: "division",
+	section: "SECCIÓN M"
+},
+	"77": {
+	desc: "Actividades de alquiler y arrendamiento",
+	level: "division",
+	section: "SECCIÓN N"
+},
+	"78": {
+	desc: "Actividades de empleo",
+	level: "division",
+	section: "SECCIÓN N"
+},
+	"79": {
+	desc: "Actividades de las agencias de viajes, operadores turísticos, servicios de reserva y actividades relacionadas",
+	level: "division",
+	section: "SECCIÓN N"
+},
+	"80": {
+	desc: "Actividades de seguridad e investigación privada",
+	level: "division",
+	section: "SECCIÓN N"
+},
+	"81": {
+	desc: "Actividades de servicios a edificios y paisajismo (jardines, zonas verdes)",
+	level: "division",
+	section: "SECCIÓN N"
+},
+	"82": {
+	desc: "Actividades administrativas y de apoyo de oficina y otras actividades de apoyo a las empresas",
+	level: "division",
+	section: "SECCIÓN N"
+},
+	"84": {
+	desc: "Administración pública y defensa; planes de seguridad social de afiliación obligatoria",
+	level: "division",
+	section: "SECCIÓN O"
+},
+	"85": {
+	desc: "Educación",
+	level: "division",
+	section: "SECCIÓN P"
+},
+	"86": {
+	desc: "Actividades de atención de la salud humana",
+	level: "division",
+	section: "SECCIÓN Q"
+},
+	"87": {
+	desc: "Actividades de atención residencial medicalizada",
+	level: "division",
+	section: "SECCIÓN Q"
+},
+	"88": {
+	desc: "Actividades de asistencia social sin alojamiento",
+	level: "division",
+	section: "SECCIÓN Q"
+},
+	"90": {
+	desc: "Actividades creativas, artísticas y de entretenimiento",
+	level: "division",
+	section: "SECCIÓN R"
+},
+	"91": {
+	desc: "Actividades de bibliotecas, archivos, museos y otras actividades culturales",
+	level: "division",
+	section: "SECCIÓN R"
+},
+	"92": {
+	desc: "Actividades de juegos de azar y apuestas",
+	level: "division",
+	section: "SECCIÓN R"
+},
+	"93": {
+	desc: "Actividades deportivas y actividades recreativas y de esparcimiento",
+	level: "division",
+	section: "SECCIÓN R"
+},
+	"94": {
+	desc: "Actividades de asociaciones",
+	level: "division",
+	section: "SECCIÓN S"
+},
+	"95": {
+	desc: "Mantenimiento y reparación de computadores, efectos personales y enseres domésticos",
+	level: "division",
+	section: "SECCIÓN S"
+},
+	"96": {
+	desc: "Otras actividades de servicios personales",
+	level: "division",
+	section: "SECCIÓN S"
+},
+	"97": {
+	desc: "Actividades de los hogares individuales como empleadores de personal doméstico",
+	level: "division",
+	section: "SECCIÓN T"
+},
+	"98": {
+	desc: "Actividades no diferenciadas de los hogares individuales como productores de bienes y servicios para uso propio",
+	level: "division",
+	section: "SECCIÓN T"
+},
+	"99": {
+	desc: "Actividades de organizaciones y entidades extraterritoriales",
+	level: "division",
+	section: "SECCIÓN U"
+},
+	"101": {
+	desc: "Procesamiento y conservación de carne, pescado, crustáceos y moluscos",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"102": {
+	desc: "Procesamiento y conservación de frutas, legumbres, hortalizas y tubérculos",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"103": {
+	desc: "Elaboración de aceites y grasas de origen vegetal y animal",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"104": {
+	desc: "Elaboración de productos lácteos",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"105": {
+	desc: "Elaboración de productos de molinería, almidones y productos derivados del almidón",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"106": {
+	desc: "Elaboración de productos de café",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"107": {
+	desc: "Elaboración de azúcar y panela",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"108": {
+	desc: "Elaboración de otros productos alimenticios",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"109": {
+	desc: "Elaboración de alimentos preparados para animales",
+	level: "group",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"110": {
+	desc: "Elaboración de bebidas",
+	level: "group",
+	division: "11",
+	section: "SECCIÓN C"
+},
+	"120": {
+	desc: "Elaboración de productos de tabaco",
+	level: "group",
+	division: "12",
+	section: "SECCIÓN C"
+},
+	"131": {
+	desc: "Preparación, hilatura, tejeduría y acabado de productos textiles",
+	level: "group",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"139": {
+	desc: "Fabricación de otros productos textiles",
+	level: "group",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"141": {
+	desc: "Confección de prendas de vestir, excepto prendas de piel",
+	level: "group",
+	division: "14",
+	section: "SECCIÓN C"
+},
+	"142": {
+	desc: "Fabricación de artículos de piel",
+	level: "group",
+	division: "14",
+	section: "SECCIÓN C"
+},
+	"143": {
+	desc: "Fabricación de artículos de punto y ganchillo",
+	level: "group",
+	division: "14",
+	section: "SECCIÓN C"
+},
+	"151": {
+	desc: "Curtido y recurtido de cueros; fabricación de artículos de viaje, bolsos de mano y artículos similares, y fabricación de artículos de talabartería y guarnicionería; adobo y teñido de pieles",
+	level: "group",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"152": {
+	desc: "Fabricación de calzado",
+	level: "group",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"161": {
+	desc: "Aserrado, acepillado e impregnación de la madera",
+	level: "group",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"162": {
+	desc: "Fabricación de hojas de madera para enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles",
+	level: "group",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"163": {
+	desc: "Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción",
+	level: "group",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"164": {
+	desc: "Fabricación de recipientes de madera",
+	level: "group",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"169": {
+	desc: "Fabricación de otros productos de madera; fabricación de artículos de corcho, cestería y espartería",
+	level: "group",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"170": {
+	desc: "Fabricación de papel, cartón y productos de papel y cartón",
+	level: "group",
+	division: "17",
+	section: "SECCIÓN C"
+},
+	"181": {
+	desc: "Actividades de impresión y actividades de servicios relacionados con la impresión",
+	level: "group",
+	division: "18",
+	section: "SECCIÓN C"
+},
+	"182": {
+	desc: "Producción de copias a partir de grabaciones originales",
+	level: "group",
+	division: "18",
+	section: "SECCIÓN C"
+},
+	"191": {
+	desc: "Fabricación de productos de hornos de coque",
+	level: "group",
+	division: "19",
+	section: "SECCIÓN C"
+},
+	"192": {
+	desc: "Fabricación de productos de la refinación del petróleo",
+	level: "group",
+	division: "19",
+	section: "SECCIÓN C"
+},
+	"201": {
+	desc: "Fabricación de sustancias químicas básicas, abonos y compuestos inorgánicos nitrogenados, plásticos y caucho sintético en formas primarias",
+	level: "group",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"202": {
+	desc: "Fabricación de otros productos químicos",
+	level: "group",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"203": {
+	desc: "Fabricación de fibras sintéticas y artificiales",
+	level: "group",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"210": {
+	desc: "Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico",
+	level: "group",
+	division: "21",
+	section: "SECCIÓN C"
+},
+	"221": {
+	desc: "Fabricación de productos de caucho",
+	level: "group",
+	division: "22",
+	section: "SECCIÓN C"
+},
+	"222": {
+	desc: "Fabricación de productos de plástico",
+	level: "group",
+	division: "22",
+	section: "SECCIÓN C"
+},
+	"231": {
+	desc: "Fabricación de vidrio y productos de vidrio",
+	level: "group",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"239": {
+	desc: "Fabricación de productos minerales no metálicos n.c.p.",
+	level: "group",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"241": {
+	desc: "Industrias básicas de hierro y de acero",
+	level: "group",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"242": {
+	desc: "Industrias básicas de metales preciosos y de metales no ferrosos",
+	level: "group",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"243": {
+	desc: "Fundición de metales",
+	level: "group",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"251": {
+	desc: "Fabricación de productos metálicos para uso estructural, tanques, depósitos y generadores de vapor",
+	level: "group",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"252": {
+	desc: "Fabricación de armas y municiones",
+	level: "group",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"259": {
+	desc: "Fabricación de otros productos elaborados de metal y actividades de servicios relacionadas con el trabajo de metales",
+	level: "group",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"261": {
+	desc: "Fabricación de componentes y tableros electrónicos",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"262": {
+	desc: "Fabricación de computadoras y de equipo periférico",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"263": {
+	desc: "Fabricación de equipos de comunicación",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"264": {
+	desc: "Fabricación de aparatos electrónicos de consumo",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"265": {
+	desc: "Fabricación de equipo de medición, prueba, navegación y control; fabricación de relojes",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"266": {
+	desc: "Fabricación de equipo de irradiación y equipo electrónico de uso médico y terapéutico",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"267": {
+	desc: "Fabricación de instrumentos ópticos y equipo fotográfico",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"268": {
+	desc: "Fabricación de medios magnéticos y ópticos para almacenamiento de datos",
+	level: "group",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"271": {
+	desc: "Fabricación de motores, generadores y transformadores eléctricos y de aparatos de distribución y control de la energía eléctrica",
+	level: "group",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"272": {
+	desc: "Fabricación de pilas, baterías y acumuladores eléctricos",
+	level: "group",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"273": {
+	desc: "Fabricación de hilos y cables aislados y sus dispositivos",
+	level: "group",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"274": {
+	desc: "Fabricación de equipos eléctricos de iluminación",
+	level: "group",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"275": {
+	desc: "Fabricación de aparatos de uso doméstico",
+	level: "group",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"279": {
+	desc: "Fabricación de otros tipos de equipo eléctrico n.c.p.",
+	level: "group",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"281": {
+	desc: "Fabricación de maquinaria y equipo de uso general",
+	level: "group",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"282": {
+	desc: "Fabricación de maquinaria y equipo de uso especial",
+	level: "group",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"291": {
+	desc: "Fabricación de vehículos automotores y sus motores",
+	level: "group",
+	division: "29",
+	section: "SECCIÓN C"
+},
+	"292": {
+	desc: "Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques",
+	level: "group",
+	division: "29",
+	section: "SECCIÓN C"
+},
+	"293": {
+	desc: "Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores",
+	level: "group",
+	division: "29",
+	section: "SECCIÓN C"
+},
+	"301": {
+	desc: "Construcción de barcos y otras embarcaciones",
+	level: "group",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"302": {
+	desc: "Fabricación de locomotoras y de material rodante para ferrocarriles",
+	level: "group",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"303": {
+	desc: "Fabricación de aeronaves, naves espaciales y de maquinaria conexa",
+	level: "group",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"304": {
+	desc: "Fabricación de vehículos militares de combate",
+	level: "group",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"309": {
+	desc: "Fabricación de otros tipos de equipo de transporte n.c.p.",
+	level: "group",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"311": {
+	desc: "Fabricación de muebles",
+	level: "group",
+	division: "31",
+	section: "SECCIÓN C"
+},
+	"312": {
+	desc: "Fabricación de colchones y somieres",
+	level: "group",
+	division: "31",
+	section: "SECCIÓN C"
+},
+	"321": {
+	desc: "Fabricación de joyas, bisutería y artículos conexos",
+	level: "group",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"322": {
+	desc: "Fabricación de instrumentos musicales",
+	level: "group",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"323": {
+	desc: "Fabricación de artículos y equipo para la práctica del deporte",
+	level: "group",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"324": {
+	desc: "Fabricación de juegos, juguetes y rompecabezas",
+	level: "group",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"325": {
+	desc: "Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario)",
+	level: "group",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"329": {
+	desc: "Otras industrias manufactureras n.c.p.",
+	level: "group",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"331": {
+	desc: "Mantenimiento y reparación especializado de productos elaborados en metal y de maquinaria y equipo",
+	level: "group",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"332": {
+	desc: "Instalación especializada de maquinaria y equipo industrial",
+	level: "group",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"351": {
+	desc: "Generación, transmisión, distribución y comercialización de energía eléctrica",
+	level: "group",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"352": {
+	desc: "Producción de gas; distribución de combustibles gaseosos por tuberías",
+	level: "group",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"353": {
+	desc: "Suministro de vapor y aire acondicionado",
+	level: "group",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"360": {
+	desc: "Captación, tratamiento y distribución de agua",
+	level: "group",
+	division: "36",
+	section: "SECCIÓN E"
+},
+	"370": {
+	desc: "Evacuación y tratamiento de aguas residuales",
+	level: "group",
+	division: "37",
+	section: "SECCIÓN E"
+},
+	"381": {
+	desc: "Recolección de desechos",
+	level: "group",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"382": {
+	desc: "Tratamiento y disposición de desechos",
+	level: "group",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"383": {
+	desc: "Recuperación de materiales",
+	level: "group",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"390": {
+	desc: "Actividades de saneamiento ambiental y otros servicios de gestión de desechos",
+	level: "group",
+	division: "39",
+	section: "SECCIÓN E"
+},
+	"411": {
+	desc: "Construcción de edificios",
+	level: "group",
+	division: "41",
+	section: "SECCIÓN F"
+},
+	"421": {
+	desc: "Construcción de carreteras y vías de ferrocarril",
+	level: "group",
+	division: "42",
+	section: "SECCIÓN F"
+},
+	"422": {
+	desc: "Construcción de proyectos de servicio público",
+	level: "group",
+	division: "42",
+	section: "SECCIÓN F"
+},
+	"429": {
+	desc: "Construcción de otras obras de ingeniería civil",
+	level: "group",
+	division: "42",
+	section: "SECCIÓN F"
+},
+	"431": {
+	desc: "Demolición y preparación del terreno",
+	level: "group",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"432": {
+	desc: "Instalaciones eléctricas, de fontanería y otras instalaciones especializadas",
+	level: "group",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"433": {
+	desc: "Terminación y acabado de edificios y obras de ingeniería civil",
+	level: "group",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"439": {
+	desc: "Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil",
+	level: "group",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"451": {
+	desc: "Comercio de vehículos automotores",
+	level: "group",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"452": {
+	desc: "Mantenimiento y reparación de vehículos automotores",
+	level: "group",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"453": {
+	desc: "Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores",
+	level: "group",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"454": {
+	desc: "Comercio, mantenimiento y reparación de motocicletas y de sus partes, piezas y accesorios",
+	level: "group",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"461": {
+	desc: "Comercio al por mayor a cambio de una retribución o por contrata",
+	level: "group",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"462": {
+	desc: "Comercio al por mayor de materias primas agropecuarias; animales vivos",
+	level: "group",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"463": {
+	desc: "Comercio al por mayor de alimentos, bebidas y tabaco",
+	level: "group",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"464": {
+	desc: "Comercio al por mayor de artículos y enseres domésticos (incluidas prendas de vestir)",
+	level: "group",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"465": {
+	desc: "Comercio al por mayor de maquinaria y equipo",
+	level: "group",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"466": {
+	desc: "Comercio al por mayor especializado de otros productos",
+	level: "group",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"469": {
+	desc: "Comercio al por mayor no especializado",
+	level: "group",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"471": {
+	desc: "Comercio al por menor en establecimientos no especializados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"472": {
+	desc: "Comercio al por menor de alimentos (víveres en general), bebidas y tabaco, en establecimientos especializados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"473": {
+	desc: "Comercio al por menor de combustible, lubricantes, aditivos y productos de limpieza para automotores, en establecimientos especializados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"474": {
+	desc: "Comercio al por menor de equipos de informática y de comunicaciones en establecimientos especializados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"475": {
+	desc: "Comercio al por menor de otros enseres domésticos en establecimientos especializados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"476": {
+	desc: "Comercio al por menor de artículos culturales y de entretenimiento en establecimientos especializados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"477": {
+	desc: "Comercio al por menor de otros productos en establecimientos especializados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"478": {
+	desc: "Comercio al por menor en puestos de venta móviles",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"479": {
+	desc: "Comercio al por menor no realizado en establecimientos, puestos de venta o mercados",
+	level: "group",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"491": {
+	desc: "Transporte férreo",
+	level: "group",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"492": {
+	desc: "Transporte terrestre público automotor",
+	level: "group",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"493": {
+	desc: "Transporte por tuberías",
+	level: "group",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"501": {
+	desc: "Transporte marítimo y de cabotaje",
+	level: "group",
+	division: "50",
+	section: "SECCIÓN H"
+},
+	"502": {
+	desc: "Transporte fluvial",
+	level: "group",
+	division: "50",
+	section: "SECCIÓN H"
+},
+	"511": {
+	desc: "Transporte aéreo de pasajeros",
+	level: "group",
+	division: "51",
+	section: "SECCIÓN H"
+},
+	"512": {
+	desc: "Transporte aéreo de carga",
+	level: "group",
+	division: "51",
+	section: "SECCIÓN H"
+},
+	"521": {
+	desc: "Almacenamiento y depósito",
+	level: "group",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"522": {
+	desc: "Actividades de las estaciones, vías y servicios complementarios para el transporte",
+	level: "group",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"531": {
+	desc: "Actividades postales nacionales",
+	level: "group",
+	division: "53",
+	section: "SECCIÓN H"
+},
+	"532": {
+	desc: "Actividades de mensajería",
+	level: "group",
+	division: "53",
+	section: "SECCIÓN H"
+},
+	"551": {
+	desc: "Actividades de alojamiento de estancias cortas",
+	level: "group",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"552": {
+	desc: "Actividades de zonas de camping y parques para vehículos recreacionales",
+	level: "group",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"553": {
+	desc: "Servicio de estancia por horas",
+	level: "group",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"559": {
+	desc: "Otros tipos de alojamiento n.c.p.",
+	level: "group",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"561": {
+	desc: "Actividades de restaurantes, cafeterías y servicio móvil de comidas",
+	level: "group",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"562": {
+	desc: "Actividades de catering para eventos y otros servicios de comidas",
+	level: "group",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"563": {
+	desc: "Expendio de bebidas alcohólicas para el consumo dentro del establecimiento",
+	level: "group",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"581": {
+	desc: "Edición de libros, publicaciones periódicas y otras actividades de edición",
+	level: "group",
+	division: "58",
+	section: "SECCIÓN J"
+},
+	"582": {
+	desc: "Edición de programas de informática (software)",
+	level: "group",
+	division: "58",
+	section: "SECCIÓN J"
+},
+	"591": {
+	desc: "Actividades de producción de películas cinematográficas, video y producción de programas, anuncios y comerciales de televisión",
+	level: "group",
+	division: "59",
+	section: "SECCIÓN J"
+},
+	"592": {
+	desc: "Actividades de grabación de sonido y edición de música",
+	level: "group",
+	division: "59",
+	section: "SECCIÓN J"
+},
+	"601": {
+	desc: "Actividades de programación y transmisión en el servicio de radiodifusión sonora",
+	level: "group",
+	division: "60",
+	section: "SECCIÓN J"
+},
+	"602": {
+	desc: "Actividades de programación y transmisión de televisión",
+	level: "group",
+	division: "60",
+	section: "SECCIÓN J"
+},
+	"611": {
+	desc: "Actividades de telecomunicaciones alámbricas",
+	level: "group",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"612": {
+	desc: "Actividades de telecomunicaciones inalámbricas",
+	level: "group",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"613": {
+	desc: "Actividades de telecomunicación satelital",
+	level: "group",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"619": {
+	desc: "Otras actividades de telecomunicaciones",
+	level: "group",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"620": {
+	desc: "Desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas), consultoría informática y actividades relacionadas",
+	level: "group",
+	division: "62",
+	section: "SECCIÓN J"
+},
+	"631": {
+	desc: "Procesamiento de datos, alojamiento (hosting) y actividades relacionadas; portales web",
+	level: "group",
+	division: "63",
+	section: "SECCIÓN J"
+},
+	"639": {
+	desc: "Otras actividades de servicios de información",
+	level: "group",
+	division: "63",
+	section: "SECCIÓN J"
+},
+	"641": {
+	desc: "Intermediación monetaria",
+	level: "group",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"642": {
+	desc: "Otros tipos de intermediación monetaria",
+	level: "group",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"643": {
+	desc: "Fideicomisos, fondos (incluye fondos de cesantías) y entidades financieras similares",
+	level: "group",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"649": {
+	desc: "Otras actividades de servicio financiero, excepto las de seguros y pensiones",
+	level: "group",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"651": {
+	desc: "Seguros",
+	level: "group",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"652": {
+	desc: "Servicios de seguros sociales excepto los de pensiones",
+	level: "group",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"653": {
+	desc: "Servicios de seguros sociales en pensiones, excepto los programas de seguridad social",
+	level: "group",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"661": {
+	desc: "Actividades auxiliares de las actividades de servicios financieros, excepto las de seguros y pensiones",
+	level: "group",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"662": {
+	desc: "Actividades de servicios auxiliares de los servicios de seguros y pensiones",
+	level: "group",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"663": {
+	desc: "Actividades de administración de fondos",
+	level: "group",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"681": {
+	desc: "Actividades inmobiliarias realizadas con bienes propios o arrendados",
+	level: "group",
+	division: "68",
+	section: "SECCIÓN L"
+},
+	"682": {
+	desc: "Actividades inmobiliarias realizadas a cambio de una retribución o por contrata",
+	level: "group",
+	division: "68",
+	section: "SECCIÓN L"
+},
+	"691": {
+	desc: "Actividades jurídicas",
+	level: "group",
+	division: "69",
+	section: "SECCIÓN M"
+},
+	"692": {
+	desc: "Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria",
+	level: "group",
+	division: "69",
+	section: "SECCIÓN M"
+},
+	"701": {
+	desc: "Actividades de administración empresarial",
+	level: "group",
+	division: "70",
+	section: "SECCIÓN M"
+},
+	"702": {
+	desc: "Actividades de consultoría de gestión",
+	level: "group",
+	division: "70",
+	section: "SECCIÓN M"
+},
+	"711": {
+	desc: "Actividades de arquitectura e ingeniería y otras actividades conexas de consultoría técnica",
+	level: "group",
+	division: "71",
+	section: "SECCIÓN M"
+},
+	"712": {
+	desc: "Ensayos y análisis técnicos",
+	level: "group",
+	division: "71",
+	section: "SECCIÓN M"
+},
+	"721": {
+	desc: "Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería",
+	level: "group",
+	division: "72",
+	section: "SECCIÓN M"
+},
+	"722": {
+	desc: "Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades",
+	level: "group",
+	division: "72",
+	section: "SECCIÓN M"
+},
+	"731": {
+	desc: "Publicidad",
+	level: "group",
+	division: "73",
+	section: "SECCIÓN M"
+},
+	"732": {
+	desc: "Estudios de mercado y realización de encuestas de opinión pública",
+	level: "group",
+	division: "73",
+	section: "SECCIÓN M"
+},
+	"741": {
+	desc: "Actividades especializadas de diseño",
+	level: "group",
+	division: "74",
+	section: "SECCIÓN M"
+},
+	"742": {
+	desc: "Actividades de fotografía",
+	level: "group",
+	division: "74",
+	section: "SECCIÓN M"
+},
+	"749": {
+	desc: "Otras actividades profesionales, científicas y técnicas n.c.p.",
+	level: "group",
+	division: "74",
+	section: "SECCIÓN M"
+},
+	"750": {
+	desc: "Actividades veterinarias",
+	level: "group",
+	division: "75",
+	section: "SECCIÓN M"
+},
+	"771": {
+	desc: "Alquiler y arrendamiento de vehículos automotores",
+	level: "group",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"772": {
+	desc: "Alquiler y arrendamiento de efectos personales y enseres domésticos",
+	level: "group",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"773": {
+	desc: "Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p.",
+	level: "group",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"774": {
+	desc: "Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor",
+	level: "group",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"781": {
+	desc: "Actividades de agencias de gestión y colocación de empleo",
+	level: "group",
+	division: "78",
+	section: "SECCIÓN N"
+},
+	"782": {
+	desc: "Actividades de empresas de servicios temporales",
+	level: "group",
+	division: "78",
+	section: "SECCIÓN N"
+},
+	"783": {
+	desc: "Otras actividades de provisión de talento humano",
+	level: "group",
+	division: "78",
+	section: "SECCIÓN N"
+},
+	"791": {
+	desc: "Actividades de las agencias de viajes y operadores turísticos",
+	level: "group",
+	division: "79",
+	section: "SECCIÓN N"
+},
+	"799": {
+	desc: "Otros servicios de reserva y actividades relacionadas",
+	level: "group",
+	division: "79",
+	section: "SECCIÓN N"
+},
+	"801": {
+	desc: "Actividades de seguridad privada",
+	level: "group",
+	division: "80",
+	section: "SECCIÓN N"
+},
+	"802": {
+	desc: "Actividades de servicios de sistemas de seguridad",
+	level: "group",
+	division: "80",
+	section: "SECCIÓN N"
+},
+	"803": {
+	desc: "Actividades de detectives e investigadores privados",
+	level: "group",
+	division: "80",
+	section: "SECCIÓN N"
+},
+	"811": {
+	desc: "Actividades combinadas de apoyo a instalaciones",
+	level: "group",
+	division: "81",
+	section: "SECCIÓN N"
+},
+	"812": {
+	desc: "Actividades de limpieza",
+	level: "group",
+	division: "81",
+	section: "SECCIÓN N"
+},
+	"813": {
+	desc: "Actividades de paisajismo y servicios de mantenimiento conexos",
+	level: "group",
+	division: "81",
+	section: "SECCIÓN N"
+},
+	"821": {
+	desc: "Actividades administrativas y de apoyo de oficina",
+	level: "group",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"822": {
+	desc: "Actividades de centros de llamadas (call center)",
+	level: "group",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"823": {
+	desc: "Organización de convenciones y eventos comerciales",
+	level: "group",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"829": {
+	desc: "Actividades de servicios de apoyo a las empresas n.c.p.",
+	level: "group",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"841": {
+	desc: "Administración del Estado y aplicación de la política económica y social de la comunidad",
+	level: "group",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"842": {
+	desc: "Prestación de servicios a la comunidad en general",
+	level: "group",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"843": {
+	desc: "Actividades de planes de seguridad social de afiliación obligatoria",
+	level: "group",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"851": {
+	desc: "Educación de la primera infancia, preescolar y básica primaria",
+	level: "group",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"852": {
+	desc: "Educación secundaria y de formación laboral",
+	level: "group",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"853": {
+	desc: "Establecimientos que combinan diferentes niveles de educación",
+	level: "group",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"854": {
+	desc: "Educación superior",
+	level: "group",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"855": {
+	desc: "Otros tipos de educación",
+	level: "group",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"856": {
+	desc: "Actividades de apoyo a la educación",
+	level: "group",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"861": {
+	desc: "Actividades de hospitales y clínicas, con internación",
+	level: "group",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"862": {
+	desc: "Actividades de práctica médica y odontológica, sin internación",
+	level: "group",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"869": {
+	desc: "Otras actividades de atención relacionadas con la salud humana",
+	level: "group",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"871": {
+	desc: "Actividades de atención residencial medicalizada de tipo general",
+	level: "group",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"872": {
+	desc: "Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas",
+	level: "group",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"873": {
+	desc: "Actividades de atención en instituciones para el cuidado de personas mayores y/o discapacitadas",
+	level: "group",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"879": {
+	desc: "Otras actividades de atención en instituciones con alojamiento",
+	level: "group",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"881": {
+	desc: "Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas",
+	level: "group",
+	division: "88",
+	section: "SECCIÓN Q"
+},
+	"889": {
+	desc: "Otras actividades de asistencia social sin alojamiento",
+	level: "group",
+	division: "88",
+	section: "SECCIÓN Q"
+},
+	"900": {
+	desc: "Actividades creativas, artísticas y de entretenimiento",
+	level: "group",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"910": {
+	desc: "Actividades de bibliotecas, archivos, museos y otras actividades culturales",
+	level: "group",
+	division: "91",
+	section: "SECCIÓN R"
+},
+	"920": {
+	desc: "Actividades de juegos de azar y apuestas",
+	level: "group",
+	division: "92",
+	section: "SECCIÓN R"
+},
+	"931": {
+	desc: "Actividades deportivas",
+	level: "group",
+	division: "93",
+	section: "SECCIÓN R"
+},
+	"932": {
+	desc: "Otras actividades recreativas y de esparcimiento",
+	level: "group",
+	division: "93",
+	section: "SECCIÓN R"
+},
+	"941": {
+	desc: "Actividades de asociaciones empresariales y de empleadores, y asociaciones profesionales",
+	level: "group",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"942": {
+	desc: "Actividades de sindicatos de empleados",
+	level: "group",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"949": {
+	desc: "Actividades de otras asociaciones",
+	level: "group",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"951": {
+	desc: "Mantenimiento y reparación de computadores y equipo de comunicaciones",
+	level: "group",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"952": {
+	desc: "Mantenimiento y reparación de efectos personales y enseres domésticos",
+	level: "group",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"960": {
+	desc: "Otras actividades de servicios personales",
+	level: "group",
+	division: "96",
+	section: "SECCIÓN S"
+},
+	"970": {
+	desc: "Actividades de los hogares individuales como empleadores de personal doméstico",
+	level: "group",
+	division: "97",
+	section: "SECCIÓN T"
+},
+	"981": {
+	desc: "Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio",
+	level: "group",
+	division: "98",
+	section: "SECCIÓN T"
+},
+	"982": {
+	desc: "Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio",
+	level: "group",
+	division: "98",
+	section: "SECCIÓN T"
+},
+	"990": {
+	desc: "Actividades de organizaciones y entidades extraterritoriales",
+	level: "group",
+	division: "99",
+	section: "SECCIÓN U"
+},
+	"1011": {
+	desc: "Procesamiento y conservación de carne y productos cárnicos",
+	level: "class",
+	group: "101",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1012": {
+	desc: "Procesamiento y conservación de pescados, crustáceos y moluscos",
+	level: "class",
+	group: "101",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1020": {
+	desc: "Procesamiento y conservación de frutas, legumbres, hortalizas y tubérculos",
+	level: "class",
+	group: "102",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1031": {
+	desc: "Extracción de aceites de origen vegetal crudos",
+	level: "class",
+	group: "103",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1032": {
+	desc: "Elaboración de aceites y grasas de origen vegetal refinados",
+	level: "class",
+	group: "103",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1033": {
+	desc: "Elaboración de aceites y grasas de origen animal",
+	level: "class",
+	group: "103",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1040": {
+	desc: "Elaboración de productos lácteos",
+	level: "class",
+	group: "104",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1051": {
+	desc: "Elaboración de productos de molinería",
+	level: "class",
+	group: "105",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1052": {
+	desc: "Elaboración de almidones y productos derivados del almidón",
+	level: "class",
+	group: "105",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1061": {
+	desc: "Trilla de café",
+	level: "class",
+	group: "106",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1062": {
+	desc: "Descafeinado, tostión y molienda del café",
+	level: "class",
+	group: "106",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1063": {
+	desc: "Otros derivados del café",
+	level: "class",
+	group: "106",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1071": {
+	desc: "Elaboración y refinación de azúcar",
+	level: "class",
+	group: "107",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1072": {
+	desc: "Elaboración de panela",
+	level: "class",
+	group: "107",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1081": {
+	desc: "Elaboración de productos de panadería",
+	level: "class",
+	group: "108",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1082": {
+	desc: "Elaboración de cacao, chocolate y productos de confitería",
+	level: "class",
+	group: "108",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1083": {
+	desc: "Elaboración de macarrones, fideos, alcuzcuz y productos farináceos similares",
+	level: "class",
+	group: "108",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1084": {
+	desc: "Elaboración de comidas y platos preparados",
+	level: "class",
+	group: "108",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1089": {
+	desc: "Elaboración de otros productos alimenticios n.c.p.",
+	level: "class",
+	group: "108",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1090": {
+	desc: "Elaboración de alimentos preparados para animales",
+	level: "class",
+	group: "109",
+	division: "10",
+	section: "SECCIÓN C"
+},
+	"1101": {
+	desc: "Destilación, rectificación y mezcla de bebidas alcohólicas",
+	level: "class",
+	group: "110",
+	division: "11",
+	section: "SECCIÓN C"
+},
+	"1102": {
+	desc: "Elaboración de bebidas fermentadas no destiladas",
+	level: "class",
+	group: "110",
+	division: "11",
+	section: "SECCIÓN C"
+},
+	"1103": {
+	desc: "Producción de malta, elaboración de cervezas y otras bebidas malteadas",
+	level: "class",
+	group: "110",
+	division: "11",
+	section: "SECCIÓN C"
+},
+	"1104": {
+	desc: "Elaboración de bebidas no alcohólicas, producción de aguas minerales y otras aguas embotelladas",
+	level: "class",
+	group: "110",
+	division: "11",
+	section: "SECCIÓN C"
+},
+	"1200": {
+	desc: "Elaboración de productos de tabaco",
+	level: "class",
+	group: "120",
+	division: "12",
+	section: "SECCIÓN C"
+},
+	"1311": {
+	desc: "Preparación e hilatura de fibras textiles",
+	level: "class",
+	group: "131",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1312": {
+	desc: "Tejeduría de productos textiles",
+	level: "class",
+	group: "131",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1313": {
+	desc: "Acabado de productos textiles",
+	level: "class",
+	group: "131",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1391": {
+	desc: "Fabricación de tejidos de punto y ganchillo",
+	level: "class",
+	group: "139",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1392": {
+	desc: "Confección de artículos con materiales textiles, excepto prendas de vestir",
+	level: "class",
+	group: "139",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1393": {
+	desc: "Fabricación de tapetes y alfombras para pisos",
+	level: "class",
+	group: "139",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1394": {
+	desc: "Fabricación de cuerdas, cordeles, cables, bramantes y redes",
+	level: "class",
+	group: "139",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1399": {
+	desc: "Fabricación de otros artículos textiles n.c.p.",
+	level: "class",
+	group: "139",
+	division: "13",
+	section: "SECCIÓN C"
+},
+	"1410": {
+	desc: "Confección de prendas de vestir, excepto prendas de piel",
+	level: "class",
+	group: "141",
+	division: "14",
+	section: "SECCIÓN C"
+},
+	"1420": {
+	desc: "Fabricación de artículos de piel",
+	level: "class",
+	group: "142",
+	division: "14",
+	section: "SECCIÓN C"
+},
+	"1430": {
+	desc: "Fabricación de artículos de punto y ganchillo",
+	level: "class",
+	group: "143",
+	division: "14",
+	section: "SECCIÓN C"
+},
+	"1511": {
+	desc: "Curtido y recurtido de cueros; recurtido y teñido de pieles",
+	level: "class",
+	group: "151",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"1512": {
+	desc: "Fabricación de artículos de viaje, bolsos de mano y artículos similares elaborados en cuero, y fabricación de artículos de talabartería y guarnicionería",
+	level: "class",
+	group: "151",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"1513": {
+	desc: "Fabricación de artículos de viaje, bolsos de mano y artículos similares; artículos de talabartería y guarnicionería elaborados en otros materiales",
+	level: "class",
+	group: "151",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"1521": {
+	desc: "Fabricación de calzado de cuero y piel, con cualquier tipo de suela",
+	level: "class",
+	group: "152",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"1522": {
+	desc: "Fabricación de otros tipos de calzado, excepto calzado de cuero y piel",
+	level: "class",
+	group: "152",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"1523": {
+	desc: "Fabricación de partes del calzado",
+	level: "class",
+	group: "152",
+	division: "15",
+	section: "SECCIÓN C"
+},
+	"1610": {
+	desc: "Aserrado, acepillado e impregnación de la madera",
+	level: "class",
+	group: "161",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"1620": {
+	desc: "Fabricación de hojas de madera para enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles",
+	level: "class",
+	group: "162",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"1630": {
+	desc: "Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción",
+	level: "class",
+	group: "163",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"1640": {
+	desc: "Fabricación de recipientes de madera",
+	level: "class",
+	group: "164",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"1690": {
+	desc: "Fabricación de otros productos de madera; fabricación de artículos de corcho, cestería y espartería",
+	level: "class",
+	group: "169",
+	division: "16",
+	section: "SECCIÓN C"
+},
+	"1701": {
+	desc: "Fabricación de pulpas (pastas) celulósicas; papel y cartón",
+	level: "class",
+	group: "170",
+	division: "17",
+	section: "SECCIÓN C"
+},
+	"1702": {
+	desc: "Fabricación de papel y cartón ondulado (corrugado); fabricación de envases, empaques y de embalajes de papel y cartón",
+	level: "class",
+	group: "170",
+	division: "17",
+	section: "SECCIÓN C"
+},
+	"1709": {
+	desc: "Fabricación de otros artículos de papel y cartón",
+	level: "class",
+	group: "170",
+	division: "17",
+	section: "SECCIÓN C"
+},
+	"1811": {
+	desc: "Actividades de impresión",
+	level: "class",
+	group: "181",
+	division: "18",
+	section: "SECCIÓN C"
+},
+	"1812": {
+	desc: "Actividades de servicios relacionados con la impresión",
+	level: "class",
+	group: "181",
+	division: "18",
+	section: "SECCIÓN C"
+},
+	"1820": {
+	desc: "Producción de copias a partir de grabaciones originales",
+	level: "class",
+	group: "182",
+	division: "18",
+	section: "SECCIÓN C"
+},
+	"1910": {
+	desc: "Fabricación de productos de hornos de coque",
+	level: "class",
+	group: "191",
+	division: "19",
+	section: "SECCIÓN C"
+},
+	"1921": {
+	desc: "Fabricación de productos de la refinación del petróleo",
+	level: "class",
+	group: "192",
+	division: "19",
+	section: "SECCIÓN C"
+},
+	"1922": {
+	desc: "Actividad de mezcla de combustibles",
+	level: "class",
+	group: "192",
+	division: "19",
+	section: "SECCIÓN C"
+},
+	"2011": {
+	desc: "Fabricación de sustancias y productos químicos básicos",
+	level: "class",
+	group: "201",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2012": {
+	desc: "Fabricación de abonos y compuestos inorgánicos nitrogenados",
+	level: "class",
+	group: "201",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2013": {
+	desc: "Fabricación de plásticos en formas primarias",
+	level: "class",
+	group: "201",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2014": {
+	desc: "Fabricación de caucho sintético en formas primarias",
+	level: "class",
+	group: "201",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2021": {
+	desc: "Fabricación de plaguicidas y otros productos químicos de uso agropecuario",
+	level: "class",
+	group: "202",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2022": {
+	desc: "Fabricación de pinturas, barnices y revestimientos similares, tintas para impresión y masillas",
+	level: "class",
+	group: "202",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2023": {
+	desc: "Fabricación de jabones y detergentes, preparados para limpiar y pulir; perfumes y preparados de tocador",
+	level: "class",
+	group: "202",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2029": {
+	desc: "Fabricación de otros productos químicos n.c.p.",
+	level: "class",
+	group: "202",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2030": {
+	desc: "Fabricación de fibras sintéticas y artificiales",
+	level: "class",
+	group: "203",
+	division: "20",
+	section: "SECCIÓN C"
+},
+	"2100": {
+	desc: "Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico",
+	level: "class",
+	group: "210",
+	division: "21",
+	section: "SECCIÓN C"
+},
+	"2211": {
+	desc: "Fabricación de llantas y neumáticos de caucho",
+	level: "class",
+	group: "221",
+	division: "22",
+	section: "SECCIÓN C"
+},
+	"2212": {
+	desc: "Reencauche de llantas usadas",
+	level: "class",
+	group: "221",
+	division: "22",
+	section: "SECCIÓN C"
+},
+	"2219": {
+	desc: "Fabricación de formas básicas de caucho y otros productos de caucho n.c.p.",
+	level: "class",
+	group: "221",
+	division: "22",
+	section: "SECCIÓN C"
+},
+	"2221": {
+	desc: "Fabricación de formas básicas de plástico",
+	level: "class",
+	group: "222",
+	division: "22",
+	section: "SECCIÓN C"
+},
+	"2229": {
+	desc: "Fabricación de artículos de plástico n.c.p.",
+	level: "class",
+	group: "222",
+	division: "22",
+	section: "SECCIÓN C"
+},
+	"2310": {
+	desc: "Fabricación de vidrio y productos de vidrio",
+	level: "class",
+	group: "231",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2391": {
+	desc: "Fabricación de productos refractarios",
+	level: "class",
+	group: "239",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2392": {
+	desc: "Fabricación de materiales de arcilla para la construcción",
+	level: "class",
+	group: "239",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2393": {
+	desc: "Fabricación de otros productos de cerámica y porcelana",
+	level: "class",
+	group: "239",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2394": {
+	desc: "Fabricación de cemento, cal y yeso",
+	level: "class",
+	group: "239",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2395": {
+	desc: "Fabricación de artículos de hormigón, cemento y yeso",
+	level: "class",
+	group: "239",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2396": {
+	desc: "Corte, tallado y acabado de la piedra",
+	level: "class",
+	group: "239",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2399": {
+	desc: "Fabricación de otros productos minerales no metálicos n.c.p.",
+	level: "class",
+	group: "239",
+	division: "23",
+	section: "SECCIÓN C"
+},
+	"2410": {
+	desc: "Industrias básicas de hierro y de acero",
+	level: "class",
+	group: "241",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"2421": {
+	desc: "Industrias básicas de metales preciosos",
+	level: "class",
+	group: "242",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"2429": {
+	desc: "Industrias básicas de otros metales no ferrosos",
+	level: "class",
+	group: "242",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"2431": {
+	desc: "Fundición de hierro y de acero",
+	level: "class",
+	group: "243",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"2432": {
+	desc: "Fundición de metales no ferrosos",
+	level: "class",
+	group: "243",
+	division: "24",
+	section: "SECCIÓN C"
+},
+	"2511": {
+	desc: "Fabricación de productos metálicos para uso estructural",
+	level: "class",
+	group: "251",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2512": {
+	desc: "Fabricación de tanques, depósitos y recipientes de metal, excepto los utilizados para el envase o el transporte de mercancías",
+	level: "class",
+	group: "251",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2513": {
+	desc: "Fabricación de generadores de vapor, excepto calderas de agua caliente para calefacción central",
+	level: "class",
+	group: "251",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2520": {
+	desc: "Fabricación de armas y municiones",
+	level: "class",
+	group: "252",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2591": {
+	desc: "Forja, prensado, estampado y laminado de metal; pulvimetalurgia",
+	level: "class",
+	group: "259",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2592": {
+	desc: "Tratamiento y revestimiento de metales; mecanizado",
+	level: "class",
+	group: "259",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2593": {
+	desc: "Fabricación de artículos de cuchillería, herramientas de mano y artículos de ferretería",
+	level: "class",
+	group: "259",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2599": {
+	desc: "Fabricación de otros productos elaborados de metal n.c.p.",
+	level: "class",
+	group: "259",
+	division: "25",
+	section: "SECCIÓN C"
+},
+	"2610": {
+	desc: "Fabricación de componentes y tableros electrónicos",
+	level: "class",
+	group: "261",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2620": {
+	desc: "Fabricación de computadoras y de equipo periférico",
+	level: "class",
+	group: "262",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2630": {
+	desc: "Fabricación de equipos de comunicación",
+	level: "class",
+	group: "263",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2640": {
+	desc: "Fabricación de aparatos electrónicos de consumo",
+	level: "class",
+	group: "264",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2651": {
+	desc: "Fabricación de equipo de medición, prueba, navegación y control",
+	level: "class",
+	group: "265",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2652": {
+	desc: "Fabricación de relojes",
+	level: "class",
+	group: "265",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2660": {
+	desc: "Fabricación de equipo de irradiación y equipo electrónico de uso médico y terapéutico",
+	level: "class",
+	group: "266",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2670": {
+	desc: "Fabricación de instrumentos ópticos y equipo fotográfico",
+	level: "class",
+	group: "267",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2680": {
+	desc: "Fabricación de medios magnéticos y ópticos para almacenamiento de datos",
+	level: "class",
+	group: "268",
+	division: "26",
+	section: "SECCIÓN C"
+},
+	"2711": {
+	desc: "Fabricación de motores, generadores y transformadores eléctricos",
+	level: "class",
+	group: "271",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2712": {
+	desc: "Fabricación de aparatos de distribución y control de la energía eléctrica",
+	level: "class",
+	group: "271",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2720": {
+	desc: "Fabricación de pilas, baterías y acumuladores eléctricos",
+	level: "class",
+	group: "272",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2731": {
+	desc: "Fabricación de hilos y cables eléctricos y de fibra óptica",
+	level: "class",
+	group: "273",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2732": {
+	desc: "Fabricación de dispositivos de cableado",
+	level: "class",
+	group: "273",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2740": {
+	desc: "Fabricación de equipos eléctricos de iluminación",
+	level: "class",
+	group: "274",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2750": {
+	desc: "Fabricación de aparatos de uso doméstico",
+	level: "class",
+	group: "275",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2790": {
+	desc: "Fabricación de otros tipos de equipo eléctrico n.c.p.",
+	level: "class",
+	group: "279",
+	division: "27",
+	section: "SECCIÓN C"
+},
+	"2811": {
+	desc: "Fabricación de motores, turbinas, y partes para motores de combustión interna",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2812": {
+	desc: "Fabricación de equipos de potencia hidráulica y neumática",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2813": {
+	desc: "Fabricación de otras bombas, compresores, grifos y válvulas",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2814": {
+	desc: "Fabricación de cojinetes, engranajes, trenes de engranajes y piezas de transmisión",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2815": {
+	desc: "Fabricación de hornos, hogares y quemadores industriales",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2816": {
+	desc: "Fabricación de equipo de elevación y manipulación",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2817": {
+	desc: "Fabricación de maquinaria y equipo de oficina (excepto computadoras y equipo periférico)",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2818": {
+	desc: "Fabricación de herramientas manuales con motor",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2819": {
+	desc: "Fabricación de otros tipos de maquinaria y equipo de uso general n.c.p.",
+	level: "class",
+	group: "281",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2821": {
+	desc: "Fabricación de maquinaria agropecuaria y forestal",
+	level: "class",
+	group: "282",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2822": {
+	desc: "Fabricación de máquinas formadoras de metal y de máquinas herramienta",
+	level: "class",
+	group: "282",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2823": {
+	desc: "Fabricación de maquinaria para la metalurgia",
+	level: "class",
+	group: "282",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2824": {
+	desc: "Fabricación de maquinaria para explotación de minas y canteras y para obras de construcción",
+	level: "class",
+	group: "282",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2825": {
+	desc: "Fabricación de maquinaria para la elaboración de alimentos, bebidas y tabaco",
+	level: "class",
+	group: "282",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2826": {
+	desc: "Fabricación de maquinaria para la elaboración de productos textiles, prendas de vestir y cueros",
+	level: "class",
+	group: "282",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2829": {
+	desc: "Fabricación de otros tipos de maquinaria y equipo de uso especial n.c.p.",
+	level: "class",
+	group: "282",
+	division: "28",
+	section: "SECCIÓN C"
+},
+	"2910": {
+	desc: "Fabricación de vehículos automotores y sus motores",
+	level: "class",
+	group: "291",
+	division: "29",
+	section: "SECCIÓN C"
+},
+	"2920": {
+	desc: "Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques",
+	level: "class",
+	group: "292",
+	division: "29",
+	section: "SECCIÓN C"
+},
+	"2930": {
+	desc: "Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores",
+	level: "class",
+	group: "293",
+	division: "29",
+	section: "SECCIÓN C"
+},
+	"3011": {
+	desc: "Construcción de barcos y de estructuras flotantes",
+	level: "class",
+	group: "301",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3012": {
+	desc: "Construcción de embarcaciones de recreo y deporte",
+	level: "class",
+	group: "301",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3020": {
+	desc: "Fabricación de locomotoras y de material rodante para ferrocarriles",
+	level: "class",
+	group: "302",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3030": {
+	desc: "Fabricación de aeronaves, naves espaciales y de maquinaria conexa",
+	level: "class",
+	group: "303",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3040": {
+	desc: "Fabricación de vehículos militares de combate",
+	level: "class",
+	group: "304",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3091": {
+	desc: "Fabricación de motocicletas",
+	level: "class",
+	group: "309",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3092": {
+	desc: "Fabricación de bicicletas y de sillas de ruedas para personas con discapacidad",
+	level: "class",
+	group: "309",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3099": {
+	desc: "Fabricación de otros tipos de equipo de transporte n.c.p.",
+	level: "class",
+	group: "309",
+	division: "30",
+	section: "SECCIÓN C"
+},
+	"3110": {
+	desc: "Fabricación de muebles",
+	level: "class",
+	group: "311",
+	division: "31",
+	section: "SECCIÓN C"
+},
+	"3120": {
+	desc: "Fabricación de colchones y somieres",
+	level: "class",
+	group: "312",
+	division: "31",
+	section: "SECCIÓN C"
+},
+	"3211": {
+	desc: "Fabricación de joyas y artículos conexos",
+	level: "class",
+	group: "321",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"3212": {
+	desc: "Fabricación de bisutería y artículos conexos",
+	level: "class",
+	group: "321",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"3220": {
+	desc: "Fabricación de instrumentos musicales",
+	level: "class",
+	group: "322",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"3230": {
+	desc: "Fabricación de artículos y equipo para la práctica del deporte",
+	level: "class",
+	group: "323",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"3240": {
+	desc: "Fabricación de juegos, juguetes y rompecabezas",
+	level: "class",
+	group: "324",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"3250": {
+	desc: "Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario)",
+	level: "class",
+	group: "325",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"3290": {
+	desc: "Otras industrias manufactureras n.c.p.",
+	level: "class",
+	group: "329",
+	division: "32",
+	section: "SECCIÓN C"
+},
+	"3311": {
+	desc: "Mantenimiento y reparación especializado de productos elaborados en metal",
+	level: "class",
+	group: "331",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"3312": {
+	desc: "Mantenimiento y reparación especializado de maquinaria y equipo",
+	level: "class",
+	group: "331",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"3313": {
+	desc: "Mantenimiento y reparación especializado de equipo electrónico y óptico",
+	level: "class",
+	group: "331",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"3314": {
+	desc: "Mantenimiento y reparación especializado de equipo eléctrico",
+	level: "class",
+	group: "331",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"3315": {
+	desc: "Mantenimiento y reparación especializado de equipo de transporte, excepto los vehículos automotores, motocicletas y bicicletas",
+	level: "class",
+	group: "331",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"3319": {
+	desc: "Mantenimiento y reparación de otros tipos de equipos y sus componentes n.c.p.",
+	level: "class",
+	group: "331",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"3320": {
+	desc: "Instalación especializada de maquinaria y equipo industrial",
+	level: "class",
+	group: "332",
+	division: "33",
+	section: "SECCIÓN C"
+},
+	"3511": {
+	desc: "Generación de energía eléctrica",
+	level: "class",
+	group: "351",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"3512": {
+	desc: "Transmisión de energía eléctrica",
+	level: "class",
+	group: "351",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"3513": {
+	desc: "Distribución de energía eléctrica",
+	level: "class",
+	group: "351",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"3514": {
+	desc: "Comercialización de energía eléctrica",
+	level: "class",
+	group: "351",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"3520": {
+	desc: "Producción de gas; distribución de combustibles gaseosos por tuberías",
+	level: "class",
+	group: "352",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"3530": {
+	desc: "Suministro de vapor y aire acondicionado",
+	level: "class",
+	group: "353",
+	division: "35",
+	section: "SECCIÓN D"
+},
+	"3600": {
+	desc: "Captación, tratamiento y distribución de agua",
+	level: "class",
+	group: "360",
+	division: "36",
+	section: "SECCIÓN E"
+},
+	"3700": {
+	desc: "Evacuación y tratamiento de aguas residuales",
+	level: "class",
+	group: "370",
+	division: "37",
+	section: "SECCIÓN E"
+},
+	"3811": {
+	desc: "Recolección de desechos no peligrosos",
+	level: "class",
+	group: "381",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"3812": {
+	desc: "Recolección de desechos peligrosos",
+	level: "class",
+	group: "381",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"3821": {
+	desc: "Tratamiento y disposición de desechos no peligrosos",
+	level: "class",
+	group: "382",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"3822": {
+	desc: "Tratamiento y disposición de desechos peligrosos",
+	level: "class",
+	group: "382",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"3830": {
+	desc: "Recuperación de materiales",
+	level: "class",
+	group: "383",
+	division: "38",
+	section: "SECCIÓN E"
+},
+	"3900": {
+	desc: "Actividades de saneamiento ambiental y otros servicios de gestión de desechos",
+	level: "class",
+	group: "390",
+	division: "39",
+	section: "SECCIÓN E"
+},
+	"4111": {
+	desc: "Construcción de edificios residenciales",
+	level: "class",
+	group: "411",
+	division: "41",
+	section: "SECCIÓN F"
+},
+	"4112": {
+	desc: "Construcción de edificios no residenciales",
+	level: "class",
+	group: "411",
+	division: "41",
+	section: "SECCIÓN F"
+},
+	"4210": {
+	desc: "Construcción de carreteras y vías de ferrocarril",
+	level: "class",
+	group: "421",
+	division: "42",
+	section: "SECCIÓN F"
+},
+	"4220": {
+	desc: "Construcción de proyectos de servicio público",
+	level: "class",
+	group: "422",
+	division: "42",
+	section: "SECCIÓN F"
+},
+	"4290": {
+	desc: "Construcción de otras obras de ingeniería civil",
+	level: "class",
+	group: "429",
+	division: "42",
+	section: "SECCIÓN F"
+},
+	"4311": {
+	desc: "Demolición",
+	level: "class",
+	group: "431",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"4312": {
+	desc: "Preparación del terreno",
+	level: "class",
+	group: "431",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"4321": {
+	desc: "Instalaciones eléctricas",
+	level: "class",
+	group: "432",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"4322": {
+	desc: "Instalaciones de fontanería, calefacción y aire acondicionado",
+	level: "class",
+	group: "432",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"4329": {
+	desc: "Otras instalaciones especializadas",
+	level: "class",
+	group: "432",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"4330": {
+	desc: "Terminación y acabado de edificios y obras de ingeniería civil",
+	level: "class",
+	group: "433",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"4390": {
+	desc: "Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil",
+	level: "class",
+	group: "439",
+	division: "43",
+	section: "SECCIÓN F"
+},
+	"4511": {
+	desc: "Comercio de vehículos automotores nuevos",
+	level: "class",
+	group: "451",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"4512": {
+	desc: "Comercio de vehículos automotores usados",
+	level: "class",
+	group: "451",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"4520": {
+	desc: "Mantenimiento y reparación de vehículos automotores",
+	level: "class",
+	group: "452",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"4530": {
+	desc: "Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores",
+	level: "class",
+	group: "453",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"4541": {
+	desc: "Comercio de motocicletas y de sus partes, piezas y accesorios",
+	level: "class",
+	group: "454",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"4542": {
+	desc: "Mantenimiento y reparación de motocicletas y de sus partes y piezas",
+	level: "class",
+	group: "454",
+	division: "45",
+	section: "SECCIÓN G"
+},
+	"4610": {
+	desc: "Comercio al por mayor a cambio de una retribución o por contrata",
+	level: "class",
+	group: "461",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4620": {
+	desc: "Comercio al por mayor de materias primas agropecuarias; animales vivos",
+	level: "class",
+	group: "462",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4631": {
+	desc: "Comercio al por mayor de productos alimenticios",
+	level: "class",
+	group: "463",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4632": {
+	desc: "Comercio al por mayor de bebidas y tabaco",
+	level: "class",
+	group: "463",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4641": {
+	desc: "Comercio al por mayor de productos textiles, productos confeccionados para uso doméstico",
+	level: "class",
+	group: "464",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4642": {
+	desc: "Comercio al por mayor de prendas de vestir",
+	level: "class",
+	group: "464",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4643": {
+	desc: "Comercio al por mayor de calzado",
+	level: "class",
+	group: "464",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4644": {
+	desc: "Comercio al por mayor de aparatos y equipo de uso doméstico",
+	level: "class",
+	group: "464",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4645": {
+	desc: "Comercio al por mayor de productos farmacéuticos, medicinales, cosméticos y de tocador",
+	level: "class",
+	group: "464",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4649": {
+	desc: "Comercio al por mayor de otros utensilios domésticos n.c.p.",
+	level: "class",
+	group: "464",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4651": {
+	desc: "Comercio al por mayor de computadores, equipo periférico y programas de informática",
+	level: "class",
+	group: "465",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4652": {
+	desc: "Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomunicaciones",
+	level: "class",
+	group: "465",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4653": {
+	desc: "Comercio al por mayor de maquinaria y equipo agropecuarios",
+	level: "class",
+	group: "465",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4659": {
+	desc: "Comercio al por mayor de otros tipos de maquinaria y equipo n.c.p.",
+	level: "class",
+	group: "465",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4661": {
+	desc: "Comercio al por mayor de combustibles sólidos, líquidos, gaseosos y productos conexos",
+	level: "class",
+	group: "466",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4662": {
+	desc: "Comercio al por mayor de metales y productos metalíferos",
+	level: "class",
+	group: "466",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4663": {
+	desc: "Comercio al por mayor de materiales de construcción, artículos de ferretería, pinturas, productos de vidrio, equipo y materiales de fontanería y calefacción",
+	level: "class",
+	group: "466",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4664": {
+	desc: "Comercio al por mayor de productos químicos básicos, cauchos y plásticos en formas primarias y productos químicos de uso agropecuario",
+	level: "class",
+	group: "466",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4665": {
+	desc: "Comercio al por mayor de desperdicios, desechos y chatarra",
+	level: "class",
+	group: "466",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4669": {
+	desc: "Comercio al por mayor de otros productos n.c.p.",
+	level: "class",
+	group: "466",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4690": {
+	desc: "Comercio al por mayor no especializado",
+	level: "class",
+	group: "469",
+	division: "46",
+	section: "SECCIÓN G"
+},
+	"4711": {
+	desc: "Comercio al por menor en establecimientos no especializados con surtido compuesto principalmente por alimentos, bebidas (alcohólicas y no alcohólicas) o tabaco",
+	level: "class",
+	group: "471",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4719": {
+	desc: "Comercio al por menor en establecimientos no especializados, con surtido compuesto principalmente por productos diferentes de alimentos (víveres en general), bebidas (alcohólicas y no alcohólicas) y tabaco",
+	level: "class",
+	group: "471",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4721": {
+	desc: "Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados",
+	level: "class",
+	group: "472",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4722": {
+	desc: "Comercio al por menor de leche, productos lácteos y huevos, en establecimientos especializados",
+	level: "class",
+	group: "472",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4723": {
+	desc: "Comercio al por menor de carnes (incluye aves de corral), productos cárnicos, pescados y productos de mar, en establecimientos especializados",
+	level: "class",
+	group: "472",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4724": {
+	desc: "Comercio al por menor de bebidas y productos del tabaco, en establecimientos especializados",
+	level: "class",
+	group: "472",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4729": {
+	desc: "Comercio al por menor de otros productos alimenticios n.c.p., en establecimientos especializados",
+	level: "class",
+	group: "472",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4731": {
+	desc: "Comercio al por menor de combustible para automotores",
+	level: "class",
+	group: "473",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4732": {
+	desc: "Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores",
+	level: "class",
+	group: "473",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4741": {
+	desc: "Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados",
+	level: "class",
+	group: "474",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4742": {
+	desc: "Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados",
+	level: "class",
+	group: "474",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4751": {
+	desc: "Comercio al por menor de productos textiles en establecimientos especializados",
+	level: "class",
+	group: "475",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4752": {
+	desc: "Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados",
+	level: "class",
+	group: "475",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4753": {
+	desc: "Comercio al por menor de tapices, alfombras y recubrimientos para paredes y pisos en establecimientos especializados",
+	level: "class",
+	group: "475",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4754": {
+	desc: "Comercio al por menor de electrodomésticos y gasodomésticos, muebles y equipos de iluminación en establecimientos especializados",
+	level: "class",
+	group: "475",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4755": {
+	desc: "Comercio al por menor de artículos y utensilios de uso doméstico en establecimientos especializados",
+	level: "class",
+	group: "475",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4759": {
+	desc: "Comercio al por menor de otros artículos domésticos en establecimientos especializados",
+	level: "class",
+	group: "475",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4761": {
+	desc: "Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados",
+	level: "class",
+	group: "476",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4762": {
+	desc: "Comercio al por menor de artículos deportivos, en establecimientos especializados",
+	level: "class",
+	group: "476",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4769": {
+	desc: "Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados",
+	level: "class",
+	group: "476",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4771": {
+	desc: "Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados",
+	level: "class",
+	group: "477",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4772": {
+	desc: "Comercio al por menor de todo tipo de calzado y artículos de cuero y sucedáneos del cuero en establecimientos especializados",
+	level: "class",
+	group: "477",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4773": {
+	desc: "Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados",
+	level: "class",
+	group: "477",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4774": {
+	desc: "Comercio al por menor de otros productos nuevos en establecimientos especializados",
+	level: "class",
+	group: "477",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4775": {
+	desc: "Comercio al por menor de artículos de segunda mano",
+	level: "class",
+	group: "477",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4781": {
+	desc: "Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles",
+	level: "class",
+	group: "478",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4782": {
+	desc: "Comercio al por menor de productos textiles, prendas de vestir y calzado, en puestos de venta móviles",
+	level: "class",
+	group: "478",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4789": {
+	desc: "Comercio al por menor de otros productos en puestos de venta móviles",
+	level: "class",
+	group: "478",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4791": {
+	desc: "Comercio al por menor realizado a través de internet",
+	level: "class",
+	group: "479",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4792": {
+	desc: "Comercio al por menor realizado a través de casas de venta o por correo",
+	level: "class",
+	group: "479",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4799": {
+	desc: "Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados",
+	level: "class",
+	group: "479",
+	division: "47",
+	section: "SECCIÓN G"
+},
+	"4911": {
+	desc: "Transporte férreo de pasajeros",
+	level: "class",
+	group: "491",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"4912": {
+	desc: "Transporte férreo de carga",
+	level: "class",
+	group: "491",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"4921": {
+	desc: "Transporte de pasajeros",
+	level: "class",
+	group: "492",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"4922": {
+	desc: "Transporte mixto",
+	level: "class",
+	group: "492",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"4923": {
+	desc: "Transporte de carga por carretera",
+	level: "class",
+	group: "492",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"4930": {
+	desc: "Transporte por tuberías",
+	level: "class",
+	group: "493",
+	division: "49",
+	section: "SECCIÓN H"
+},
+	"5011": {
+	desc: "Transporte de pasajeros marítimo y de cabotaje",
+	level: "class",
+	group: "501",
+	division: "50",
+	section: "SECCIÓN H"
+},
+	"5012": {
+	desc: "Transporte de carga marítimo y de cabotaje",
+	level: "class",
+	group: "501",
+	division: "50",
+	section: "SECCIÓN H"
+},
+	"5021": {
+	desc: "Transporte fluvial de pasajeros",
+	level: "class",
+	group: "502",
+	division: "50",
+	section: "SECCIÓN H"
+},
+	"5022": {
+	desc: "Transporte fluvial de carga",
+	level: "class",
+	group: "502",
+	division: "50",
+	section: "SECCIÓN H"
+},
+	"5111": {
+	desc: "Transporte aéreo nacional de pasajeros",
+	level: "class",
+	group: "511",
+	division: "51",
+	section: "SECCIÓN H"
+},
+	"5112": {
+	desc: "Transporte aéreo internacional de pasajeros",
+	level: "class",
+	group: "511",
+	division: "51",
+	section: "SECCIÓN H"
+},
+	"5121": {
+	desc: "Transporte aéreo nacional de carga",
+	level: "class",
+	group: "512",
+	division: "51",
+	section: "SECCIÓN H"
+},
+	"5122": {
+	desc: "Transporte aéreo internacional de carga",
+	level: "class",
+	group: "512",
+	division: "51",
+	section: "SECCIÓN H"
+},
+	"5210": {
+	desc: "Almacenamiento y depósito",
+	level: "class",
+	group: "521",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"5221": {
+	desc: "Actividades de estaciones, vías y servicios complementarios para el transporte terrestre",
+	level: "class",
+	group: "522",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"5222": {
+	desc: "Actividades de puertos y servicios complementarios para el transporte acuático",
+	level: "class",
+	group: "522",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"5223": {
+	desc: "Actividades de aeropuertos, servicios de navegación aérea y demás actividades conexas al transporte aéreo",
+	level: "class",
+	group: "522",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"5224": {
+	desc: "Manipulación de carga",
+	level: "class",
+	group: "522",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"5229": {
+	desc: "Otras actividades complementarias al transporte",
+	level: "class",
+	group: "522",
+	division: "52",
+	section: "SECCIÓN H"
+},
+	"5310": {
+	desc: "Actividades postales nacionales",
+	level: "class",
+	group: "531",
+	division: "53",
+	section: "SECCIÓN H"
+},
+	"5320": {
+	desc: "Actividades de mensajería",
+	level: "class",
+	group: "532",
+	division: "53",
+	section: "SECCIÓN H"
+},
+	"5511": {
+	desc: "Alojamiento en hoteles",
+	level: "class",
+	group: "551",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5512": {
+	desc: "Alojamiento en apartahoteles",
+	level: "class",
+	group: "551",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5513": {
+	desc: "Alojamiento en centros vacacionales",
+	level: "class",
+	group: "551",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5514": {
+	desc: "Alojamiento rural",
+	level: "class",
+	group: "551",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5519": {
+	desc: "Otros tipos de alojamiento para visitantes",
+	level: "class",
+	group: "551",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5520": {
+	desc: "Actividades de zonas de camping y parques para vehículos recreacionales",
+	level: "class",
+	group: "552",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5530": {
+	desc: "Servicio de estancia por horas",
+	level: "class",
+	group: "553",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5590": {
+	desc: "Otros tipos de alojamiento n.c.p.",
+	level: "class",
+	group: "559",
+	division: "55",
+	section: "SECCIÓN I"
+},
+	"5611": {
+	desc: "Expendio a la mesa de comidas preparadas",
+	level: "class",
+	group: "561",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"5612": {
+	desc: "Expendio por autoservicio de comidas preparadas",
+	level: "class",
+	group: "561",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"5613": {
+	desc: "Expendio de comidas preparadas en cafeterías",
+	level: "class",
+	group: "561",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"5619": {
+	desc: "Otros tipos de expendio de comidas preparadas n.c.p.",
+	level: "class",
+	group: "561",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"5621": {
+	desc: "Catering para eventos",
+	level: "class",
+	group: "562",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"5629": {
+	desc: "Actividades de otros servicios de comidas",
+	level: "class",
+	group: "562",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"5630": {
+	desc: "Expendio de bebidas alcohólicas para el consumo dentro del establecimiento",
+	level: "class",
+	group: "563",
+	division: "56",
+	section: "SECCIÓN I"
+},
+	"5811": {
+	desc: "Edición de libros",
+	level: "class",
+	group: "581",
+	division: "58",
+	section: "SECCIÓN J"
+},
+	"5812": {
+	desc: "Edición de directorios y listas de correo",
+	level: "class",
+	group: "581",
+	division: "58",
+	section: "SECCIÓN J"
+},
+	"5813": {
+	desc: "Edición de periódicos, revistas y otras publicaciones periódicas",
+	level: "class",
+	group: "581",
+	division: "58",
+	section: "SECCIÓN J"
+},
+	"5819": {
+	desc: "Otros trabajos de edición",
+	level: "class",
+	group: "581",
+	division: "58",
+	section: "SECCIÓN J"
+},
+	"5820": {
+	desc: "Edición de programas de informática (software)",
+	level: "class",
+	group: "582",
+	division: "58",
+	section: "SECCIÓN J"
+},
+	"5911": {
+	desc: "Actividades de producción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",
+	level: "class",
+	group: "591",
+	division: "59",
+	section: "SECCIÓN J"
+},
+	"5912": {
+	desc: "Actividades de postproducción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",
+	level: "class",
+	group: "591",
+	division: "59",
+	section: "SECCIÓN J"
+},
+	"5913": {
+	desc: "Actividades de distribución de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",
+	level: "class",
+	group: "591",
+	division: "59",
+	section: "SECCIÓN J"
+},
+	"5914": {
+	desc: "Actividades de exhibición de películas cinematográficas y videos",
+	level: "class",
+	group: "591",
+	division: "59",
+	section: "SECCIÓN J"
+},
+	"5920": {
+	desc: "Actividades de grabación de sonido y edición de música",
+	level: "class",
+	group: "592",
+	division: "59",
+	section: "SECCIÓN J"
+},
+	"6010": {
+	desc: "Actividades de programación y transmisión en el servicio de radiodifusión sonora",
+	level: "class",
+	group: "601",
+	division: "60",
+	section: "SECCIÓN J"
+},
+	"6020": {
+	desc: "Actividades de programación y transmisión de televisión",
+	level: "class",
+	group: "602",
+	division: "60",
+	section: "SECCIÓN J"
+},
+	"6110": {
+	desc: "Actividades de telecomunicaciones alámbricas",
+	level: "class",
+	group: "611",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"6120": {
+	desc: "Actividades de telecomunicaciones inalámbricas",
+	level: "class",
+	group: "612",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"6130": {
+	desc: "Actividades de telecomunicación satelital",
+	level: "class",
+	group: "613",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"6190": {
+	desc: "Otras actividades de telecomunicaciones",
+	level: "class",
+	group: "619",
+	division: "61",
+	section: "SECCIÓN J"
+},
+	"6201": {
+	desc: "Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas)",
+	level: "class",
+	group: "620",
+	division: "62",
+	section: "SECCIÓN J"
+},
+	"6202": {
+	desc: "Actividades de consultoría informática y actividades de administración de instalaciones informáticas",
+	level: "class",
+	group: "620",
+	division: "62",
+	section: "SECCIÓN J"
+},
+	"6209": {
+	desc: "Otras actividades de tecnologías de información y actividades de servicios informáticos",
+	level: "class",
+	group: "620",
+	division: "62",
+	section: "SECCIÓN J"
+},
+	"6311": {
+	desc: "Procesamiento de datos, alojamiento (hosting) y actividades relacionadas",
+	level: "class",
+	group: "631",
+	division: "63",
+	section: "SECCIÓN J"
+},
+	"6312": {
+	desc: "Portales web",
+	level: "class",
+	group: "631",
+	division: "63",
+	section: "SECCIÓN J"
+},
+	"6391": {
+	desc: "Actividades de agencias de noticias",
+	level: "class",
+	group: "639",
+	division: "63",
+	section: "SECCIÓN J"
+},
+	"6399": {
+	desc: "Otras actividades de servicios de información n.c.p.",
+	level: "class",
+	group: "639",
+	division: "63",
+	section: "SECCIÓN J"
+},
+	"6411": {
+	desc: "Banco Central",
+	level: "class",
+	group: "641",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6412": {
+	desc: "Bancos comerciales",
+	level: "class",
+	group: "641",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6421": {
+	desc: "Actividades de las corporaciones financieras",
+	level: "class",
+	group: "642",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6422": {
+	desc: "Actividades de las compañías de financiamiento",
+	level: "class",
+	group: "642",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6423": {
+	desc: "Banca de segundo piso",
+	level: "class",
+	group: "642",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6424": {
+	desc: "Actividades de las cooperativas financieras",
+	level: "class",
+	group: "642",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6431": {
+	desc: "Fideicomisos, fondos y entidades financieras similares",
+	level: "class",
+	group: "643",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6432": {
+	desc: "Fondos de cesantías",
+	level: "class",
+	group: "643",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6491": {
+	desc: "Leasing financiero (arrendamiento financiero)",
+	level: "class",
+	group: "649",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6492": {
+	desc: "Actividades financieras de fondos de empleados y otras formas asociativas del sector solidario",
+	level: "class",
+	group: "649",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6493": {
+	desc: "Actividades de compra de cartera o factoring",
+	level: "class",
+	group: "649",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6494": {
+	desc: "Otras actividades de distribución de fondos",
+	level: "class",
+	group: "649",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6495": {
+	desc: "Instituciones especiales oficiales",
+	level: "class",
+	group: "649",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6496": {
+	desc: "Capitalización",
+	level: "class",
+	group: "649",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6499": {
+	desc: "Otras actividades de servicio financiero, excepto las de seguros y pensiones n.c.p.",
+	level: "class",
+	group: "649",
+	division: "64",
+	section: "SECCIÓN K"
+},
+	"6511": {
+	desc: "Seguros generales",
+	level: "class",
+	group: "651",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6512": {
+	desc: "Seguros de vida",
+	level: "class",
+	group: "651",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6513": {
+	desc: "Reaseguros",
+	level: "class",
+	group: "651",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6515": {
+	desc: "Seguros de salud",
+	level: "class",
+	group: "651",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6521": {
+	desc: "Servicios de seguros sociales de salud",
+	level: "class",
+	group: "652",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6522": {
+	desc: "Servicios de seguros sociales en riesgos laborales",
+	level: "class",
+	group: "652",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6523": {
+	desc: "Servicios de seguros sociales en riesgos familia",
+	level: "class",
+	group: "652",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6531": {
+	desc: "Régimen de prima media con prestación definida (RPM)",
+	level: "class",
+	group: "653",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6532": {
+	desc: "Régimen de ahorro individual con solidaridad (RAIS)",
+	level: "class",
+	group: "653",
+	division: "65",
+	section: "SECCIÓN K"
+},
+	"6611": {
+	desc: "Administración de mercados financieros",
+	level: "class",
+	group: "661",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6612": {
+	desc: "Corretaje de valores y de contratos de productos básicos",
+	level: "class",
+	group: "661",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6613": {
+	desc: "Otras actividades relacionadas con el mercado de valores",
+	level: "class",
+	group: "661",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6614": {
+	desc: "Actividades de las sociedades de intermediación cambiaria y de servicios financieros especiales",
+	level: "class",
+	group: "661",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6615": {
+	desc: "Actividades de los profesionales de compra y venta de divisas",
+	level: "class",
+	group: "661",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6619": {
+	desc: "Otras actividades auxiliares de las actividades de servicios financieros n.c.p.",
+	level: "class",
+	group: "661",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6621": {
+	desc: "Actividades de agentes y corredores de seguros",
+	level: "class",
+	group: "662",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6629": {
+	desc: "Evaluación de riesgos y daños, y otras actividades de servicios auxiliares",
+	level: "class",
+	group: "662",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6630": {
+	desc: "Actividades de administración de fondos",
+	level: "class",
+	group: "663",
+	division: "66",
+	section: "SECCIÓN K"
+},
+	"6810": {
+	desc: "Actividades inmobiliarias realizadas con bienes propios o arrendados",
+	level: "class",
+	group: "681",
+	division: "68",
+	section: "SECCIÓN L"
+},
+	"6820": {
+	desc: "Actividades inmobiliarias realizadas a cambio de una retribución o por contrata",
+	level: "class",
+	group: "682",
+	division: "68",
+	section: "SECCIÓN L"
+},
+	"6910": {
+	desc: "Actividades jurídicas",
+	level: "class",
+	group: "691",
+	division: "69",
+	section: "SECCIÓN M"
+},
+	"6920": {
+	desc: "Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria",
+	level: "class",
+	group: "692",
+	division: "69",
+	section: "SECCIÓN M"
+},
+	"7010": {
+	desc: "Actividades de administración empresarial",
+	level: "class",
+	group: "701",
+	division: "70",
+	section: "SECCIÓN M"
+},
+	"7020": {
+	desc: "Actividades de consultoría de gestión",
+	level: "class",
+	group: "702",
+	division: "70",
+	section: "SECCIÓN M"
+},
+	"7111": {
+	desc: "Actividades de arquitectura",
+	level: "class",
+	group: "711",
+	division: "71",
+	section: "SECCIÓN M"
+},
+	"7112": {
+	desc: "Actividades de ingeniería y otras actividades conexas de consultoría técnica",
+	level: "class",
+	group: "711",
+	division: "71",
+	section: "SECCIÓN M"
+},
+	"7120": {
+	desc: "Ensayos y análisis técnicos",
+	level: "class",
+	group: "712",
+	division: "71",
+	section: "SECCIÓN M"
+},
+	"7210": {
+	desc: "Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería",
+	level: "class",
+	group: "721",
+	division: "72",
+	section: "SECCIÓN M"
+},
+	"7220": {
+	desc: "Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades",
+	level: "class",
+	group: "722",
+	division: "72",
+	section: "SECCIÓN M"
+},
+	"7310": {
+	desc: "Publicidad",
+	level: "class",
+	group: "731",
+	division: "73",
+	section: "SECCIÓN M"
+},
+	"7320": {
+	desc: "Estudios de mercado y realización de encuestas de opinión pública",
+	level: "class",
+	group: "732",
+	division: "73",
+	section: "SECCIÓN M"
+},
+	"7410": {
+	desc: "Actividades especializadas de diseño",
+	level: "class",
+	group: "741",
+	division: "74",
+	section: "SECCIÓN M"
+},
+	"7420": {
+	desc: "Actividades de fotografía",
+	level: "class",
+	group: "742",
+	division: "74",
+	section: "SECCIÓN M"
+},
+	"7490": {
+	desc: "Otras actividades profesionales, científicas y técnicas n.c.p.",
+	level: "class",
+	group: "749",
+	division: "74",
+	section: "SECCIÓN M"
+},
+	"7500": {
+	desc: "Actividades veterinarias",
+	level: "class",
+	group: "750",
+	division: "75",
+	section: "SECCIÓN M"
+},
+	"7710": {
+	desc: "Alquiler y arrendamiento de vehículos automotores",
+	level: "class",
+	group: "771",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"7721": {
+	desc: "Alquiler y arrendamiento de equipo recreativo y deportivo",
+	level: "class",
+	group: "772",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"7722": {
+	desc: "Alquiler de videos y discos",
+	level: "class",
+	group: "772",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"7729": {
+	desc: "Alquiler y arrendamiento de otros efectos personales y enseres domésticos n.c.p.",
+	level: "class",
+	group: "772",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"7730": {
+	desc: "Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p.",
+	level: "class",
+	group: "773",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"7740": {
+	desc: "Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor",
+	level: "class",
+	group: "774",
+	division: "77",
+	section: "SECCIÓN N"
+},
+	"7810": {
+	desc: "Actividades de agencias de gestión y colocación de empleo",
+	level: "class",
+	group: "781",
+	division: "78",
+	section: "SECCIÓN N"
+},
+	"7820": {
+	desc: "Actividades de empresas de servicios temporales",
+	level: "class",
+	group: "782",
+	division: "78",
+	section: "SECCIÓN N"
+},
+	"7830": {
+	desc: "Otras actividades de provisión de talento humano",
+	level: "class",
+	group: "783",
+	division: "78",
+	section: "SECCIÓN N"
+},
+	"7911": {
+	desc: "Actividades de las agencias de viaje",
+	level: "class",
+	group: "791",
+	division: "79",
+	section: "SECCIÓN N"
+},
+	"7912": {
+	desc: "Actividades de operadores turísticos",
+	level: "class",
+	group: "791",
+	division: "79",
+	section: "SECCIÓN N"
+},
+	"7990": {
+	desc: "Otros servicios de reserva y actividades relacionadas",
+	level: "class",
+	group: "799",
+	division: "79",
+	section: "SECCIÓN N"
+},
+	"8010": {
+	desc: "Actividades de seguridad privada",
+	level: "class",
+	group: "801",
+	division: "80",
+	section: "SECCIÓN N"
+},
+	"8020": {
+	desc: "Actividades de servicios de sistemas de seguridad",
+	level: "class",
+	group: "802",
+	division: "80",
+	section: "SECCIÓN N"
+},
+	"8030": {
+	desc: "Actividades de detectives e investigadores privados",
+	level: "class",
+	group: "803",
+	division: "80",
+	section: "SECCIÓN N"
+},
+	"8110": {
+	desc: "Actividades combinadas de apoyo a instalaciones",
+	level: "class",
+	group: "811",
+	division: "81",
+	section: "SECCIÓN N"
+},
+	"8121": {
+	desc: "Limpieza general interior de edificios",
+	level: "class",
+	group: "812",
+	division: "81",
+	section: "SECCIÓN N"
+},
+	"8129": {
+	desc: "Otras actividades de limpieza de edificios e instalaciones industriales",
+	level: "class",
+	group: "812",
+	division: "81",
+	section: "SECCIÓN N"
+},
+	"8130": {
+	desc: "Actividades de paisajismo y servicios de mantenimiento conexos",
+	level: "class",
+	group: "813",
+	division: "81",
+	section: "SECCIÓN N"
+},
+	"8211": {
+	desc: "Actividades combinadas de servicios administrativos de oficina",
+	level: "class",
+	group: "821",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"8219": {
+	desc: "Fotocopiado, preparación de documentos y otras actividades especializadas de apoyo a oficina",
+	level: "class",
+	group: "821",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"8220": {
+	desc: "Actividades de centros de llamadas (call center)",
+	level: "class",
+	group: "822",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"8230": {
+	desc: "Organización de convenciones y eventos comerciales",
+	level: "class",
+	group: "823",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"8291": {
+	desc: "Actividades de agencias de cobranza y oficinas de calificación crediticia",
+	level: "class",
+	group: "829",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"8292": {
+	desc: "Actividades de envase y empaque",
+	level: "class",
+	group: "829",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"8299": {
+	desc: "Otras actividades de servicio de apoyo a las empresas n.c.p.",
+	level: "class",
+	group: "829",
+	division: "82",
+	section: "SECCIÓN N"
+},
+	"8411": {
+	desc: "Actividades legislativas de la administración pública",
+	level: "class",
+	group: "841",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8412": {
+	desc: "Actividades ejecutivas de la administración pública",
+	level: "class",
+	group: "841",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8413": {
+	desc: "Regulación de las actividades de organismos que prestan servicios de salud, educativos, culturales y otros servicios sociales, excepto servicios de seguridad social",
+	level: "class",
+	group: "841",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8414": {
+	desc: "Actividades reguladoras y facilitadoras de la actividad económica",
+	level: "class",
+	group: "841",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8415": {
+	desc: "Actividades de los órganos de control y otras instituciones",
+	level: "class",
+	group: "841",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8421": {
+	desc: "Relaciones exteriores",
+	level: "class",
+	group: "842",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8422": {
+	desc: "Actividades de defensa",
+	level: "class",
+	group: "842",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8423": {
+	desc: "Orden público y actividades de seguridad",
+	level: "class",
+	group: "842",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8424": {
+	desc: "Administración de justicia",
+	level: "class",
+	group: "842",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8430": {
+	desc: "Actividades de planes de seguridad social de afiliación obligatoria",
+	level: "class",
+	group: "843",
+	division: "84",
+	section: "SECCIÓN O"
+},
+	"8511": {
+	desc: "Educación de la primera infancia",
+	level: "class",
+	group: "851",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8512": {
+	desc: "Educación preescolar",
+	level: "class",
+	group: "851",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8513": {
+	desc: "Educación básica primaria",
+	level: "class",
+	group: "851",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8521": {
+	desc: "Educación básica secundaria",
+	level: "class",
+	group: "852",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8522": {
+	desc: "Educación media académica",
+	level: "class",
+	group: "852",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8523": {
+	desc: "Educación media técnica",
+	level: "class",
+	group: "852",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8530": {
+	desc: "Establecimientos que combinan diferentes niveles de educación",
+	level: "class",
+	group: "853",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8541": {
+	desc: "Educación técnica profesional",
+	level: "class",
+	group: "854",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8542": {
+	desc: "Educación tecnológica",
+	level: "class",
+	group: "854",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8543": {
+	desc: "Educación de instituciones universitarias o de escuelas tecnológicas",
+	level: "class",
+	group: "854",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8544": {
+	desc: "Educación de universidades",
+	level: "class",
+	group: "854",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8551": {
+	desc: "Formación para el trabajo",
+	level: "class",
+	group: "855",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8552": {
+	desc: "Enseñanza deportiva y recreativa",
+	level: "class",
+	group: "855",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8553": {
+	desc: "Enseñanza cultural",
+	level: "class",
+	group: "855",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8559": {
+	desc: "Otros tipos de educación n.c.p.",
+	level: "class",
+	group: "855",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8560": {
+	desc: "Actividades de apoyo a la educación",
+	level: "class",
+	group: "856",
+	division: "85",
+	section: "SECCIÓN P"
+},
+	"8610": {
+	desc: "Actividades de hospitales y clínicas, con internación",
+	level: "class",
+	group: "861",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"8621": {
+	desc: "Actividades de la práctica médica, sin internación",
+	level: "class",
+	group: "862",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"8622": {
+	desc: "Actividades de la práctica odontológica",
+	level: "class",
+	group: "862",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"8691": {
+	desc: "Actividades de apoyo diagnóstico",
+	level: "class",
+	group: "869",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"8692": {
+	desc: "Actividades de apoyo terapéutico",
+	level: "class",
+	group: "869",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"8699": {
+	desc: "Otras actividades de atención de la salud humana",
+	level: "class",
+	group: "869",
+	division: "86",
+	section: "SECCIÓN Q"
+},
+	"8710": {
+	desc: "Actividades de atención residencial medicalizada de tipo general",
+	level: "class",
+	group: "871",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"8720": {
+	desc: "Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas",
+	level: "class",
+	group: "872",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"8730": {
+	desc: "Actividades de atención en instituciones para el cuidado de personas mayores y/o discapacitadas",
+	level: "class",
+	group: "873",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"8790": {
+	desc: "Otras actividades de atención en instituciones con alojamiento",
+	level: "class",
+	group: "879",
+	division: "87",
+	section: "SECCIÓN Q"
+},
+	"8810": {
+	desc: "Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas",
+	level: "class",
+	group: "881",
+	division: "88",
+	section: "SECCIÓN Q"
+},
+	"8891": {
+	desc: "Actividades de guarderías para niños y niñas",
+	level: "class",
+	group: "889",
+	division: "88",
+	section: "SECCIÓN Q"
+},
+	"8899": {
+	desc: "Otras actividades de asistencia social sin alojamiento n.c.p.",
+	level: "class",
+	group: "889",
+	division: "88",
+	section: "SECCIÓN Q"
+},
+	"9001": {
+	desc: "Creación literaria",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9002": {
+	desc: "Creación musical",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9003": {
+	desc: "Creación teatral",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9004": {
+	desc: "Creación audiovisual",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9005": {
+	desc: "Artes plásticas y visuales",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9006": {
+	desc: "Actividades teatrales",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9007": {
+	desc: "Actividades de espectáculos musicales en vivo",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9008": {
+	desc: "Otras actividades de espectáculos en vivo n.c.p.",
+	level: "class",
+	group: "900",
+	division: "90",
+	section: "SECCIÓN R"
+},
+	"9101": {
+	desc: "Actividades de bibliotecas y archivos",
+	level: "class",
+	group: "910",
+	division: "91",
+	section: "SECCIÓN R"
+},
+	"9102": {
+	desc: "Actividades y funcionamiento de museos, conservación de edificios y sitios históricos",
+	level: "class",
+	group: "910",
+	division: "91",
+	section: "SECCIÓN R"
+},
+	"9103": {
+	desc: "Actividades de jardines botánicos, zoológicos y reservas naturales",
+	level: "class",
+	group: "910",
+	division: "91",
+	section: "SECCIÓN R"
+},
+	"9200": {
+	desc: "Actividades de juegos de azar y apuestas",
+	level: "class",
+	group: "920",
+	division: "92",
+	section: "SECCIÓN R"
+},
+	"9311": {
+	desc: "Gestión de instalaciones deportivas",
+	level: "class",
+	group: "931",
+	division: "93",
+	section: "SECCIÓN R"
+},
+	"9312": {
+	desc: "Actividades de clubes deportivos",
+	level: "class",
+	group: "931",
+	division: "93",
+	section: "SECCIÓN R"
+},
+	"9319": {
+	desc: "Otras actividades deportivas",
+	level: "class",
+	group: "931",
+	division: "93",
+	section: "SECCIÓN R"
+},
+	"9321": {
+	desc: "Actividades de parques de atracciones y parques temáticos",
+	level: "class",
+	group: "932",
+	division: "93",
+	section: "SECCIÓN R"
+},
+	"9329": {
+	desc: "Otras actividades recreativas y de esparcimiento n.c.p.",
+	level: "class",
+	group: "932",
+	division: "93",
+	section: "SECCIÓN R"
+},
+	"9411": {
+	desc: "Actividades de asociaciones empresariales y de empleadores",
+	level: "class",
+	group: "941",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"9412": {
+	desc: "Actividades de asociaciones profesionales",
+	level: "class",
+	group: "941",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"9420": {
+	desc: "Actividades de sindicatos de empleados",
+	level: "class",
+	group: "942",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"9491": {
+	desc: "Actividades de asociaciones religiosas",
+	level: "class",
+	group: "949",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"9492": {
+	desc: "Actividades de asociaciones políticas",
+	level: "class",
+	group: "949",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"9499": {
+	desc: "Actividades de otras asociaciones n.c.p.",
+	level: "class",
+	group: "949",
+	division: "94",
+	section: "SECCIÓN S"
+},
+	"9511": {
+	desc: "Mantenimiento y reparación de computadores y de equipo periférico",
+	level: "class",
+	group: "951",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"9512": {
+	desc: "Mantenimiento y reparación de equipos de comunicación",
+	level: "class",
+	group: "951",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"9521": {
+	desc: "Mantenimiento y reparación de aparatos electrónicos de consumo",
+	level: "class",
+	group: "952",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"9522": {
+	desc: "Mantenimiento y reparación de aparatos y equipos domésticos y de jardinería",
+	level: "class",
+	group: "952",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"9523": {
+	desc: "Reparación de calzado y artículos de cuero",
+	level: "class",
+	group: "952",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"9524": {
+	desc: "Reparación de muebles y accesorios para el hogar",
+	level: "class",
+	group: "952",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"9529": {
+	desc: "Mantenimiento y reparación de otros efectos personales y enseres domésticos",
+	level: "class",
+	group: "952",
+	division: "95",
+	section: "SECCIÓN S"
+},
+	"9601": {
+	desc: "Lavado y limpieza, incluso la limpieza en seco, de productos textiles y de piel",
+	level: "class",
+	group: "960",
+	division: "96",
+	section: "SECCIÓN S"
+},
+	"9602": {
+	desc: "Peluquería y otros tratamientos de belleza",
+	level: "class",
+	group: "960",
+	division: "96",
+	section: "SECCIÓN S"
+},
+	"9603": {
+	desc: "Pompas fúnebres y actividades relacionadas",
+	level: "class",
+	group: "960",
+	division: "96",
+	section: "SECCIÓN S"
+},
+	"9609": {
+	desc: "Otras actividades de servicios personales n.c.p.",
+	level: "class",
+	group: "960",
+	division: "96",
+	section: "SECCIÓN S"
+},
+	"9700": {
+	desc: "Actividades de los hogares individuales como empleadores de personal doméstico",
+	level: "class",
+	group: "970",
+	division: "97",
+	section: "SECCIÓN T"
+},
+	"9810": {
+	desc: "Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio",
+	level: "class",
+	group: "981",
+	division: "98",
+	section: "SECCIÓN T"
+},
+	"9820": {
+	desc: "Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio",
+	level: "class",
+	group: "982",
+	division: "98",
+	section: "SECCIÓN T"
+},
+	"9900": {
+	desc: "Actividades de organizaciones y entidades extraterritoriales",
+	level: "class",
+	group: "990",
+	division: "99",
+	section: "SECCIÓN U"
+},
+	"SECCIÓN A": {
+	desc: "AGRICULTURA, GANADERÍA, CAZA, SILVICULTURA Y PESCA",
+	level: "section"
+},
+	"01": {
+	desc: "Agricultura, ganadería, caza y actividades de servicios conexas",
+	level: "division",
+	section: "SECCIÓN A"
+},
+	"011": {
+	desc: "Cultivos agrícolas transitorios",
+	level: "group",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0111": {
+	desc: "Cultivo de cereales (excepto arroz), legumbres y semillas oleaginosas",
+	level: "class",
+	group: "011",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0112": {
+	desc: "Cultivo de arroz",
+	level: "class",
+	group: "011",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0113": {
+	desc: "Cultivo de hortalizas, raíces y tubérculos",
+	level: "class",
+	group: "011",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0114": {
+	desc: "Cultivo de tabaco",
+	level: "class",
+	group: "011",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0115": {
+	desc: "Cultivo de plantas textiles",
+	level: "class",
+	group: "011",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0119": {
+	desc: "Otros cultivos transitorios n.c.p.",
+	level: "class",
+	group: "011",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"012": {
+	desc: "Cultivos agrícolas permanentes",
+	level: "group",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0121": {
+	desc: "Cultivo de frutas tropicales y subtropicales",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0122": {
+	desc: "Cultivo de plátano y banano",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0123": {
+	desc: "Cultivo de café",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0124": {
+	desc: "Cultivo de caña de azúcar",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0125": {
+	desc: "Cultivo de flor de corte",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0126": {
+	desc: "Cultivo de palma para aceite (palma africana) y otros frutos oleaginosos",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0127": {
+	desc: "Cultivo de plantas con las que se preparan bebidas",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0128": {
+	desc: "Cultivo de especias y de plantas aromáticas y medicinales",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0129": {
+	desc: "Otros cultivos permanentes n.c.p.",
+	level: "class",
+	group: "012",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"013": {
+	desc: "Propagación de plantas (actividades de los viveros, excepto viveros forestales)",
+	level: "group",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0130": {
+	desc: "Propagación de plantas (actividades de los viveros, excepto viveros forestales)",
+	level: "class",
+	group: "013",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"014": {
+	desc: "Ganadería",
+	level: "group",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0141": {
+	desc: "Cría de ganado bovino y bufalino",
+	level: "class",
+	group: "014",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0142": {
+	desc: "Cría de caballos y otros equinos",
+	level: "class",
+	group: "014",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0143": {
+	desc: "Cría de ovejas y cabras",
+	level: "class",
+	group: "014",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0144": {
+	desc: "Cría de ganado porcino",
+	level: "class",
+	group: "014",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0145": {
+	desc: "Cría de aves de corral",
+	level: "class",
+	group: "014",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0149": {
+	desc: "Cría de otros animales n.c.p.",
+	level: "class",
+	group: "014",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"015": {
+	desc: "Explotación mixta (agrícola y pecuaria)",
+	level: "group",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0150": {
+	desc: "Explotación mixta (agrícola y pecuaria)",
+	level: "class",
+	group: "015",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"016": {
+	desc: "Actividades de apoyo a la agricultura y la ganadería, y actividades posteriores a la cosecha",
+	level: "group",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0161": {
+	desc: "Actividades de apoyo a la agricultura",
+	level: "class",
+	group: "016",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0162": {
+	desc: "Actividades de apoyo a la ganadería",
+	level: "class",
+	group: "016",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0163": {
+	desc: "Actividades posteriores a la cosecha",
+	level: "class",
+	group: "016",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0164": {
+	desc: "Tratamiento de semillas para propagación",
+	level: "class",
+	group: "016",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"017": {
+	desc: "Caza ordinaria y mediante trampas y actividades de servicios conexas",
+	level: "group",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"0170": {
+	desc: "Caza ordinaria y mediante trampas y actividades de servicios conexas",
+	level: "class",
+	group: "017",
+	division: "01",
+	section: "SECCIÓN A"
+},
+	"02": {
+	desc: "Silvicultura y extracción de madera",
+	level: "division",
+	section: "SECCIÓN A"
+},
+	"021": {
+	desc: "Silvicultura y otras actividades forestales",
+	level: "group",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"0210": {
+	desc: "Silvicultura y otras actividades forestales",
+	level: "class",
+	group: "021",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"022": {
+	desc: "Extracción de madera",
+	level: "group",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"0220": {
+	desc: "Extracción de madera",
+	level: "class",
+	group: "022",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"023": {
+	desc: "Recolección de productos forestales diferentes a la madera",
+	level: "group",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"0230": {
+	desc: "Recolección de productos forestales diferentes a la madera",
+	level: "class",
+	group: "023",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"024": {
+	desc: "Servicios de apoyo a la silvicultura",
+	level: "group",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"0240": {
+	desc: "Servicios de apoyo a la silvicultura",
+	level: "class",
+	group: "024",
+	division: "02",
+	section: "SECCIÓN A"
+},
+	"03": {
+	desc: "Pesca y acuicultura",
+	level: "division",
+	section: "SECCIÓN A"
+},
+	"031": {
+	desc: "Pesca",
+	level: "group",
+	division: "03",
+	section: "SECCIÓN A"
+},
+	"0311": {
+	desc: "Pesca marítima",
+	level: "class",
+	group: "031",
+	division: "03",
+	section: "SECCIÓN A"
+},
+	"0312": {
+	desc: "Pesca de agua dulce",
+	level: "class",
+	group: "031",
+	division: "03",
+	section: "SECCIÓN A"
+},
+	"032": {
+	desc: "Acuicultura",
+	level: "group",
+	division: "03",
+	section: "SECCIÓN A"
+},
+	"0321": {
+	desc: "Acuicultura marítima",
+	level: "class",
+	group: "032",
+	division: "03",
+	section: "SECCIÓN A"
+},
+	"0322": {
+	desc: "Acuicultura de agua dulce",
+	level: "class",
+	group: "032",
+	division: "03",
+	section: "SECCIÓN A"
+},
+	"SECCIÓN B": {
+	desc: "EXPLOTACIÓN DE MINAS Y CANTERAS",
+	level: "section"
+},
+	"05": {
+	desc: "Extracción de carbón de piedra y lignito",
+	level: "division",
+	section: "SECCIÓN B"
+},
+	"051": {
+	desc: "Extracción de hulla (carbón de piedra)",
+	level: "group",
+	division: "05",
+	section: "SECCIÓN B"
+},
+	"0510": {
+	desc: "Extracción de hulla (carbón de piedra)",
+	level: "class",
+	group: "051",
+	division: "05",
+	section: "SECCIÓN B"
+},
+	"052": {
+	desc: "Extracción de carbón lignito",
+	level: "group",
+	division: "05",
+	section: "SECCIÓN B"
+},
+	"0520": {
+	desc: "Extracción de carbón lignito",
+	level: "class",
+	group: "052",
+	division: "05",
+	section: "SECCIÓN B"
+},
+	"06": {
+	desc: "Extracción de petróleo crudo y gas natural",
+	level: "division",
+	section: "SECCIÓN B"
+},
+	"061": {
+	desc: "Extracción de petróleo crudo",
+	level: "group",
+	division: "06",
+	section: "SECCIÓN B"
+},
+	"0610": {
+	desc: "Extracción de petróleo crudo",
+	level: "class",
+	group: "061",
+	division: "06",
+	section: "SECCIÓN B"
+},
+	"062": {
+	desc: "Extracción de gas natural",
+	level: "group",
+	division: "06",
+	section: "SECCIÓN B"
+},
+	"0620": {
+	desc: "Extracción de gas natural",
+	level: "class",
+	group: "062",
+	division: "06",
+	section: "SECCIÓN B"
+},
+	"07": {
+	desc: "Extracción de minerales metalíferos",
+	level: "division",
+	section: "SECCIÓN B"
+},
+	"071": {
+	desc: "Extracción de minerales de hierro",
+	level: "group",
+	division: "07",
+	section: "SECCIÓN B"
+},
+	"0710": {
+	desc: "Extracción de minerales de hierro",
+	level: "class",
+	group: "071",
+	division: "07",
+	section: "SECCIÓN B"
+},
+	"072": {
+	desc: "Extracción de minerales metalíferos no ferrosos",
+	level: "group",
+	division: "07",
+	section: "SECCIÓN B"
+},
+	"0721": {
+	desc: "Extracción de minerales de uranio y de torio",
+	level: "class",
+	group: "072",
+	division: "07",
+	section: "SECCIÓN B"
+},
+	"0722": {
+	desc: "Extracción de oro y otros metales preciosos",
+	level: "class",
+	group: "072",
+	division: "07",
+	section: "SECCIÓN B"
+},
+	"0723": {
+	desc: "Extracción de minerales de níquel",
+	level: "class",
+	group: "072",
+	division: "07",
+	section: "SECCIÓN B"
+},
+	"0729": {
+	desc: "Extracción de otros minerales metalíferos no ferrosos n.c.p.",
+	level: "class",
+	group: "072",
+	division: "07",
+	section: "SECCIÓN B"
+},
+	"08": {
+	desc: "Extracción de otras minas y canteras",
+	level: "division",
+	section: "SECCIÓN B"
+},
+	"081": {
+	desc: "Extracción de piedra, arena, arcillas, cal, yeso, caolín, bentonitas y similares",
+	level: "group",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"0811": {
+	desc: "Extracción de piedra, arena, arcillas comunes, yeso y anhidrita",
+	level: "class",
+	group: "081",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"0812": {
+	desc: "Extracción de arcillas de uso industrial, caliza, caolín y bentonitas",
+	level: "class",
+	group: "081",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"082": {
+	desc: "Extracción de esmeraldas, piedras preciosas y semipreciosas",
+	level: "group",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"0820": {
+	desc: "Extracción de esmeraldas, piedras preciosas y semipreciosas",
+	level: "class",
+	group: "082",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"089": {
+	desc: "Extracción de otros minerales no metálicos n.c.p.",
+	level: "group",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"0891": {
+	desc: "Extracción de minerales para la fabricación de abonos y productos químicos",
+	level: "class",
+	group: "089",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"0892": {
+	desc: "Extracción de halita (sal)",
+	level: "class",
+	group: "089",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"0899": {
+	desc: "Extracción de otros minerales no metálicos n.c.p.",
+	level: "class",
+	group: "089",
+	division: "08",
+	section: "SECCIÓN B"
+},
+	"09": {
+	desc: "Actividades de servicios de apoyo para la explotación de minas y canteras",
+	level: "division",
+	section: "SECCIÓN B"
+},
+	"091": {
+	desc: "Actividades de apoyo para la extracción de petróleo y de gas natural",
+	level: "group",
+	division: "09",
+	section: "SECCIÓN B"
+},
+	"0910": {
+	desc: "Actividades de apoyo para la extracción de petróleo y de gas natural",
+	level: "class",
+	group: "091",
+	division: "09",
+	section: "SECCIÓN B"
+},
+	"099": {
+	desc: "Actividades de apoyo para otras actividades de explotación de minas y canteras",
+	level: "group",
+	division: "09",
+	section: "SECCIÓN B"
+},
+	"0990": {
+	desc: "Actividades de apoyo para otras actividades de explotación de minas y canteras",
+	level: "class",
+	group: "099",
+	division: "09",
+	section: "SECCIÓN B"
+},
+	"SECCIÓN C": {
+	desc: "INDUSTRIAS MANUFACTURERAS",
+	level: "section"
+},
+	"SECCIÓN D": {
+	desc: "SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO",
+	level: "section"
+},
+	"SECCIÓN E": {
+	desc: "DISTRIBUCIÓN DE AGUA; EVACUACIÓN Y TRATAMIENTO DE AGUAS RESIDUALES, GESTIÓN DE DESECHOS Y ACTIVIDADES DE SANEAMIENTO AMBIENTAL",
+	level: "section"
+},
+	"SECCIÓN F": {
+	desc: "CONSTRUCCIÓN",
+	level: "section"
+},
+	"SECCIÓN G": {
+	desc: "COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS",
+	level: "section"
+},
+	"SECCIÓN H": {
+	desc: "TRANSPORTE Y ALMACENAMIENTO",
+	level: "section"
+},
+	"SECCIÓN I": {
+	desc: "ALOJAMIENTO Y SERVICIOS DE COMIDA",
+	level: "section"
+},
+	"SECCIÓN J": {
+	desc: "INFORMACIÓN Y COMUNICACIONES",
+	level: "section"
+},
+	"SECCIÓN K": {
+	desc: "ACTIVIDADES FINANCIERAS Y DE SEGUROS",
+	level: "section"
+},
+	"SECCIÓN L": {
+	desc: "ACTIVIDADES INMOBILIARIAS",
+	level: "section"
+},
+	"SECCIÓN M": {
+	desc: "ACTIVIDADES PROFESIONALES, CIENTÍFICAS Y TÉCNICAS",
+	level: "section"
+},
+	"SECCIÓN N": {
+	desc: "ACTIVIDADES DE SERVICIOS ADMINISTRATIVOS Y DE APOYO",
+	level: "section"
+},
+	"SECCIÓN O": {
+	desc: "ADMINISTRACIÓN PÚBLICA Y DEFENSA; PLANES DE SEGURIDAD SOCIAL DE AFILIACIÓN OBLIGATORIA",
+	level: "section"
+},
+	"SECCIÓN P": {
+	desc: "EDUCACIÓN",
+	level: "section"
+},
+	"SECCIÓN Q": {
+	desc: "ACTIVIDADES DE ATENCIÓN DE LA SALUD HUMANA Y DE ASISTENCIA SOCIAL",
+	level: "section"
+},
+	"SECCIÓN R": {
+	desc: "ACTIVIDADES ARTÍSTICAS, DE ENTRETENIMIENTO Y RECREACIÓN",
+	level: "section"
+},
+	"SECCIÓN S": {
+	desc: "OTRAS ACTIVIDADES DE SERVICIOS",
+	level: "section"
+},
+	"SECCIÓN T": {
+	desc: "ACTIVIDADES DE LOS HOGARES INDIVIDUALES EN CALIDAD DE EMPLEADORES; ACTIVIDADES NO DIFERENCIADAS DE LOS HOGARES INDIVIDUALES COMO PRODUCTORES DE BIENES Y SERVICIOS PARA USO PROPIO",
+	level: "section"
+},
+	"SECCIÓN U": {
+	desc: "ACTIVIDADES DE ORGANIZACIONES Y ENTIDADES EXTRATERRITORIALES",
+	level: "section"
+}
+};
+
+const byCode = ciiuData;
+function ciiuCode(code) {
+  if (!code) return "No disponible";
+  const clean = code.trim();
+  if (!clean) return "No disponible";
+  const entry = byCode[clean];
+  if (!entry) return `Código CIIU ${clean}`;
+  if (entry.level === "class") {
+    const group = entry.group ? byCode[entry.group] : void 0;
+    const division = entry.division ? byCode[entry.division] : void 0;
+    const section = entry.section ? byCode[entry.section] : void 0;
+    const parts = [section?.desc, division?.desc, group?.desc, entry.desc].filter(Boolean);
+    return `${clean} - ${parts.join(" / ")}`;
+  }
+  return `${clean} - ${entry.desc}`;
+}
+
+const RUES_ENDPOINT = "https://www.datos.gov.co/resource/c82u-588k.json";
+function esc(value) {
+  return `"${value.replace(/"/g, '""')}"`;
+}
+function parseSocrataDate(value) {
+  if (!value) return "No disponible";
+  const digits = value.replace(/[^\d]/g, "");
+  if (digits === "99991231") return "Indefinida";
+  if (digits.length >= 8) {
+    const y = digits.slice(0, 4);
+    const m = digits.slice(4, 6);
+    const d = digits.slice(6, 8);
+    if (/^\d{4}$/.test(y) && /^\d{2}$/.test(m) && /^\d{2}$/.test(d)) {
+      return `${d}/${m}/${y}`;
+    }
+  }
+  return value;
+}
+function cleanName(value) {
+  return value.replace(/\s+/g, " ").trim();
+}
+function localRowToRecord(r) {
+  return {
+    razon_social: r.razon_social ?? void 0,
+    numero_identificacion: r.numero_identificacion ?? void 0,
+    digito_verificacion: r.digito_verificacion ?? void 0,
+    clase_identificacion: r.clase_identificacion ?? void 0,
+    tipo_sociedad: r.tipo_sociedad ?? void 0,
+    organizacion_juridica: r.organizacion_juridica ?? void 0,
+    estado_matricula: r.estado_matricula ?? void 0,
+    camara_comercio: r.camara_comercio ?? void 0,
+    representante_legal: r.representante_legal ?? void 0,
+    num_identificacion_representante_legal: r.num_identificacion_representante_legal ?? void 0,
+    cod_ciiu_act_econ_pri: r.cod_ciiu_act_econ_pri ?? void 0,
+    cod_ciiu_act_econ_sec: r.cod_ciiu_act_econ_sec ?? void 0,
+    ciiu3: r.ciiu3 ?? void 0,
+    ciiu4: r.ciiu4 ?? void 0,
+    ultimo_ano_renovado: r.ultimo_ano_renovado ?? void 0,
+    fecha_matricula: r.fecha_matricula ?? void 0,
+    fecha_actualizacion: r.fecha_actualizacion ?? void 0,
+    codigo_tamano_empresa: r.codigo_tamano_empresa ?? void 0,
+    categoria_matricula: r.categoria_matricula ?? void 0,
+    municipio: r.municipio ?? void 0,
+    departamento: r.departamento ?? void 0,
+    direccion: r.direccion ?? void 0,
+    telefono: r.telefono ?? void 0,
+    correo_electronico: r.correo_electronico ?? void 0,
+    cantidad_mujeres_empleadas: r.cantidad_mujeres_empleadas ?? void 0
+  };
+}
+function hasLocalSource() {
+  return Boolean(undefined                                 );
+}
+async function queryLocalByNit(nit) {
+  if (!hasLocalSource()) return null;
+  try {
+    const {
+      createClient
+    } = await import('./index_B12LTPqM.mjs');
+    const supabase = createClient(undefined                            , undefined                                 );
+    const {
+      data,
+      error
+    } = await supabase.rpc("search_rues_by_nit", {
+      p_nit: nit
+    });
+    if (error) throw error;
+    if (!Array.isArray(data) || data.length === 0) return [];
+    return data.map(localRowToRecord);
+  } catch {
+    return null;
+  }
+}
+async function queryLocalByName(name, limit = 10) {
+  if (!hasLocalSource()) return null;
+  try {
+    const {
+      createClient
+    } = await import('./index_B12LTPqM.mjs');
+    const supabase = createClient(undefined                            , undefined                                 );
+    const {
+      data,
+      error
+    } = await supabase.rpc("search_rues_by_name", {
+      p_name: name,
+      p_limit: limit
+    });
+    if (error) throw error;
+    if (!Array.isArray(data) || data.length === 0) return [];
+    return data.map(localRowToRecord);
+  } catch {
+    return null;
+  }
+}
+async function queryRuesByNit(nit) {
+  const cleanNit = nit.replace(/[^0-9]/g, "");
+  if (!/^\d{6,10}$/.test(cleanNit)) return [];
+  const local = await queryLocalByNit(cleanNit);
+  if (local !== null) return local;
+  const url = `${RUES_ENDPOINT}?$where=numero_identificacion%20%3D%20${esc(cleanNit).replace(/"/g, "%22").replace(/\s/g, "%20")}&$limit=5`;
+  const res = await fetch(url, {
+    signal: AbortSignal.timeout(2e4)
+  });
+  if (!res.ok) throw new Error(`datos.gov.co ${res.status}`);
+  const data = await res.json();
+  return data.map((r) => ({
+    ...r,
+    razon_social: cleanName(r.razon_social ?? ""),
+    camara_comercio: cleanName(r.camara_comercio ?? "")
+  }));
+}
+async function queryRuesByName(name, limit = 10) {
+  const clean = cleanName(name);
+  if (!clean) return [];
+  const local = await queryLocalByName(clean, limit);
+  if (local !== null) return local;
+  const url = `${RUES_ENDPOINT}?$q=${encodeURIComponent(clean)}&$where=estado_matricula%20like%20%22ACTIVA%22&$select=razon_social,numero_identificacion,nit,digito_verificacion,clase_identificacion,organizacion_juridica,tipo_sociedad,estado_matricula,camara_comercio,representante_legal,num_identificacion_representante_legal,cod_ciiu_act_econ_pri,cod_ciiu_act_econ_sec,ciiu3,ciiu4,ultimo_ano_renovado,fecha_matricula,fecha_vigencia&$order=ultimo_ano_renovado%20DESC&$limit=${limit}`;
+  const res = await fetch(url, {
+    signal: AbortSignal.timeout(2e4)
+  });
+  if (!res.ok) throw new Error(`datos.gov.co ${res.status}`);
+  const data = await res.json();
+  return data.map((r) => ({
+    ...r,
+    razon_social: cleanName(r.razon_social ?? ""),
+    camara_comercio: cleanName(r.camara_comercio ?? "")
+  }));
+}
+async function queryRuesByFilters(params) {
+  if (!hasLocalSource()) return [];
+  try {
+    const {
+      createClient
+    } = await import('./index_B12LTPqM.mjs');
+    const supabase = createClient(undefined                            , undefined                                 );
+    const {
+      data,
+      error
+    } = await supabase.rpc("search_rues_by_filters", {
+      p_municipio: params.municipio ?? null,
+      p_departamento: params.departamento ?? null,
+      p_camara: params.camara ?? null,
+      p_tamano: params.tamano ?? null,
+      p_ciiu: params.ciiu ?? null,
+      p_limit: params.limit ?? 25
+    });
+    if (error) throw error;
+    if (!Array.isArray(data)) return [];
+    return data.map(localRowToRecord);
+  } catch {
+    return [];
+  }
+}
+async function queryRuesCountsByMunicipio(departamento) {
+  if (!hasLocalSource()) return [];
+  try {
+    const {
+      createClient
+    } = await import('./index_B12LTPqM.mjs');
+    const supabase = createClient(undefined                            , undefined                                 );
+    const {
+      data,
+      error
+    } = await supabase.rpc("rues_counts_by_municipio", {
+      p_departamento: departamento ?? null
+    });
+    if (error) throw error;
+    if (!Array.isArray(data)) return [];
+    return data;
+  } catch {
+    return [];
+  }
+}
+function formatRuesRecord(r) {
+  const id = r.nit || r.numero_identificacion || "No disponible";
+  const dv = r.digito_verificacion ? `-${r.digito_verificacion}` : "";
+  const actPri = r.cod_ciiu_act_econ_pri ? ciiuCode(r.cod_ciiu_act_econ_pri) : null;
+  const actSec = r.cod_ciiu_act_econ_sec ? ciiuCode(r.cod_ciiu_act_econ_sec) : null;
+  const actOtras = [r.ciiu3, r.ciiu4].filter((c) => Boolean(c)).map(ciiuCode);
+  const lines = [`Razón social: ${r.razon_social || "No disponible"}`, `Identificación: ${r.clase_identificacion || ""} ${id}${dv}`, `Tipo: ${r.tipo_sociedad || "No disponible"} / ${r.organizacion_juridica || "No disponible"}`, `Estado: ${r.estado_matricula || "No disponible"}`, `Cámara de comercio: ${r.camara_comercio || "No disponible"}`, `Representante legal: ${r.representante_legal || "No disponible"}`, `Actividad económica principal: ${actPri || "No disponible"}`, ...actSec ? [`Actividad económica secundaria: ${actSec}`] : [], ...actOtras.length ? [`Otras actividades (CIIU): ${actOtras.join(" | ")}`] : [], `Matrícula desde: ${parseSocrataDate(r.fecha_matricula)}`, `Vigencia: ${parseSocrataDate(r.fecha_vigencia)}`, `Último año renovado: ${r.ultimo_ano_renovado || "No disponible"}`];
+  return lines.join("\n");
+}
+function ruesContext(matches) {
+  if (matches.length === 0) {
+    return "No se encontraron registros en el Registro Único Empresarial y Social (RUES) para la empresa consultada.";
+  }
+  const head = matches.length === 1 ? "Registro encontrado en RUES:" : `Registros encontrados en RUES (mostrando ${matches.length}):`;
+  return `${head}
+${matches.map((m, i) => `${i + 1}. ${formatRuesRecord(m)}`).join("\n\n")}`;
+}
+
+export { queryRuesCountsByMunicipio as a, queryRuesByNit as b, queryRuesByName as c, queryRuesByFilters as q, ruesContext as r };

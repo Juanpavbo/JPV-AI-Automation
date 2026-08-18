@@ -1,0 +1,51 @@
+---
+import ContactForm from '../islands/ContactForm';
+---
+
+<section id="contacto" class="section-lg bg-[var(--bg-muted)] relative overflow-hidden" aria-labelledby="contacto-title">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-[var(--brand)]/5 rounded-full blur-[120px]" />
+  </div>
+
+  <div class="container relative z-10">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+      <!-- Info Panel -->
+      <div class="reveal slide-up">
+        <span class="section-label">Contacto</span>
+        <h2 id="contacto-title" class="display-md text-[var(--text)] mb-6">Agenda tu diagnóstico gratuito</h2>
+        <p class="body text-[var(--text-secondary)] mb-8 leading-relaxed">
+          En una conversación de 30 minutos entendemos cómo funciona tu negocio y te decimos, en lenguaje claro, qué se puede mejorar y cuánto te ahorrarías. Sin compromiso y sin tecnicismos.
+        </p>
+
+        <ul class="space-y-4 mb-10">
+          {[
+            { icon: 'conversacion', text: 'Conversación de 30 minutos, virtual o presencial' },
+            { icon: 'propuesta', text: 'Propuesta clara con tiempos y costos' },
+            { icon: 'honestidad', text: 'Si no te conviene, te lo decimos de frente' }
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-[var(--success-bg)] border border-[#a7f3d0] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-[var(--success)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span class="text-[var(--text)] font-medium">{item.text}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="space-y-3 text-[var(--text-secondary)]">
+          <a href="mailto:vexania@zohomail.com" class="flex items-center gap-3 group">
+            <span class="w-10 h-10 rounded-xl bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-[var(--brand-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            </span>
+            <span class="font-medium text-[var(--text)] group-hover:text-[var(--brand)] transition-colors">vexania@zohomail.com</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <article class="card card-elevated reveal slide-up stagger-1" style="animation-delay: 150ms;">
+        <ContactForm client:load />
+      </article>
+    </div>
+  </div>
+</section>
