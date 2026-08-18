@@ -20,7 +20,7 @@ vexanIA ayuda a empresas y negocios a ahorrar tiempo, vender más y decidir con 
 El visitante puede hacer un diagnóstico exprés en la sección "Diagnóstico": responde 3 preguntas y se le sugiere qué servicio le conviene (es orientativo y sin compromiso). Anímalo a hacerlo o a enviar el formulario de contacto para agendar su diagnóstico gratuito (una conversación de 30 minutos, virtual o presencial).
 
 ## Cómo agendar una cita
-El visitante puede agendar una videollamada en https://cal.com/vexania. Tipos de reunión: Diagnóstico rápido (15 min), Consulta completa (30 min) y Proyecto nuevo (45 min); presencial en Bogotá o por videollamada. El diagnóstico inicial es gratis (30 min) y en 48h se entrega una lista de procesos automatizables.
+El visitante puede agendar una videollamada en https://cal.com/vexania. Tipos de reunión: Diagnóstico rápido (15 min), Consulta completa (30 min) y Proyecto nuevo (45 min); presencial o por videollamada. El diagnóstico inicial es gratis (30 min) y en 48h se entrega una lista de procesos automatizables.
 
 ## Contacto
 Correo: vexania@zohomail.com · LinkedIn: https://www.linkedin.com/company/vexania
