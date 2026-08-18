@@ -2,7 +2,8 @@
   <div id="vex-chat-backdrop" class="vex-chat-backdrop" hidden></div>
   <button id="vex-chat-toggle" type="button" aria-label="Abrir chat con vexanIA" aria-expanded="false">
     <svg id="vex-chat-open-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 2L2 7h10L12 22L4 7z"/>
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 12l4-4L16 8M8 12l4 4L16 16"/>
     </svg>
     <span>¡Hola!</span>
   </button>
@@ -39,7 +40,7 @@
   </div>
 </div>
 <script>
-  const WELCOME = 'Soy el asistente de IA de Globant.\n\nPuedo ayudarte a encontrar las mejores soluciones para tu negocio.\n\n¿Qué es Glob.AI?\n\nEste assistant está desarrollado por Globant. Las respuestas generadas por IA pueden ser incorrectas; verifica la información. Podemos recopilar tu información personal; al utilizar este chat estás confirmando que aceptas la Política de Privacidad de Globant.';
+  const WELCOME = 'Soy el asistente de IA de vexanIA.\n\nPuedo ayudarte a encontrar las mejores soluciones para tu negocio.\n\n¿Qué es Glob.AI?\n\nEste assistant está desarrollado por vexanIA. Las respuestas generadas por IA pueden ser incorrectas; verifica la información. Podemos recopilar tu información personal; al utilizar este chat estás confirmando que aceptas la Política de Privacidad de vexanIA.';
 
   function initChat() {
     const messagesEl = document.getElementById('vex-chat-messages') as HTMLElement;
