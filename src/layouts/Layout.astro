@@ -9,7 +9,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Vexania — Consultoría de automatización, aplicaciones a la medida, agentes de IA y reportes inteligentes para micro y pequeñas empresas en Bogotá y Cundinamarca. Diagnóstico gratuito.' } = Astro.props;
+const { title, description = 'vexanIA — Consultoría de automatización, aplicaciones a la medida, agentes de IA y reportes inteligentes para micro y pequeñas empresas en Bogotá y Cundinamarca. Diagnóstico gratuito.' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const navLinks = [
@@ -22,9 +22,9 @@ const navLinks = [
 ] as const;
 
 const socialLinks = [
-  { href: 'https://www.linkedin.com/company/136065577', label: 'LinkedIn', icon: Linkedin },
+  { href: 'https://www.linkedin.com/company/vexania', label: 'LinkedIn', icon: Linkedin },
   { href: 'mailto:vexania@zohomail.com', label: 'Email', icon: Mail },
-  { href: '#agendar', label: 'Calendario', icon: Calendar },
+  { href: 'https://cal.com/vexania', label: 'Calendario', icon: Calendar },
 ] as const;
 ---
 
@@ -49,7 +49,7 @@ const socialLinks = [
   <meta name="theme-color" content="#06b6d4" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Vexania" />
+  <meta name="apple-mobile-web-app-title" content="vexanIA" />
   <script is:inline>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
@@ -59,12 +59,12 @@ const socialLinks = [
 <body class="antialiased">
   <header class="glass sticky top-0 z-50 border-b border-[var(--border)]">
     <nav class="container flex items-center justify-between h-[72px]" aria-label="Navegación principal">
-      <a href="/" class="flex items-center gap-3" aria-label="Vexania - Inicio">
+      <a href="/" class="flex items-center gap-3" aria-label="vexanIA - Inicio">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="text-[var(--brand)]">
           <rect width="32" height="32" rx="8" fill="currentColor"/>
           <path d="M8 10h16M8 16h16M8 22h10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span class="text-xl font-bold tracking-tight text-[var(--text)]">Vexania</span>
+        <span class="text-xl font-bold tracking-tight text-[var(--text)]">vexanIA</span>
       </a>
       
       <button class="md:hidden p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] transition-colors" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
@@ -98,12 +98,12 @@ const socialLinks = [
     <div class="container py-16 lg:py-24">
       <div class="grid lg:grid-cols-4 gap-12 lg:gap-16 mb-12 lg:mb-16">
         <div class="lg:col-span-2">
-          <a href="/" class="flex items-center gap-3 mb-6" aria-label="Vexania - Inicio">
+          <a href="/" class="flex items-center gap-3 mb-6" aria-label="vexanIA - Inicio">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="text-[var(--brand)]">
               <rect width="32" height="32" rx="8" fill="currentColor"/>
               <path d="M8 10h16M8 16h16M8 22h10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="text-xl font-bold tracking-tight text-[var(--text)]">Vexania</span>
+            <span class="text-xl font-bold tracking-tight text-[var(--text)]">vexanIA</span>
           </a>
           <p class="text-[var(--text-secondary)] max-w-xs mb-6 leading-relaxed">
             Consultoría de automatización, aplicaciones a la medida, agentes de IA y reportes inteligentes para micro y pequeñas empresas en Bogotá y Cundinamarca.
@@ -134,10 +134,10 @@ const socialLinks = [
             <a href="mailto:vexania@zohomail.com" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
               <Mail class="w-4 h-4" aria-hidden="true" /> vexania@zohomail.com
             </a>
-            <a href="https://www.linkedin.com/company/136065577" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+            <a href="https://www.linkedin.com/company/vexania" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
               <Linkedin class="w-4 h-4" aria-hidden="true" /> LinkedIn
             </a>
-            <a href="#agendar" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
+            <a href="https://cal.com/vexania" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[var(--text)] transition-colors">
               <Calendar class="w-4 h-4" aria-hidden="true" /> Agendar videollamada
             </a>
             <p class="flex items-center gap-2">
@@ -148,7 +148,7 @@ const socialLinks = [
       </div>
       
       <div class="border-t border-[var(--border)] pt-8 flex flex-col lg:flex-row items-center justify-between gap-4">
-        <p class="text-sm text-[var(--text-muted)]">© 2026 Vexania. Hecho con dedicación en Bogotá, Colombia.</p>
+        <p class="text-sm text-[var(--text-muted)]">© 2026 vexanIA. Hecho con dedicación en Bogotá, Colombia.</p>
         <div class="flex items-center gap-6">
           <a href="/politica-privacidad" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Privacidad</a>
           <a href="/terminos" class="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">Términos</a>
@@ -159,7 +159,7 @@ const socialLinks = [
   </footer>
   
   <Chat />
-  <TelegramButton username="vexania_bot" welcomeMessage="Hola 👋 Soy el asistente de Vexania. Pregúntame por automatización de tareas, apps a la medida, agentes de IA o reportes con datos claros. También puedes hacer el diagnóstico exprés gratis." />
+  <TelegramButton username="vexania_bot" welcomeMessage="Hola 👋 Soy el asistente de vexanIA. Pregúntame por automatización de tareas, apps a la medida, agentes de IA o reportes con datos claros. También puedes hacer el diagnóstico exprés gratis." />
   
   <script is:inline>
     // Page view tracking

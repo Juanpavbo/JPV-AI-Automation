@@ -88,7 +88,7 @@ async function sendEmailToGroup(data: ContactData, emails: string[], groupName: 
       auth: { user: smtpUser, pass: smtpPass }
     });
     await transporter.sendMail({
-      from: `"Vexania" <${smtpUser}>`,
+      from: `"vexanIA" <${smtpUser}>`,
       to: emails.join(', '),
       subject: `[${groupName.toUpperCase()}] Nuevo lead: ${data.name} - ${data.interest || 'Sin categoría'}`,
       html: buildHtml(data)
@@ -296,7 +296,7 @@ async function sendPaymentEmail(data: PaymentData): Promise<string[]> {
       auth: { user: smtpUser, pass: smtpPass }
     });
     await transporter.sendMail({
-      from: `"Vexania" <${smtpUser}>`,
+      from: `"vexanIA" <${smtpUser}>`,
       to: to.join(', '),
       subject: `💰 Pago aprobado: ${data.customer_name} - ${(data.amount_in_cents / 100).toLocaleString('es-CO', { style: 'currency', currency: data.currency })}`,
       html: buildPaymentHtml(data)
