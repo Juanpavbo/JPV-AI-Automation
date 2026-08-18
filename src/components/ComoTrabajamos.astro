@@ -1,0 +1,67 @@
+---
+import { FileText } from 'lucide-preact';
+---
+
+<section id="como-trabajamos" class="section-lg relative overflow-hidden" aria-labelledby="como-trabajamos-title">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[var(--brand)]/5 rounded-full blur-[150px]" />
+  </div>
+
+  <div class="container relative z-10">
+    <header class="text-center mb-12 lg:mb-16 reveal slide-up">
+      <span class="section-label">Cómo trabajamos</span>
+      <h2 id="como-trabajamos-title" class="display-md text-[var(--text)] mb-6">Un proceso simple, pensado para dueños de negocio ocupados</h2>
+    </header>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      {[
+        {
+          step: '01',
+          title: 'Conversamos (gratis)',
+          desc: 'Nos cuentas cómo funciona tu negocio y qué te quita el sueño. Sin compromiso y sin palabras raras.'
+        },
+        {
+          step: '02',
+          title: 'Te proponemos un plan claro',
+          desc: 'Recibes una propuesta en lenguaje sencillo: qué haremos, cuánto tarda, cuánto cuesta y qué ganarás.'
+        },
+        {
+          step: '03',
+          title: 'Construimos y probamos contigo',
+          desc: 'Desarrollamos la solución por partes y la vas viendo desde el principio. Nada de sorpresas al final.'
+        },
+        {
+          step: '04',
+          title: 'Te acompañamos',
+          desc: 'Capacitamos a tu equipo, entregamos guías sencillas y quedamos disponibles para soporte y mejoras.'
+        }
+      ].map((s, i) => (
+        <div class={`relative p-6 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] transition-all duration-300 hover:shadow-lg hover:-translate-y-1 reveal ${i === 0 ? 'slide-up' : `slide-up stagger-${i + 1}`}`} style={`animation-delay: ${(i + 1) * 100}ms`}>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-4xl font-extrabold bg-gradient-to-br from-[var(--brand)] to-[#8b5cf6] bg-clip-text text-transparent opacity-30" aria-hidden="true">{s.step}</span>
+            <span class="w-10 h-10 rounded-full bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center text-sm font-bold text-[var(--brand-dark)]">{s.step}</span>
+          </div>
+          <h3 class="heading-sm text-[var(--text)] mb-2">{s.title}</h3>
+          <p class="text-sm text-[var(--text-secondary)] leading-relaxed">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- RUES card -->
+    <div class="max-w-3xl mx-auto reveal slide-up">
+      <div class="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-[var(--brand-bg)] to-white border border-[var(--brand-border)] flex flex-col sm:flex-row gap-6 items-start">
+        <div class="flex-shrink-0">
+          <span class="w-12 h-12 rounded-xl bg-[var(--brand)] flex items-center justify-center">
+            <FileText class="w-6 h-6 text-white" aria-hidden="true" />
+          </span>
+        </div>
+        <div>
+          <h3 class="heading-sm text-[var(--text)] mb-3">¿Por qué trabajamos con empresas registradas ante el RUES?</h3>
+          <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+            Porque un negocio formal es un negocio listo para crecer. Si tu empresa ya está registrada ante el Registro Único Empresarial y Social (RUES), tienes todo lo necesario para acceder a estas soluciones: facturación electrónica, cuentas de correo empresariales y herramientas en la nube con costos pensados para pequeñas empresas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

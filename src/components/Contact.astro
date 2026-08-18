@@ -1,194 +1,59 @@
 ---
-import { Send } from 'lucide-preact';
-
-const interests = [
-  { value: 'rpa', label: 'Automatización RPA' },
-  { value: 'bi', label: 'Analítica / Power BI / Tableros' },
-  { value: 'ia', label: 'Agentes de IA & LLMs' },
-  { value: 'ocr', label: 'OCR de facturas' },
-  { value: 'lowcode', label: 'Low-Code / No-Code' },
-  { value: 'consultoria', label: 'Consultoría general' },
-  { value: 'validacion-pagos', label: 'Validación Pagos Nequi/Daviplata' },
-  { value: 'otro', label: 'Otro' }
-] as const;
+import ContactForm from '../islands/ContactForm';
 ---
 
-<section id="contacto" class="section-lg bg-[var(--bg-muted)]" aria-labelledby="contacto-title">
-  <div class="container">
-    <header class="text-center mb-12 lg:mb-16 reveal slide-up">
-      <span class="section-label">Contacto</span>
-      <h2 id="contacto-title" class="display-md text-[var(--text)] mb-6">Hablemos de tu automatización</h2>
-      <p class="body-lg max-w-2xl mx-auto">Cuéntame qué procesos quieres automatizar. En 24h tendrás una propuesta preliminar. Sin compromiso, sin spam.</p>
-    </header>
+<section id="contacto" class="section-lg bg-[var(--bg-muted)] relative overflow-hidden" aria-labelledby="contacto-title">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-[var(--brand)]/5 rounded-full blur-[120px]" />
+  </div>
 
-    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
-      <!-- Form -->
-      <article class="card card-elevated reveal slide-up stagger-1">
-        <form class="space-y-6" action="/api/contact" method="POST">
-          <input type="hidden" name="form-name" value="contacto" />
-          <input type="hidden" name="bot-field" value="" style="display:none;" />
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="form-group">
-              <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre" class="form-input" autocomplete="name" />
-            </div>
-            <div class="form-group">
-              <label for="email" class="form-label">Correo electrónico *</label>
-              <input type="email" id="email" name="email" required placeholder="tu@correo.com" class="form-input" autocomplete="email" />
-            </div>
-          </div>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="form-group">
-              <label for="empresa" class="form-label">Empresa / Organización</label>
-              <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa u organización" class="form-input" autocomplete="organization" />
-            </div>
-            <div class="form-group">
-              <label for="cargo" class="form-label">Cargo / Rol</label>
-              <input type="text" id="cargo" name="cargo" placeholder="Tu cargo o rol en la organización" class="form-input" autocomplete="organization-title" />
-            </div>
-          </div>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="form-group">
-              <label for="telefono" class="form-label">Teléfono / WhatsApp</label>
-              <input type="tel" id="telefono" name="telefono" placeholder="+57 3XX XXX XXXX" class="form-input" autocomplete="tel" />
-            </div>
-            <div class="form-group">
-              <label for="interes" class="form-label">Interés principal *</label>
-              <select id="interes" name="interes" class="form-select" required>
-                <option value="">Selecciona una opción</option>
-                {interests.map((opt) => <option value={opt.value}>{opt.label}</option>)}
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Servicios de interés <span class="text-sm text-[var(--text-muted)] font-normal">(múltiples)</span></label>
-            <div class="checkbox-group">
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="rpa" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>Automatización RPA</span>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="bi" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>Analítica & BI</span>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="ia" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>Agentes de IA & LLMs</span>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="ocr" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>OCR de facturas</span>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="lowcode" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>Low-Code / No-Code</span>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="consultoria" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>Consultoría General</span>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="validacion-pagos" class="w-4 h-4 accent-[var(--accent)]" />
-                <span>Validación Pagos Nequi/Daviplata</span>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" name="servicios_interes" value="otro" class="w-4 h-4 accent-[var(--brand)]" />
-                <span>Otro</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="mensaje" class="form-label">Cuéntame más *</label>
-            <textarea id="mensaje" name="mensaje" required rows="5" placeholder="Describe tu situación, lo que necesitas o la idea que tienes..." class="form-textarea"></textarea>
-          </div>
-
-          <input type="hidden" name="form-name" value="contacto" />
-          <input type="hidden" name="bot-field" value="" style="display:none;" />
-
-          <button type="submit" class="btn btn-primary btn-full btn-lg">
-            <Send class="w-5 h-5" aria-hidden="true" />
-            Enviar mensaje →
-          </button>
-          
-          <p class="form-hint text-center">Respondo en menos de 24h laborables. Tus datos se usan solo para contactarte (política de privacidad).</p>
-        </form>
-      </article>
-
+  <div class="container relative z-10">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
       <!-- Info Panel -->
-      <article class="card card-elevated h-full reveal slide-up stagger-2" style="animation-delay: 200ms;">
-        <header class="mb-8">
-          <h3 class="heading-md text-[var(--text)] mb-2">Más formas de contactar</header>
-          <p class="body text-[var(--text-secondary)]">Elige la que prefieras. Respondo rápido.</p>
-        </header>
+      <div class="reveal slide-up">
+        <span class="section-label">Contacto</span>
+        <h2 id="contacto-title" class="display-md text-[var(--text)] mb-6">Agenda tu diagnóstico gratuito</h2>
+        <p class="body text-[var(--text-secondary)] mb-8 leading-relaxed">
+          En una conversación de 30 minutos entendemos cómo funciona tu negocio y te decimos, en lenguaje claro, qué se puede mejorar y cuánto te ahorrarías. Sin compromiso y sin tecnicismos.
+        </p>
 
-        <nav class="space-y-4 mb-10">
-          <a href="https://www.linkedin.com/company/136065577" target="_blank" rel="noopener noreferrer" class="contact-card flex items-center gap-4 p-4 rounded-xl transition-all duration-200 group">
-            <span class="flex-shrink-0 w-12 h-12 rounded-xl bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center text-[var(--brand-dark)] group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.642v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              <div class="flex-1">
-                <div class="font-semibold text-[var(--text)]">LinkedIn</div>
-                <div class="text-sm text-[var(--text-secondary)]">Conectemos y conversemos</div>
-              </div>
-              <svg class="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--brand)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </a>
+        <ul class="space-y-4 mb-10">
+          {[
+            { icon: 'conversacion', text: 'Conversación de 30 minutos, virtual o presencial' },
+            { icon: 'propuesta', text: 'Propuesta clara con tiempos y costos' },
+            { icon: 'honestidad', text: 'Si no te conviene, te lo decimos de frente' }
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-[var(--success-bg)] border border-[#a7f3d0] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-[var(--success)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span class="text-[var(--text)] font-medium">{item.text}</span>
+            </li>
+          ))}
+        </ul>
 
-            <a href="mailto:vexania@zohomail.com" class="contact-card flex items-center gap-4 p-4 rounded-xl transition-all duration-200 group">
-              <span class="flex-shrink-0 w-12 h-12 rounded-xl bg-[var(--accent-bg)] border border-[#fecdd3] flex items-center justify-center text-[var(--accent-dark)] group-hover:scale-110 transition-transform">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </div>
-              <div class="flex-1">
-                <div class="font-semibold text-[var(--text)]">Email directo</div>
-                <div class="text-sm text-[var(--text-secondary)]">vexania@zohomail.com</div>
-              </div>
-              <svg class="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </a>
-
-            <a href="https://t.me/vexania_bot" target="_blank" rel="noopener noreferrer" class="contact-card flex items-center gap-4 p-4 rounded-xl transition-all duration-200 group">
-              <span class="flex-shrink-0 w-12 h-12 rounded-xl bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center text-[var(--brand-dark)] group-hover:scale-110 transition-transform">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M15 9h.01M10 9h.01M15 14h.01M10 14h.01"/></svg>
-              </div>
-              <div class="flex-1">
-                <div class="font-semibold text-[var(--text)]">Telegram</div>
-                <div class="text-sm text-[var(--text-secondary)]">Chat directo @vexania_bot</div>
-              </div>
-              <svg class="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--brand)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </a>
-
-            <a href="#agendar" class="contact-card flex items-center gap-4 p-4 rounded-xl transition-all duration-200 group">
-              <span class="flex-shrink-0 w-12 h-12 rounded-xl bg-[var(--success-bg)] border border-[#a7f3d0] flex items-center justify-center text-[var(--success)] group-hover:scale-110 transition-transform">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </div>
-              <div class="flex-1">
-                <div class="font-semibold text-[var(--text)]">Agendar videollamada</div>
-                <div class="text-sm text-[var(--text-secondary)]">15 / 30 / 45 min · Presencial o virtual</div>
-              </div>
-              <svg class="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--success)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </a>
-          </nav>
-
-          <!-- Office Info -->
-          <div class="p-4 bg-[var(--bg-muted)] border border-[var(--border)] rounded-lg">
-            <h4 class="heading-sm text-[var(--text)] mb-3 flex items-center gap-2"><svg class="w-5 h-5 text-[var(--brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg> Ubicación y cobertura</h4>
-            <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg> <strong>Bogotá D.C.:</strong> Chapinero, Usaquén, Teusaquillo, Suba</li>
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg> <strong>Cundinamarca:</strong> Chía, Cajicá, Soacha, Funza, Mosquera, Madrid, Facatativá, Zipaquirá, Sopó, Tenjo, La Calera</li>
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[var(--brand)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> <strong>Horario:</strong> Lun-Vie 8:00-18:00 (COT) · Sáb 9:00-13:00</li>
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> <strong>Email:</strong> vexania@zohomail.com</li>
-            </ul>
+        <div class="space-y-3 text-[var(--text-secondary)]">
+          <a href="mailto:vexania@zohomail.com" class="flex items-center gap-3 group">
+            <span class="w-10 h-10 rounded-xl bg-[var(--brand-bg)] border border-[var(--brand-border)] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-[var(--brand-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            </span>
+            <span class="font-medium text-[var(--text)] group-hover:text-[var(--brand)] transition-colors">vexania@zohomail.com</span>
+          </a>
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center flex-shrink-0">📍</span>
+            <span>Bogotá D.C. y municipios de Cundinamarca</span>
           </div>
-        </article>
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center flex-shrink-0">🕐</span>
+            <span>Lun–Vie 8:00–18:00 · Sáb 9:00–13:00</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Form -->
+      <article class="card card-elevated reveal slide-up stagger-1" style="animation-delay: 150ms;">
+        <ContactForm client:load />
+      </article>
     </div>
   </div>
 </section>
-
-<style>
-  @media (max-width: 640px) {
-    .grid-auto { grid-template-columns: 1fr; }
-  }
-</style>

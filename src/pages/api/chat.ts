@@ -177,7 +177,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    const messages: ChatMessage[] = parsed.data.messages.map((m, i) => {
+    const historyMessages: ChatMessage[] = parsed.data.messages.map((m, i) => {
       if (i === parsed.data.messages.length - 1 && ruesContextText) {
         return {
           role: 'user',
@@ -196,6 +196,11 @@ export const POST: APIRoute = async ({ request }) => {
       }
       return m;
     });
+
+    const messages: ChatMessage[] = [
+      { role: 'system', content: SYSTEM_PROMPT } as ChatMessage,
+      ...historyMessages
+    ];
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 25_000);

@@ -9,15 +9,15 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Vexania — Consultoría RPA interactiva, automatización e IA para MIPYMEs en Bogotá y Cundinamarca. Cotiza tus procesos en vivo, automatiza y crece sin fricción.' } = Astro.props;
+const { title, description = 'Vexania — Consultoría de automatización, aplicaciones a la medida, agentes de IA y reportes inteligentes para micro y pequeñas empresas en Bogotá y Cundinamarca. Diagnóstico gratuito.' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const navLinks = [
   { href: '#inicio', label: 'Inicio' },
-  { href: '#procesos', label: 'Cotizador' },
-  { href: '#casos', label: 'Casos' },
-  { href: '#metodologia', label: 'Metodología' },
-  { href: '#rues', label: 'Campaña RUES' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#diagnostico', label: 'Diagnóstico' },
+  { href: '#como-trabajamos', label: 'Cómo trabajamos' },
+  { href: '#preguntas', label: 'Preguntas frecuentes' },
   { href: '#contacto', label: 'Contacto' },
 ] as const;
 
@@ -84,7 +84,7 @@ const socialLinks = [
               <s.icon class="w-5 h-5" />
             </a>
           ))}
-          <a href="#contacto" class="btn btn-primary btn-sm hidden sm:inline-flex">Cotizar</a>
+          <a href="#contacto" class="btn btn-primary btn-sm hidden sm:inline-flex">Diagnóstico gratuito</a>
         </div>
       </nav>
     </nav>
@@ -106,26 +106,25 @@ const socialLinks = [
             <span class="text-xl font-bold tracking-tight text-[var(--text)]">Vexania</span>
           </a>
           <p class="text-[var(--text-secondary)] max-w-xs mb-6 leading-relaxed">
-            Consultoría RPA interactiva, automatización e IA para MIPYMEs en Bogotá y Cundinamarca.
-            Cotiza tus procesos, automatiza tareas repetitivas y crece con tus datos.
+            Consultoría de automatización, aplicaciones a la medida, agentes de IA y reportes inteligentes para micro y pequeñas empresas en Bogotá y Cundinamarca.
+            Te lo explicamos sin palabras técnicas.
           </p>
           <div class="flex flex-wrap gap-3">
             <span class="tag tag-brand">Bogotá & Cundinamarca</span>
-            <span class="tag tag-brand">MIPYMEs</span>
-            <span class="tag tag-accent">Cotizador interactivo</span>
+            <span class="tag tag-brand">Micro y pequeñas empresas</span>
+            <span class="tag tag-accent">Diagnóstico gratuito</span>
           </div>
         </div>
         
         <div>
           <h4 class="heading-sm mb-4">Servicios</h4>
           <nav class="flex flex-col gap-3">
-            <a href="#procesos" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Automatización RPA</a>
-            <a href="#procesos" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Agentes de IA & LLMs</a>
-            <a href="#procesos" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">OCR de facturas</a>
-            <a href="#procesos" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Analítica & BI</a>
-            <a href="#procesos" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Validación pagos Nequi/Daviplata</a>
-            <a href="#procesos" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Low-Code / No-Code</a>
-            <a href="#rues" class="text-sm text-[var(--brand)] font-medium hover:underline">Campaña RUES gratis</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Automatización de tareas repetitivas</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Aplicaciones a la medida</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Agentes de IA</a>
+            <a href="#servicios" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Reportes e inteligencia de negocio</a>
+            <a href="#diagnostico" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Diagnóstico exprés</a>
+            <a href="#preguntas" class="text-sm text-[var(--brand)] font-medium hover:underline">Preguntas frecuentes</a>
           </nav>
         </div>
         
@@ -160,7 +159,7 @@ const socialLinks = [
   </footer>
   
   <Chat />
-  <TelegramButton username="vexania_bot" welcomeMessage="Hola 👋 Soy el asistente de Vexania. Pregúntame por automatización RPA, agentes de IA, validación de pagos Nequi/Daviplata o la campaña RUES gratis." />
+  <TelegramButton username="vexania_bot" welcomeMessage="Hola 👋 Soy el asistente de Vexania. Pregúntame por automatización de tareas, apps a la medida, agentes de IA o reportes con datos claros. También puedes hacer el diagnóstico exprés gratis." />
   
   <script is:inline>
     // Page view tracking

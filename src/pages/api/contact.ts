@@ -9,9 +9,16 @@ export const prerender = false;
 
 const contactSchema = z.object({
   nombre: z.string().min(2).max(100),
-  email: z.string().email(),
+  email: z
+    .string()
+    .min(3)
+    .max(200)
+    .refine(
+      (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || /^\+?[0-9\s\-()]{6,20}$/.test(v),
+      'Ingresa un correo o un WhatsApp válido'
+    ),
   interes: z.string().min(1),
-  mensaje: z.string().min(10).max(5000),
+  mensaje: z.string().max(5000).optional().default(''),
   empresa: z.string().max(100).optional(),
   cargo: z.string().max(100).optional(),
   telefono: z.string().max(30).optional(),
@@ -58,6 +65,11 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parsed.data.email);
+    const contacto = parsed.data.email;
+    const email = isEmail ? contacto : `${contacto.replace(/[^0-9]/g, '').slice(-12)}@contacto.vexania.co`;
+    const phone = isEmail ? (parsed.data.telefono ?? '') : contacto;
+
     const emailLimit = rateLimit(`contact-email:${parsed.data.email}`, 3, 60_000);
     if (!emailLimit.allowed) {
       return new Response(JSON.stringify({ error: 'Demasiadas solicitudes' }), {
@@ -69,7 +81,7 @@ export const POST: APIRoute = async ({ request }) => {
     // 1. Insertar contacto base
     const contact = await insertContact({
       name: parsed.data.nombre,
-      email: parsed.data.email,
+      email,
       interest: parsed.data.interes,
       message: parsed.data.mensaje
     });
@@ -80,8 +92,8 @@ export const POST: APIRoute = async ({ request }) => {
       leadId = await createLead({
         contact_id: contact.id,
         name: parsed.data.nombre,
-        email: parsed.data.email,
-        phone: parsed.data.telefono || null,
+        email,
+        phone: phone || null,
         company: parsed.data.empresa || null,
         role: parsed.data.cargo || null,
         source: 'web',
@@ -117,13 +129,13 @@ export const POST: APIRoute = async ({ request }) => {
     try {
       const notify = await notifyContact({
         name: parsed.data.nombre,
-        email: parsed.data.email,
+        email,
         interest: parsed.data.interes,
         message: parsed.data.mensaje,
         service_interest: (parsed.data.servicios_interes ?? []).length > 0 ? parsed.data.servicios_interes : undefined,
         company: parsed.data.empresa || undefined,
         role: parsed.data.cargo || undefined,
-        phone: parsed.data.telefono || undefined
+        phone: phone || undefined
       });
       console.log('Notificación enviada:', JSON.stringify(notify));
       return new Response(JSON.stringify({ success: true, contact, leadId, notify }), {

@@ -1,0 +1,23 @@
+---
+import DiagnosticoQuiz from '../islands/DiagnosticoQuiz';
+---
+
+<section id="diagnostico" class="section-lg bg-gradient-to-br from-[#0f172a] via-[#083344] to-[#0f172a] relative overflow-hidden" aria-labelledby="diagnostico-title">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-[var(--brand)]/10 rounded-full blur-[150px]" />
+    <div class="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-[#8b5cf6]/10 rounded-full blur-[120px]" />
+  </div>
+
+  <div class="container relative z-10">
+    <header class="text-center reveal slide-up">
+      <span class="section-label inline-flex items-center gap-2 !bg-cyan-500/20 !text-cyan-200 !border-cyan-400/30">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/></svg>
+        Diagnóstico exprés
+      </span>
+      <h2 id="diagnostico-title" class="display-md text-white mb-6">¿No sabes por dónde empezar?</h2>
+      <p class="body-lg text-cyan-200/80 max-w-2xl mx-auto">Responde 3 preguntas y te decimos qué servicio le caería mejor a tu negocio.</p>
+    </header>
+
+    <DiagnosticoQuiz client:load />
+  </div>
+</section>

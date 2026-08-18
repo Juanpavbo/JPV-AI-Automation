@@ -1,30 +1,19 @@
 ---
-import { Send } from 'lucide-preact';
-
-interface Props {
-  ctaText?: string;
-  ctaHref?: string;
-  secondaryCtaText?: string;
-  secondaryCtaHref?: string;
-}
-const ctaText = Astro.props.ctaText ?? 'Cotizar mis procesos gratis';
-const ctaHref = Astro.props.ctaHref ?? '#procesos';
-const secondaryCtaText = Astro.props.secondaryCtaText ?? 'Ver casos por industria';
-const secondaryCtaHref = Astro.props.secondaryCtaHref ?? '#casos';
+import { Send, Sparkles } from 'lucide-preact';
 ---
 
 <section id="inicio" class="relative min-h-[90vh] lg:min-h-[100vh] flex items-center overflow-hidden" aria-labelledby="hero-title">
   <!-- Background decorative elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
     <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[var(--brand)]/10 rounded-full blur-[120px] animate-blob-slow" />
-    <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[var(--accent)]/10 rounded-full blur-[100px] animate-blob-slow-reverse" />
+    <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[#8b5cf6]/10 rounded-full blur-[100px] animate-blob-slow-reverse" />
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[var(--brand)]/5 rounded-full blur-[150px]" />
   </div>
 
   <!-- Floating geometric shapes -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
     <div class="absolute top-20 left-10 w-8 h-8 border border-[var(--brand)]/20 rounded-lg rotate-12 animate-float-slow" />
-    <div class="absolute top-40 right-20 w-6 h-6 bg-[var(--accent)]/10 rounded-full animate-float-slow-reverse" />
+    <div class="absolute top-40 right-20 w-6 h-6 bg-[#8b5cf6]/10 rounded-full animate-float-slow-reverse" />
     <div class="absolute bottom-32 left-20 w-10 h-10 border border-[var(--accent)]/20 rounded-xl -rotate-6 animate-float-slow" />
     <div class="absolute bottom-20 right-10 w-4 h-4 bg-[var(--brand)]/10 rounded-md animate-float-slow-reverse" />
   </div>
@@ -33,52 +22,57 @@ const secondaryCtaHref = Astro.props.secondaryCtaHref ?? '#casos';
     <div class="max-w-4xl mx-auto text-center">
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-dark)] text-sm font-medium mb-8 slide-up stagger-1" style="animation-delay: 100ms;">
-        <span class="w-2 h-2 rounded-full bg-[var(--brand)] animate-pulse" aria-hidden="true" />
-        <span class="font-medium">Consultoría RPA interactiva para MIPYMEs</span>
+        <Sparkles class="w-4 h-4" aria-hidden="true" />
+        <span>Para micro y pequeñas empresas registradas ante el RUES 🇨🇴</span>
       </div>
 
       <!-- Main Headline -->
       <h1 id="hero-title" class="display-xl text-[var(--text)] mb-8 slide-up stagger-2" style="animation-delay: 200ms;">
-        Vexania:<br />
-        <span class="text-gradient-brand">automatiza y crece sin fricción</span>
+        Tu negocio puede trabajar solo,<br />
+        <span class="bg-gradient-to-r from-[var(--brand)] to-[#8b5cf6] bg-clip-text text-transparent">mientras tú lo haces crecer</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="body-lg max-w-2xl mx-auto mb-12 slide-up stagger-3" style="animation-delay: 300ms;">
-        Te ayudamos a automatizar procesos y usar tus datos con robots (RPA), agentes de IA y tableros en vivo. Selecciona tus procesos, mira cuántas horas y dinero puedes ahorrar, y empieza en semanas.
+      <p class="body-lg max-w-2xl mx-auto mb-6 slide-up stagger-3" style="animation-delay: 300ms;">
+        Somos una consultoría que ayuda a empresas como la tuya a ahorrar tiempo, vender más y decidir con datos, usando automatización, aplicaciones a la medida, inteligencia artificial y reportes inteligentes.
+      </p>
+      <p class="body max-w-2xl mx-auto mb-12 text-[var(--text-secondary)] slide-up stagger-3" style="animation-delay: 350ms;">
+        Te lo explicamos sin palabras técnicas.
       </p>
 
       <!-- CTA Group -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 slide-up stagger-4" style="animation-delay: 400ms;">
-        <a href="#procesos" class="btn btn-primary btn-lg">
+        <a href="#diagnostico" class="btn btn-primary btn-lg">
           <Send class="w-5 h-5" aria-hidden="true" />
-          Cotizar mis procesos gratis
+          Descubre qué necesita tu negocio
         </a>
-        <a href="#casos" class="btn btn-secondary btn-lg">
-          Ver casos reales por industria
+        <a href="#servicios" class="btn btn-secondary btn-lg">
+          Ver los servicios explicados fácil
         </a>
       </div>
 
       <!-- Trust Indicators -->
-      <div class="flex flex-wrap items-center justify-center gap-8 text-sm text-[var(--text-muted)] slide-up stagger-5" style="animation-delay: 500ms;">
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[var(--text-secondary)] slide-up stagger-5" style="animation-delay: 500ms;">
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-[var(--brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span>Cotización interactiva en vivo</span>
+          <svg class="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Sin necesidad de saber de tecnología</span>
         </div>
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span>Diagnóstico gratis en 48h</span>
+          <svg class="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Sobre las herramientas que ya usas</span>
         </div>
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-[var(--brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-          <span>Primeros robots en 2 semanas</span>
+          <svg class="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Diagnóstico inicial gratuito</span>
         </div>
       </div>
     </div>
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-slow" aria-hidden="true">
-      <svg class="w-6 h-6 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+      <a href="#servicios" aria-label="Ver los servicios">
+        <svg class="w-6 h-6 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+      </a>
     </div>
   </div>
 </section>

@@ -25,9 +25,9 @@
     </div>
     <div id="vex-chat-messages" class="vex-chat-messages" aria-live="polite"></div>
     <div class="vex-chat-suggestions" id="vex-chat-suggestions" aria-label="Sugerencias rápidas">
-      <button type="button" class="vex-suggestion-chip" data-prompt="¿Qué procesos puedo automatizar en mi empresa?">¿Qué puedo automatizar?</button>
-      <button type="button" class="vex-suggestion-chip" data-prompt="¿Cómo funciona la validación de pagos Nequi/Daviplata?">Validación Nequi/Daviplata</button>
-      <button type="button" class="vex-suggestion-chip" data-prompt="¿Qué incluye la campaña RUES?">Campaña RUES gratis</button>
+      <button type="button" class="vex-suggestion-chip" data-prompt="¿Qué puedo automatizar en mi empresa?">¿Qué puedo automatizar?</button>
+      <button type="button" class="vex-suggestion-chip" data-prompt="¿Qué es un agente de IA y para qué sirve?">Agentes de IA</button>
+      <button type="button" class="vex-suggestion-chip" data-prompt="¿Cómo funcionan los reportes con datos claros?">Reportes con datos</button>
       <button type="button" class="vex-suggestion-chip" data-prompt="Quiero agendar un diagnóstico gratis">Agendar diagnóstico</button>
     </div>
     <form id="vex-chat-form" class="vex-chat-form">
@@ -40,7 +40,7 @@
 </div>
 
 <script>
-  const WELCOME = 'Hola 👋 Soy el asistente de Vexania. Pregúntame por automatización RPA, agentes de IA, validación de pagos Nequi/Daviplata, la campaña RUES gratis, o agenda tu diagnóstico.';
+  const WELCOME = 'Hola 👋 Soy el asistente de Vexania. Pregúntame por automatización de tareas, apps a la medida, agentes de IA o reportes con datos claros. También puedes hacer el diagnóstico exprés gratis.';
 
   function initChat() {
     const messagesEl = document.getElementById('vex-chat-messages') as HTMLElement;
