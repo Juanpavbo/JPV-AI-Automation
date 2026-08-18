@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-preact';
 const faqs = [
   {
     q: 'Mi empresa es muy pequeña, ¿esto es para mí?',
-    a: 'Precisamente para ti. Las micro y pequeñas empresas son las que más ganan con estas soluciones, porque cada hora ahorrada y cada venta recuperada se siente en el bolsillo. Empezamos pequeño (un solo proceso) y crecemos a tu ritmo y presupuesto.'
+    a: 'Precisamente para ti. Los negocios como el tuyo son los que más ganan con estas soluciones, porque cada hora ahorrada y cada venta recuperada se siente en el bolsillo. Empezamos pequeño (un solo proceso) y crecemos a tu ritmo y presupuesto.'
   },
   {
     q: '¿Necesito saber de tecnología o contratar un experto?',
