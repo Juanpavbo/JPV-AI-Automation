@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { Calendar, Mail, Linkedin, Menu, X } from 'lucide-preact';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title: string;
@@ -171,5 +172,6 @@ const socialLinks = [
     const closeIcon = document.getElementById('close-icon');
     btn?.addEventListener('click', () => { const open = menu?.classList.toggle('hidden'); menuIcon?.classList.toggle('hidden', !open); closeIcon?.classList.toggle('hidden', open); btn.setAttribute('aria-expanded', String(!open)); });
   </script>
+  <SpeedInsights />
 </body>
 </html>
